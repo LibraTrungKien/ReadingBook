@@ -1,5 +1,8 @@
-package com.example.reading.data
+package com.example.reading.data.di
 
+import com.example.reading.data.AppService
+import com.example.reading.data.RepositoryImpl
+import com.example.reading.data.locadatasource.StoryLocalDataSource
 import com.example.reading.domain.Repository
 import dagger.Module
 import dagger.Provides
@@ -13,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiModule {
+object ServiceModule {
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
@@ -36,7 +39,7 @@ object ApiModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-        //    .baseUrl("https://63eb5614f1a969340db5d273.mockapi.io/")
+            //    .baseUrl("https://63eb5614f1a969340db5d273.mockapi.io/")
             .baseUrl("http://192.168.1.38:8000/")
             .client(okHttpClient)
             .build()
@@ -48,7 +51,10 @@ object ApiModule {
     }
 
     @Provides
-    fun provideRepository(appService: AppService): Repository {
-        return RepositoryImpl(appService)
+    fun provideRepository(
+        appService: AppService,
+        localDataSource: StoryLocalDataSource
+    ): Repository {
+        return RepositoryImpl(appService, localDataSource)
     }
 }

@@ -1,11 +1,11 @@
 package com.example.reading.presentation.view.base
 
+import android.app.Activity
 import android.util.Log
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 
-fun <T> Fragment.apiCall(
+fun <T> Activity.apiCall(
     liveData: LiveData<ApiResult<T>>,
     lifecycleOwner: LifecycleOwner,
     onSuccess: (data: T?) -> Unit,
@@ -24,9 +24,7 @@ fun <T> Fragment.apiCall(
     }
 }
 
-fun handleException(
-    throwable: Throwable?
-) {
+fun Activity.handleException(throwable: Throwable?) {
     throwable ?: return
     Log.d("FragmentExtension", "handleException()...${throwable.message} ")
 }

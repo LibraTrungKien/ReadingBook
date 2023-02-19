@@ -1,4 +1,4 @@
-package com.example.reading.data
+package com.example.reading.data.dto
 
 data class ChapterDTO(
     val id: String,

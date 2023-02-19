@@ -11,9 +11,8 @@ class GetDataStoryUseCase @Inject constructor(
     private val repository: Repository
 ) {
     private val data = arrayListOf<StoryModelHolder>()
-
     suspend operator fun invoke(): List<StoryModelHolder> {
-        val stories = repository.fetchAllStory()
+        val stories = repository.getAllStory()
         data.clear()
         loadFairyTalesStories(stories)
         loadFairyTalesWorldStories(stories)
@@ -85,7 +84,6 @@ class GetDataStoryUseCase @Inject constructor(
             )
             this.stories = null
         }
-
         data.add(model)
     }
 

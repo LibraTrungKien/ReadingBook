@@ -3,9 +3,9 @@ package com.example.reading.presentation.view.base
 import android.view.View
 
 fun View.isVisibleOrGone(isVisible: Boolean) {
-    if (isVisible) {
-        this.visibility = View.VISIBLE
+    visibility = if (isVisible) {
+        View.VISIBLE
     } else {
-        this.visibility = View.GONE
+        View.GONE
     }
 }

@@ -1,5 +1,7 @@
 package com.example.reading.data
 
+import com.example.reading.data.dto.StoryDTO
+import com.example.reading.data.dto.UserDTO
 import retrofit2.Response
 import retrofit2.http.GET
 
