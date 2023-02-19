@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homePage"
+        android:icon="@drawable/ic_home"
+        android:title="@string/homePage" />
+    <item
+        android:id="@+id/postPage"
+        android:icon="@drawable/ic_create"
+        android:title="@string/postPage" />
+    <item
+        android:id="@+id/favoritePage"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/favoritePage" />
+    <item
+        android:id="@+id/infoPage"
+        android:icon="@drawable/ic_info"
+        android:title="@string/infoPage" />
+</menu>

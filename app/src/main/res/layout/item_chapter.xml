@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/txtChapter"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_round_4dp_ripple"
+        android:backgroundTint="#E1F57F17"
+        android:lines="1"
+        android:padding="8dp"
+        android:textAlignment="center" />
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Đọc Truyện</string>
+    <string name="library">Tủ truyện</string>
+    <string name="bookcase">Tủ sách</string>
+    <string name="book_name">Tên sách</string>
+    <string name="homePage">Trang chủ</string>
+    <string name="postPage">Đăng bài</string>
+    <string name="infoPage">Thông tin ứng dụng</string>
+    <string name="favoritePage">Truyện yêu thích</string>
+    <string name="story_name">Tên truyện: </string>
+    <string name="author">Tác giả: </string>
+    <string name="date_created">Ngày tạo: </string>
+    <string name="read_story">Đọc truyện</string>
+    <string name="description">Mô tả</string>
+    <string name="list_chapter">Danh sách tập</string>
+    <string name="category">Thể loại: </string>
+    <string name="status">Trạng thái:</string>
+    <string name="chapter">Số chương:</string>
+    <string name="chap">Tập </string>
+</resources>
