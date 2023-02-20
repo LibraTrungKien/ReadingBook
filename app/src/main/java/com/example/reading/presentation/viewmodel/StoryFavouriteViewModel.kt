@@ -21,8 +21,7 @@ class StoryFavouriteViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            val data = repository.getStoryFavourites()
-            _dataLiveData.postValue(data)
+            repository.getStoryFavourites().collectLatest { _dataLiveData.postValue(it) }
         }
     }
 

@@ -60,8 +60,8 @@ class RepositoryImpl @Inject constructor(
         return localDataSource.getHistory().map { it.toModel() }
     }
 
-    override suspend fun getStoryFavourites(): List<Story> {
-        return localDataSource.getStoryFavourites().map {  it.toModel() }
+    override fun getStoryFavourites(): Flow<List<Story>> {
+        return localDataSource.getStoryFavourites().map { it.map { it.toModel() } }
     }
 
     override suspend fun deleteStoryFavourite(story: Story) {

@@ -8,6 +8,7 @@ import androidx.room.Query
 import com.example.reading.data.entity.FavouriteEntity
 import com.example.reading.data.entity.HistoryEntity
 import com.example.reading.data.entity.StoryEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StoryDao {
@@ -62,7 +63,7 @@ interface StoryDao {
         FROM FavouriteEntity
     """
     )
-    suspend fun getStoryFavourites(): List<FavouriteEntity>
+    fun getStoryFavourites(): Flow<List<FavouriteEntity>>
 
     @Delete
     suspend fun deleteFavourite(favouriteEntity: FavouriteEntity)

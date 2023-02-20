@@ -40,9 +40,7 @@ class StoryLocalDataSource @Inject constructor(
         storyDao.getHistory()
     }
 
-    suspend fun getStoryFavourites() = withContext(coroutineContext) {
-        storyDao.getStoryFavourites()
-    }
+    fun getStoryFavourites() = storyDao.getStoryFavourites()
 
     suspend fun deleteFavourite(favouriteEntity: FavouriteEntity) = withContext(coroutineContext) {
         storyDao.deleteFavourite(favouriteEntity)
