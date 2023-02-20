@@ -28,7 +28,7 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun searchStoryByName(name: String): List<Story> {
-        val text = "*$name*"
+        val text = "%$name%"
         val result = localDataSource.searchStoryByName(text)
         return result.map { it.toModel() }
     }

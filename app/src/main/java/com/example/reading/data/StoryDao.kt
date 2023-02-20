@@ -25,7 +25,7 @@ interface StoryDao {
         """
         SELECT *
         FROM StoryEntity
-        WHERE name GLOB :name
+        WHERE name LIKE :name
         """
     )
     suspend fun searchStoryByName(name: String): List<StoryEntity>
@@ -49,6 +49,7 @@ interface StoryDao {
         """
         SELECT *
         FROM HistoryEntity
+        ORDER BY timeWhenSave DESC
         LIMIT 4
     """
     )
