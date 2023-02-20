@@ -35,7 +35,7 @@ class StoryFavouriteController(private val interactor: Interactor) :
                 interactor.getFragment().showConfirmDialog(
                     context = context,
                     "Xác nhận",
-                    "Bạn cc muốn xóa?",
+                    "Bạn có chắc chắn muốn xóa?",
                     {
                         (interactor.getViewModel() as StoryFavouriteViewModel).deleteStoryFavourite(
                             story
