@@ -29,6 +29,10 @@
             android:id="@+id/actSearchStoryFragment"
             app:destination="@id/searchStoryFragment" />
 
+        <action
+            android:id="@+id/actStoryFavouriteFragment"
+            app:destination="@id/storyFavouriteFragment" />
+
     </fragment>
 
     <fragment
@@ -56,6 +60,16 @@
             android:id="@+id/actStoryFragment"
             app:destination="@id/storyFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/storyFavouriteFragment"
+        android:name="com.example.reading.presentation.view.fragment.StoryFavouriteFragment"
+        tools:layout="@layout/fragment_story_favourite">
+
+        <action
+            android:id="@+id/actStoryFragment"
+            app:destination="@id/storyFragment" />
 
     </fragment>
 </navigation>

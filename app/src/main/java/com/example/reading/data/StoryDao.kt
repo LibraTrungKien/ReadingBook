@@ -1,6 +1,7 @@
 package com.example.reading.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -54,5 +55,16 @@ interface StoryDao {
     """
     )
     suspend fun getHistory(): List<HistoryEntity>
+
+    @Query(
+        """
+        SELECT *
+        FROM FavouriteEntity
+    """
+    )
+    suspend fun getStoryFavourites(): List<FavouriteEntity>
+
+    @Delete
+    suspend fun deleteFavourite(favouriteEntity: FavouriteEntity)
 
 }

@@ -1,5 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
+import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -13,10 +14,13 @@ import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.viewmodel.MainViewModel
+import com.example.reading.presentation.viewmodel.StoryFavouriteViewModel
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>() {
+class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelectedListener {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var controller: CategoryController
 
@@ -51,6 +55,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         }
 
         binding.btnSearch.setOnClickListener { SearchStoryFragment.open(findNavController()) }
+        binding.navLeftMenu.setNavigationItemSelectedListener(this)
     }
 
     override fun initializeData() {
@@ -80,5 +85,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private fun bindViewProgress(isVisible: Boolean) {
         binding.prgIndicator.visibleOrGone(isVisible)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.favoritePage -> StoryFavouriteFragment.open(findNavController())
+            else -> Unit
+        }
+        return true
     }
 }

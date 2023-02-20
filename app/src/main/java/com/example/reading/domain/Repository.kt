@@ -10,8 +10,10 @@ interface Repository {
     suspend fun searchStoryByName(name: String): List<Story>
     suspend fun getStoryByCategory(category: Int): List<Story>
     suspend fun addHistory(story: Story)
-    suspend fun addFavourite(story: Story)
+    suspend fun addFavourite(story: Story): Boolean
     suspend fun deleteHistory()
     suspend fun deleteFavourite(story: Story)
     suspend fun getHistory(): List<Story>
+    suspend fun getStoryFavourites(): List<Story>
+    suspend fun deleteStoryFavourite(story: Story)
 }

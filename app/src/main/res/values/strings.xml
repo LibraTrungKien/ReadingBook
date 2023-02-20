@@ -28,4 +28,6 @@
     <string name="history">Tìm thấy </string>
     <string name="result">kết quả</string>
     <string name="remove_history">Xóa lịch sử</string>
+    <string name="add_Favourite">Thêm vào danh sách yêu thích</string>
+    <string name="story_Favourite">Danh sách yêu thích</string>
 </resources>

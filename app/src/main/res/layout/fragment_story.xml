@@ -162,6 +162,20 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/btnAddFavourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_search_view"
+                android:backgroundTint="#E9FF6F00"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="8dp"
+                android:text="@string/add_Favourite"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
         </LinearLayout>
 
         <LinearLayout

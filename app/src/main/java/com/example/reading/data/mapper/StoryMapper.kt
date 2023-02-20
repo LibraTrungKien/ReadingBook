@@ -2,6 +2,7 @@ package com.example.reading.data.mapper
 
 import com.example.reading.data.dto.ChapterDTO
 import com.example.reading.data.dto.StoryDTO
+import com.example.reading.data.entity.FavouriteEntity
 import com.example.reading.data.entity.HistoryEntity
 import com.example.reading.data.entity.StoryEntity
 import com.example.reading.domain.model.Chapter
@@ -82,6 +83,22 @@ fun Story.toEntity(): HistoryEntity {
     )
 }
 
+fun Story.toFavouriteEntity(): FavouriteEntity {
+    val model = this
+    return FavouriteEntity(
+        id = model.id,
+        name = model.name,
+        image = model.image,
+        category = model.category,
+        author = model.author,
+        dateCreated = model.dateCreated,
+        dateUpdated = model.dateUpdated,
+        status = model.status,
+        description = model.description,
+        chapters = model.chapters
+    )
+}
+
 fun HistoryEntity.toModel(): Story {
     val entity = this
     return Story(
@@ -97,3 +114,20 @@ fun HistoryEntity.toModel(): Story {
         chapters = entity.chapters
     )
 }
+
+fun FavouriteEntity.toModel(): Story {
+    val entity = this
+    return Story(
+        id = entity.id,
+        name = entity.name,
+        image = entity.image,
+        category = entity.category,
+        author = entity.author,
+        dateCreated = entity.dateCreated,
+        dateUpdated = entity.dateUpdated,
+        status = entity.status,
+        description = entity.description,
+        chapters = entity.chapters
+    )
+}
+

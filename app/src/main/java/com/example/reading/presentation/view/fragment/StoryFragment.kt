@@ -1,6 +1,7 @@
 package com.example.reading.presentation.view.fragment
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -15,7 +16,9 @@ import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.viewmodel.StoryViewModel
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StoryFragment : BaseFragment<FragmentStoryBinding>() {
     private val viewModel: StoryViewModel by viewModels()
     private lateinit var controller: ChapterController
@@ -58,6 +61,15 @@ class StoryFragment : BaseFragment<FragmentStoryBinding>() {
                 viewModel.story,
                 1
             )
+        }
+
+        binding.btnAddFavourite.setOnClickListener {
+            viewModel.addFavourite()
+            Toast.makeText(
+                requireContext(),
+                "Đã thêm ${viewModel.story.name} vào ds yêu thích",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
