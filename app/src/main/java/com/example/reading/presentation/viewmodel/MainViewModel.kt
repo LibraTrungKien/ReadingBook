@@ -14,16 +14,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val useCase: GetDataStoryUseCase
+    private val getDataStoryUseCase: GetDataStoryUseCase
 ) : BaseViewModel() {
     val images = arrayListOf<SlideModel>()
-    var originData = listOf<StoryModelHolder>()
 
     private var _dataLiveData: MutableLiveData<List<StoryModelHolder>> = MutableLiveData()
     val dataLiveData: LiveData<List<StoryModelHolder>>
         get() = _dataLiveData
 
-    fun initImagesSlider() {
+    fun loadDataImage() {
         images.clear()
         images.add(
             SlideModel(
@@ -45,8 +44,11 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    fun loadData() = callSafeApiWithLiveData {
-        useCase.invoke()
+    fun loadData() {
+        viewModelScope.launch {
+            val data = getDataStoryUseCase.invoke()
+            _dataLiveData.postValue(data)
+        }
     }
 
 }

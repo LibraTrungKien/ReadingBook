@@ -11,7 +11,7 @@ import com.example.reading.domain.model.Chapter
 import com.example.reading.domain.model.Story
 import com.example.reading.presentation.Key
 import com.example.reading.presentation.view.base.BaseFragment
-import com.example.reading.presentation.view.base.isVisibleOrGone
+import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.viewmodel.StoryDetailViewModel
 import com.google.gson.Gson
 
@@ -65,10 +65,10 @@ class StoryDetailFragment : BaseFragment<FragmentStoryDetailBinding>() {
     }
 
     private fun bindViewNext() {
-        binding.btnNext.isVisibleOrGone(!viewModel.isEndChap())
+        binding.btnNext.visibleOrGone(!viewModel.isEndChap())
     }
 
     private fun bindViewPrevious() {
-        binding.btnPrevious.isVisibleOrGone(!viewModel.isFirstChap())
+        binding.btnPrevious.visibleOrGone(!viewModel.isFirstChap())
     }
 }

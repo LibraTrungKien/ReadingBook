@@ -58,20 +58,21 @@
 
                         </com.google.android.material.appbar.MaterialToolbar>
 
-                        <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:id="@+id/prgIndicator"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:indeterminate="true"
-                            app:indicatorColor="#1565C0" />
-
                     </com.google.android.material.appbar.AppBarLayout>
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/prgIndicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/lyt1"
+                        android:indeterminate="true"
+                        app:indicatorColor="#C81584C0" />
 
                     <com.denzcoskun.imageslider.ImageSlider
                         android:id="@+id/imgAuthor"
                         android:layout_width="match_parent"
                         android:layout_height="244dp"
-                        android:layout_below="@id/lyt1"
+                        android:layout_below="@id/prgIndicator"
                         android:background="#5E00695C"
                         android:padding="4dp"
                         app:iss_auto_cycle="true"

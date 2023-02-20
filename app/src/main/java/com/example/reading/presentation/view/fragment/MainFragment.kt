@@ -1,6 +1,5 @@
 package com.example.reading.presentation.view.fragment
 
-import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -11,7 +10,7 @@ import com.example.reading.databinding.FragmentMainBinding
 import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
-import com.example.reading.presentation.view.base.apiCall
+import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,27 +37,23 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         })
         binding.lstStory.setHasFixedSize(false)
         binding.lstStory.setController(controller)
-
     }
 
     override fun initializeEvents() {
-        binding.prgIndicator.visibility = View.VISIBLE
         binding.toolbar.setNavigationOnClickListener {
             binding.drwLayout.openDrawer(GravityCompat.START)
         }
 
+        bindViewProgress(true)
         viewModel.dataLiveData.observe(viewLifecycleOwner) {
             controller.setData(it)
-            binding.prgIndicator.visibility = View.GONE
+            bindViewProgress(false)
         }
-
-        apiCall(viewModel.loadData(), viewLifecycleOwner, {
-            controller.setData(it)
-        }, { true })
     }
 
     override fun initializeData() {
-        viewModel.initImagesSlider()
+        viewModel.loadDataImage()
+        viewModel.loadData()
     }
 
     override fun bindView() {
@@ -79,5 +74,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     private fun bindViewUserName() {
         binding.txtName.text = "Lee Viet Toan Hoo"
+    }
+
+    private fun bindViewProgress(isVisible: Boolean) {
+        binding.prgIndicator.visibleOrGone(isVisible)
     }
 }
