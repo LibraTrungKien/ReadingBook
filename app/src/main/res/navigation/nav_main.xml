@@ -33,6 +33,10 @@
             android:id="@+id/actStoryFavouriteFragment"
             app:destination="@id/storyFavouriteFragment" />
 
+        <action
+            android:id="@+id/actPostStoryFragment"
+            app:destination="@id/postStoryFragment" />
+
     </fragment>
 
     <fragment
@@ -72,4 +76,9 @@
             app:destination="@id/storyFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/postStoryFragment"
+        android:name="com.example.reading.presentation.view.fragment.PostStoryFragment"
+        tools:layout="@layout/fragment_post_story" />
 </navigation>

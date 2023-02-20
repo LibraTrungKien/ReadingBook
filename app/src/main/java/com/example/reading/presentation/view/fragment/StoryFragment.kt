@@ -43,6 +43,7 @@ class StoryFragment : BaseFragment<FragmentStoryBinding>() {
             override fun isFromSearch() = false
             override fun getStory() = viewModel.story
             override fun getViewModel() = viewModel
+            override fun getFragment() = this@StoryFragment
         })
 
         binding.lstChapter.setHasFixedSize(false)
