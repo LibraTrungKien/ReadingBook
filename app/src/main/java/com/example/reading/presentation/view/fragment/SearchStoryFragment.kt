@@ -31,6 +31,7 @@ class SearchStoryFragment : BaseFragment<FragmentSearchStoryBinding>() {
             override fun isFromSearch() = true
             override fun getStory() = null
             override fun getViewModel() = viewModel
+            override fun getFragment() = this@SearchStoryFragment
         })
         binding.lstStory.setHasFixedSize(false)
         binding.lstStory.setController(controller)

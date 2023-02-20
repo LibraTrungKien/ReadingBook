@@ -1,6 +1,8 @@
 package com.example.reading.presentation.view.base
 
+import android.content.Context
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -29,4 +31,16 @@ fun handleException(
 ) {
     throwable ?: return
     Log.d("FragmentExtension", "handleException()...${throwable.message} ")
+}
+
+fun Fragment.showConfirmDialog(
+    context: Context,
+    title: String,
+    message: String,
+    onYesClick: () -> Unit,
+    onNoClicked: () -> Unit
+) {
+    AlertDialog.Builder(context).setTitle(title).setMessage(message).setPositiveButton(
+        "Có"
+    ) { _, _ -> onYesClick() }.setNegativeButton("Không") { _, _ -> onNoClicked() }.create().show()
 }

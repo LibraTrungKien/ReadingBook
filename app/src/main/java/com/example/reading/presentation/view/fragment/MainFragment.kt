@@ -2,6 +2,7 @@ package com.example.reading.presentation.view.fragment
 
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -35,6 +36,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             override fun getStory() = null
             override fun getViewModel() = viewModel
             override fun isFromSearch() = false
+            override fun getFragment() = this@MainFragment
         })
         binding.lstStory.setHasFixedSize(false)
         binding.lstStory.setController(controller)

@@ -1,5 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -34,6 +35,8 @@ class StoryFavouriteFragment : BaseFragment<FragmentStoryFavouriteBinding>() {
             override fun getStory() = null
 
             override fun getViewModel() = viewModel
+
+            override fun getFragment() = this@StoryFavouriteFragment
         })
         binding.lstStory.setController(controller)
     }

@@ -1,6 +1,7 @@
 package com.example.reading.presentation.view.base
 
 
+import android.content.Context
 import android.view.View
 import android.view.ViewParent
 import androidx.viewbinding.ViewBinding
@@ -16,6 +17,8 @@ abstract class ViewBindingEpoxyModelWithHolder<T : ViewBinding> :
     protected val binding: T
         get() = _binding!!
 
+    protected val context: Context by lazy { binding.root.context }
+
     @Suppress("UNCHECKED_CAST")
     override fun bind(holder: ViewBindingHolder) {
         _binding = (holder.viewBinding as T)
@@ -30,12 +33,11 @@ abstract class ViewBindingEpoxyModelWithHolder<T : ViewBinding> :
         bindView()
     }
 
-    open fun initializeView(){}
-    open fun initializeComponent(){}
-    open fun initializeEvents(){}
-    open fun initializeData(){}
-    open fun bindView(){}
-
+    open fun initializeView() {}
+    open fun initializeComponent() {}
+    open fun initializeEvents() {}
+    open fun initializeData() {}
+    open fun bindView() {}
 
 
     @Suppress("UNCHECKED_CAST")

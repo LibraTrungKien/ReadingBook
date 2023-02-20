@@ -6,6 +6,7 @@ import com.example.reading.R
 import com.example.reading.databinding.ItemStoryFavouriteBinding
 import com.example.reading.domain.model.Story
 import com.example.reading.presentation.view.base.ViewBindingEpoxyModelWithHolder
+import com.example.reading.presentation.view.base.showConfirmDialog
 import com.example.reading.presentation.view.fragment.StoryFragment
 import com.example.reading.presentation.viewmodel.StoryFavouriteViewModel
 
@@ -31,7 +32,16 @@ class StoryFavouriteController(private val interactor: Interactor) :
             }
 
             binding.btnRemove.setOnClickListener {
-                (interactor.getViewModel() as StoryFavouriteViewModel).deleteStoryFavourite(story)
+                interactor.getFragment().showConfirmDialog(
+                    context = context,
+                    "Xác nhận",
+                    "Bạn cc muốn xóa?",
+                    {
+                        (interactor.getViewModel() as StoryFavouriteViewModel).deleteStoryFavourite(
+                            story
+                        )
+                    },
+                    {})
             }
         }
 
