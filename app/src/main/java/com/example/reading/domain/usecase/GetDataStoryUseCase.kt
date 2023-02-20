@@ -14,12 +14,24 @@ class GetDataStoryUseCase @Inject constructor(
     suspend operator fun invoke(): List<StoryModelHolder> {
         val stories = repository.getAllStory()
         data.clear()
+        loadNewStories(stories)
         loadFairyTalesStories(stories)
         loadFairyTalesWorldStories(stories)
         loadJokesStories(stories)
         loadFolkTaleStories(stories)
         loadGhostStories(stories)
         return data
+    }
+
+    private fun loadNewStories(stories: List<Story>) {
+        val newStories = stories.subList(0, 5)
+        val model = StoryModelHolder().apply {
+            type = Type.HEADER
+            name = "Truyện mới nhất"
+            subItem = StoryModelHolder(type = Type.CATEGORY, subItem = null, stories = newStories)
+            this.stories = null
+        }
+        data.add(model)
     }
 
     private fun loadGhostStories(stories: List<Story>) {

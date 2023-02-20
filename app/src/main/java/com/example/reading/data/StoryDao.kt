@@ -11,6 +11,11 @@ interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(story: List<StoryEntity>)
 
-    @Query("SELECT * FROM StoryEntity")
+    @Query(
+        """
+        SELECT * 
+        FROM StoryEntity 
+        ORDER BY dateCreated DESC"""
+    )
     suspend fun getAllStory(): List<StoryEntity>
 }
