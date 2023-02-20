@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 import com.example.reading.domain.model.Chapter
 
 @Entity
-data class StoryEntity(
+data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Int,
     val name: String = "",
     val image: String = "",
     val category: Int = 0,

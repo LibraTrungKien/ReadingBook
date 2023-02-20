@@ -24,6 +24,7 @@ class GetDataStoryUseCase @Inject constructor(
     }
 
     private fun loadNewStories(stories: List<Story>) {
+        if (stories.size < 6) return
         val newStories = stories.subList(0, 5)
         val model = StoryModelHolder().apply {
             type = Type.HEADER

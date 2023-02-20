@@ -2,6 +2,7 @@ package com.example.reading.presentation.view.fragment
 
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -29,11 +30,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun initializeComponent() {
         controller = CategoryController(object : Interactor {
-            override fun findNavController(): NavController {
-                return this@MainFragment.findNavController()
-            }
-
+            override fun findNavController() = this@MainFragment.findNavController()
             override fun getStory() = null
+            override fun getViewModel() = viewModel
+            override fun isFromSearch() = false
         })
         binding.lstStory.setHasFixedSize(false)
         binding.lstStory.setController(controller)
@@ -49,6 +49,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             controller.setData(it)
             bindViewProgress(false)
         }
+
+        binding.btnSearch.setOnClickListener { SearchStoryFragment.open(findNavController()) }
     }
 
     override fun initializeData() {

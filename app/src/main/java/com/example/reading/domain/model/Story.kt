@@ -1,7 +1,7 @@
 package com.example.reading.domain.model
 
 data class Story(
-    var id: String = "",
+    var id: Int = 0,
     var name: String = "",
     var image: String = "",
     var category: Int = 0,

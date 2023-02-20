@@ -8,8 +8,9 @@
         android:id="@+id/txtChapter"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_button_round_4dp_ripple"
+        android:background="@drawable/bg_button_round_4dp"
         android:backgroundTint="#E1F57F17"
+        android:foreground="?attr/selectableItemBackground"
         android:lines="1"
         android:padding="8dp"
         android:textAlignment="center" />

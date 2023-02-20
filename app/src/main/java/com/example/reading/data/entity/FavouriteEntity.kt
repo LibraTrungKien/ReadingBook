@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.example.reading.domain.model.Chapter
 
 @Entity
-data class StoryEntity(
+data class FavouriteEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String = "",

@@ -17,4 +17,15 @@
     <string name="status">Trạng thái:</string>
     <string name="chapter">Số chương:</string>
     <string name="chap">Tập </string>
+    <string name="ghost_story">Truyện ma</string>
+    <string name="fairy_tales">Truyện dân gian thế giới</string>
+    <string name="jokes_story">Truyện cười</string>
+    <string name="fairy_tales_vi">Truyện dân gian Việt Nam</string>
+    <string name="folk_tale">Truyện dân gian</string>
+    <string name="recommend_for_you">Đề xuất cho bạn</string>
+    <string name="search_history">Tìm kiếm gần đây</string>
+    <string name="enter_name">Nhập tên truyện</string>
+    <string name="history">Tìm thấy </string>
+    <string name="result">kết quả</string>
+    <string name="remove_history">Xóa lịch sử</string>
 </resources>

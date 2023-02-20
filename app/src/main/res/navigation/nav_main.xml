@@ -25,6 +25,10 @@
             android:id="@+id/actStoryFragment"
             app:destination="@id/storyFragment" />
 
+        <action
+            android:id="@+id/actSearchStoryFragment"
+            app:destination="@id/searchStoryFragment" />
+
     </fragment>
 
     <fragment
@@ -42,4 +46,16 @@
         android:id="@+id/storyDetailFragment"
         android:name="com.example.reading.presentation.view.fragment.StoryDetailFragment"
         tools:layout="@layout/fragment_story_detail" />
+
+    <fragment
+        android:id="@+id/searchStoryFragment"
+        android:name="com.example.reading.presentation.view.fragment.SearchStoryFragment"
+        tools:layout="@layout/fragment_search_story">
+
+        <action
+            android:id="@+id/actStoryFragment"
+            app:destination="@id/storyFragment" />
+
+
+    </fragment>
 </navigation>

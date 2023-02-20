@@ -5,18 +5,19 @@ import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.ItemImageStoryBinding
 import com.example.reading.domain.model.Story
-import com.example.reading.presentation.view.fragment.StoryFragment
 import com.example.reading.presentation.view.base.ViewBindingEpoxyModelWithHolder
+import com.example.reading.presentation.view.fragment.StoryFragment
+import com.example.reading.presentation.viewmodel.SearchStoryViewModel
 
 class StoryController(private val interactor: Interactor) : TypedEpoxyController<List<Story>>() {
     override fun buildModels(data: List<Story>?) {
         data ?: return
         data.forEach {
-            ViewHolder(interactor, it).id(it.hashCode()).addTo(this)
+            Holder(interactor, it).id(it.hashCode()).addTo(this)
         }
     }
 
-    class ViewHolder(
+    class Holder(
         private val interactor: Interactor,
         private val story: Story
     ) :
@@ -25,6 +26,9 @@ class StoryController(private val interactor: Interactor) : TypedEpoxyController
         override fun initializeEvents() {
             binding.root.setOnClickListener {
                 StoryFragment.open(interactor.findNavController(), story = story)
+                if (interactor.isFromSearch()) {
+                    (interactor.getViewModel() as SearchStoryViewModel).addHistory(story)
+                }
             }
         }
 

@@ -27,4 +27,33 @@ class RepositoryImpl @Inject constructor(
         return localDataSource.getAllStory().map { it.toModel() }
     }
 
+    override suspend fun searchStoryByName(name: String): List<Story> {
+        val text = "*$name*"
+        val result = localDataSource.searchStoryByName(text)
+        return result.map { it.toModel() }
+    }
+
+    override suspend fun getStoryByCategory(category: Int): List<Story> {
+        val data = localDataSource.getStoryByCategory(category)
+        return data.map { it.toModel() }
+    }
+
+    override suspend fun addHistory(story: Story) {
+        localDataSource.save(story.toEntity())
+    }
+
+    override suspend fun addFavourite(story: Story) {
+
+    }
+
+    override suspend fun deleteHistory() {
+    }
+
+    override suspend fun deleteFavourite(story: Story) {
+    }
+
+    override suspend fun getHistory(): List<Story> {
+        return localDataSource.getHistory().map { it.toModel() }
+    }
+
 }

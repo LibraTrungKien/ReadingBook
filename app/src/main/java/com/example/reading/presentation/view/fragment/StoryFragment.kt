@@ -37,7 +37,9 @@ class StoryFragment : BaseFragment<FragmentStoryBinding>() {
     override fun initializeComponent() {
         controller = ChapterController(object : Interactor {
             override fun findNavController() = this@StoryFragment.findNavController()
+            override fun isFromSearch() = false
             override fun getStory() = viewModel.story
+            override fun getViewModel() = viewModel
         })
 
         binding.lstChapter.setHasFixedSize(false)

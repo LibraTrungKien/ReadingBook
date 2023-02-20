@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_circle_ripple"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@null"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="4dp"
+            android:src="@drawable/ic_back" />
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:autofillHints="@string/enter_name"
+            android:background="@drawable/bg_search_view"
+            android:backgroundTint="#1B000000"
+            android:drawableStart="@drawable/ic_search"
+            android:hint="@string/enter_name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#1E000000" />
+
+    <LinearLayout
+        android:id="@+id/lyt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/recommend_for_you"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btnGhost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ghost_story" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btnFairyTales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fairy_tales" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btnJokes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jokes_story" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btnFairyTalesVi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fairy_tales_vi" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/btnFolkTale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/folk_tale" />
+        </com.google.android.material.chip.ChipGroup>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:text="@string/search_history"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/lstStory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_image_story" />
+
+</LinearLayout>
