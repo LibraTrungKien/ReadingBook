@@ -42,6 +42,10 @@ class StoryFavouriteFragment : BaseFragment<FragmentStoryFavouriteBinding>() {
         viewModel.dataLiveData.observe(viewLifecycleOwner) {
             controller.setData(it)
         }
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun initializeData() {

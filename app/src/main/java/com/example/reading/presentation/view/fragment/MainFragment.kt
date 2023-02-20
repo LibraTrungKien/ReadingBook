@@ -3,7 +3,6 @@ package com.example.reading.presentation.view.fragment
 import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -14,8 +13,6 @@ import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.viewmodel.MainViewModel
-import com.example.reading.presentation.viewmodel.StoryFavouriteViewModel
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,7 +85,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        binding.drwLayout.closeDrawer(GravityCompat.START)
+        when (item.itemId) {
             R.id.favoritePage -> StoryFavouriteFragment.open(findNavController())
             else -> Unit
         }

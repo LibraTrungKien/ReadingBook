@@ -43,7 +43,7 @@ interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addHistory(story: HistoryEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavourite(story: FavouriteEntity)
 
     @Query(
