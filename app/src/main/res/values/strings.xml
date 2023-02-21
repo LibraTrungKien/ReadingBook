@@ -8,10 +8,11 @@
     <string name="infoPage">Thông tin ứng dụng</string>
     <string name="favoritePage">Truyện yêu thích</string>
     <string name="story_name">Tên truyện: </string>
+    <string name="chap_name">Tên chap: </string>
     <string name="author">Tác giả: </string>
     <string name="date_created">Ngày tạo: </string>
     <string name="read_story">Đọc truyện</string>
-    <string name="description">Mô tả</string>
+    <string name="description">Mô tả: </string>
     <string name="list_chapter">Danh sách tập</string>
     <string name="category">Thể loại: </string>
     <string name="status">Trạng thái:</string>
@@ -30,4 +31,10 @@
     <string name="remove_history">Xóa lịch sử</string>
     <string name="add_Favourite">Thêm vào danh sách yêu thích</string>
     <string name="story_Favourite">Danh sách yêu thích</string>
+    <string name="post_Story">Đăng bài</string>
+    <string name="add_newStory">Truyện mới</string>
+    <string name="add_newChap">Chap mới</string>
+    <string name="content">Nội dung: </string>
+    <string name="image_story">Ảnh:</string>
+    <string name="save_Story">Đăng truyện</string>
 </resources>

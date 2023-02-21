@@ -68,4 +68,13 @@ interface StoryDao {
     @Delete
     suspend fun deleteFavourite(favouriteEntity: FavouriteEntity)
 
+    @Query(
+        """
+        SELECT *
+        FROM StoryEntity
+        WHERE author = :author
+    """
+    )
+    suspend fun getStoryByAuthor(author: String): List<StoryEntity>
+
 }

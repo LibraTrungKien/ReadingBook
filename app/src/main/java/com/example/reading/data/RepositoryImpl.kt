@@ -68,4 +68,9 @@ class RepositoryImpl @Inject constructor(
         localDataSource.deleteFavourite(story.toFavouriteEntity())
     }
 
+    override suspend fun getStoryByAuthor(author: String): List<Story> {
+        val data = localDataSource.getStoryByAuthor(author)
+        return data.map { it.toModel() }
+    }
+
 }
