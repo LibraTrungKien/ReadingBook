@@ -1,6 +1,5 @@
 package com.example.reading.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Chapter
@@ -73,7 +72,9 @@ class PostStoryViewModel @Inject constructor(
         }
         story.apply {
             dateUpdated = sdf.format(now)
-            chapters.add(chapter)
+            if (!isMatch()) {
+                chapters.add(chapter)
+            }
         }
         repository.putStory(story)
     }
@@ -87,9 +88,17 @@ class PostStoryViewModel @Inject constructor(
         story.apply {
             dateUpdated = sdf.format(now)
             dateCreated = sdf.format(now)
-            chapters.add(chapter)
+            if (!isMatch()) {
+                chapters.add(chapter)
+            }
         }
         repository.postStory(story)
+    }
+
+    private fun isMatch(): Boolean {
+        val chapId = chapter.id
+        val chapters = story.chapters
+        return chapters.any { it.id == chapId }
     }
 
 }
