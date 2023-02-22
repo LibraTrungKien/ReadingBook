@@ -1,7 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
 import android.view.View
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -52,6 +51,14 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         viewModel.loadStoryByAuthor()
     }
 
+    override fun bindView() {
+        bindViewProgress(false)
+    }
+
+    private fun bindViewProgress(isVisible: Boolean) {
+        binding.prgIndicator.visibleOrGone(isVisible)
+    }
+
     private fun showStoryPopup(anchor: View) {
         StoryPopup.show(viewModel.stories, requireContext(), anchor) {
             handleWhenClicked(it)
@@ -64,15 +71,18 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
     }
 
     private fun postStory() {
-        MessageDialog().show(parentFragmentManager, null)
-//        apiCall(viewModel.postStory(), viewLifecycleOwner, {
-//            viewModel.loadPercent(100)
-//            Toast.makeText(requireContext(), "đăng bài thành công!", Toast.LENGTH_LONG).show()
-//
-//        }, {
-//            viewModel.loadPercent(100)
-//            false
-//        })
+        bindViewProgress(true)
+        apiCall(viewModel.postStory(), viewLifecycleOwner, {
+            bindViewProgress(false)
+            MessageDialog.show(
+                parentFragmentManager,
+                "Chúc mừng",
+                "Bạn đã đẩy thành công truyện",
+                R.drawable.satisfied
+            ) {}
+        }, {
+            true
+        })
 
     }
 }

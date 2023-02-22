@@ -45,6 +45,7 @@ class StoryPopup(private val stories: List<Story>, private val context: Context)
         controller = StoryNameController(object : CallBack {
             override fun onItemClicked(story: Story) {
                 this@StoryPopup.onItemClicked(story)
+                dismiss()
             }
         })
 

@@ -1,11 +1,12 @@
 package com.example.reading.presentation.view.base
 
 import android.content.Context
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import com.example.reading.R
+import com.example.reading.presentation.view.MessageDialog
 
 fun <T> Fragment.apiCall(
     liveData: LiveData<ApiResult<T>>,
@@ -19,18 +20,26 @@ fun <T> Fragment.apiCall(
             is ApiResult.Error -> {
                 val isConsumer = onError(it.e)
                 if (isConsumer) {
-                    handleException(it.e)
+                    handleException(it.e) {
+                    }
                 }
             }
         }
     }
 }
 
-fun handleException(
-    throwable: Throwable?
+fun Fragment.handleException(
+    throwable: Throwable?,
+    onButtonClicked: () -> Unit
 ) {
     throwable ?: return
-    Log.d("FragmentExtension", "handleException()...${throwable.message} ")
+    MessageDialog.show(
+        this.parentFragmentManager,
+        "Thông báo",
+        throwable.message.toString(),
+        R.drawable.ic_sad,
+        onButtonClicked
+    )
 }
 
 fun Fragment.showConfirmDialog(
