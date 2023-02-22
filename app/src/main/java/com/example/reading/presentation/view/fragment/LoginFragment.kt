@@ -1,5 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
+import android.util.Log
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -30,7 +31,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun login() {
         apiCall(viewModel.login(), viewLifecycleOwner, {
-
-        }, { true })
+            MainFragment.open(findNavController())
+        }, {
+            true
+        })
     }
 }

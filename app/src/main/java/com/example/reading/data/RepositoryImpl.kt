@@ -1,6 +1,5 @@
 package com.example.reading.data
 
-import android.util.Log
 import com.example.reading.data.locadatasource.StoryLocalDataSource
 import com.example.reading.data.mapper.toDTO
 import com.example.reading.data.mapper.toEntity
@@ -18,8 +17,7 @@ class RepositoryImpl @Inject constructor(
     private val localDataSource: StoryLocalDataSource
 ) : Repository {
     override suspend fun login(login: Login): Boolean {
-        val response = apiService.login(login.toDTO())
-        Log.d("RepositoryImpl", "login()...${response.body()}")
+        apiService.login(login.toDTO()).body()!!
         return true
     }
 
