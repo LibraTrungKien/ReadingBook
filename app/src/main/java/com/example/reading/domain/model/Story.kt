@@ -10,7 +10,7 @@ data class Story(
     var dateUpdated: String = "",
     var status: String = "",
     var description: String = "",
-    var chapters: List<Chapter> = arrayListOf()
+    var chapters: ArrayList<Chapter> = arrayListOf()
 ) {
     fun getCategory(): String {
         return when (category) {

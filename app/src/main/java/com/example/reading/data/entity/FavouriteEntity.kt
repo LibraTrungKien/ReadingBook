@@ -16,5 +16,5 @@ data class FavouriteEntity(
     val dateUpdated: String = "",
     val status: String = "",
     val description: String = "",
-    val chapters: List<Chapter> = arrayListOf()
+    val chapters: ArrayList<Chapter> = arrayListOf()
 )

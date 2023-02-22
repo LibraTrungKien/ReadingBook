@@ -7,15 +7,15 @@ import com.google.gson.reflect.TypeToken
 
 class ChapterConverter {
     @TypeConverter
-    fun chapters2String(chapters: List<Chapter>?): String? {
+    fun chapters2String(chapters: ArrayList<Chapter>?): String? {
         if (chapters == null) return null
         return Gson().toJson(chapters)
     }
 
     @TypeConverter
-    fun string2Chapters(data: String?): List<Chapter>? {
+    fun string2Chapters(data: String?): ArrayList<Chapter>? {
         if (data == null) return null
-        val type = object : TypeToken<List<Chapter>>() {}.type
+        val type = object : TypeToken<ArrayList<Chapter>>() {}.type
         return Gson().fromJson(data, type)
     }
 }

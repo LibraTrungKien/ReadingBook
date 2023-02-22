@@ -16,6 +16,6 @@ data class HistoryEntity(
     val dateUpdated: String = "",
     val status: String = "",
     val description: String = "",
-    val chapters: List<Chapter> = arrayListOf(),
+    val chapters: ArrayList<Chapter> = arrayListOf(),
     val timeWhenSave: Long = System.currentTimeMillis()
 )

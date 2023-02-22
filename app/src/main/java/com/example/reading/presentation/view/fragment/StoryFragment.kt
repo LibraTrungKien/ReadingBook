@@ -80,6 +80,7 @@ class StoryFragment : BaseFragment<FragmentStoryBinding>() {
         binding.txtAuthor.text = story.author
         binding.toolbar.title = story.name
         binding.txtCreatedDate.text = story.dateCreated
+        binding.txtDateUpdated.text = story.dateUpdated
         binding.txtDescription.text = story.description
         binding.txtStatus.text = story.status
         binding.txtCategory.text = story.getCategory()

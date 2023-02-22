@@ -7,10 +7,12 @@ import com.example.reading.data.entity.HistoryEntity
 import com.example.reading.data.entity.StoryEntity
 import com.example.reading.domain.model.Chapter
 import com.example.reading.domain.model.Story
+import java.text.SimpleDateFormat
+import java.util.Date
 
-fun StoryDTO.toModel(): Story {
+fun Story.toDTO(): StoryDTO {
     val dto = this
-    return Story(
+    return StoryDTO(
         id = dto.id,
         name = dto.name,
         image = dto.image,
@@ -20,13 +22,24 @@ fun StoryDTO.toModel(): Story {
         dateUpdated = dto.dateUpdated,
         status = dto.status,
         description = dto.description,
-        chapters = dto.chapters.map { it.toModel() }
+        chapters = ArrayList(dto.chapters.map { it.toDTO() })
     )
 }
 
 fun ChapterDTO.toModel(): Chapter {
     val dto = this
     return Chapter(
+        id = dto.id,
+        index = dto.index,
+        image = dto.image,
+        title = dto.title,
+        content = dto.content
+    )
+}
+
+fun Chapter.toDTO(): ChapterDTO {
+    val dto = this
+    return ChapterDTO(
         id = dto.id,
         index = dto.index,
         image = dto.image,
@@ -44,10 +57,10 @@ fun StoryDTO.toEntity(): StoryEntity {
         category = dto.category,
         author = dto.author,
         dateCreated = dto.dateCreated,
-        dateUpdated = dto.dateUpdated,
+        dateUpdated = dto.modifiedAt.toDateString(),
         status = dto.status,
         description = dto.description,
-        chapters = dto.chapters.map { it.toModel() }
+        chapters = ArrayList(dto.chapters.map { it.toModel() })
     )
 }
 
@@ -127,7 +140,13 @@ fun FavouriteEntity.toModel(): Story {
         dateUpdated = entity.dateUpdated,
         status = entity.status,
         description = entity.description,
-        chapters = entity.chapters
+        chapters = ArrayList(entity.chapters)
     )
+}
+
+fun Long.toDateString(): String {
+    val date = Date(this)
+    val localDateTime = SimpleDateFormat("hh: mm dd/MM/yyyy")
+    return localDateTime.format(date)
 }
 

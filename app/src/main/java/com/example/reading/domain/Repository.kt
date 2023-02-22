@@ -18,4 +18,5 @@ interface Repository {
     fun getStoryFavourites(): Flow<List<Story>>
     suspend fun deleteStoryFavourite(story: Story)
     suspend fun getStoryByAuthor(author: String): List<Story>
+    suspend fun putStory(story: Story): Boolean
 }

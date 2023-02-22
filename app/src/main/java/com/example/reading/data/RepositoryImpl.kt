@@ -2,6 +2,7 @@ package com.example.reading.data
 
 import com.example.reading.data.dto.UserDTO
 import com.example.reading.data.locadatasource.StoryLocalDataSource
+import com.example.reading.data.mapper.toDTO
 import com.example.reading.data.mapper.toEntity
 import com.example.reading.data.mapper.toFavouriteEntity
 import com.example.reading.data.mapper.toModel
@@ -71,6 +72,12 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getStoryByAuthor(author: String): List<Story> {
         val data = localDataSource.getStoryByAuthor(author)
         return data.map { it.toModel() }
+    }
+
+    override suspend fun putStory(story: Story): Boolean {
+        val response = apiService.putStory(story.id, story.toDTO()).body()!!
+        localDataSource.save(response.toEntity())
+        return true
     }
 
 }

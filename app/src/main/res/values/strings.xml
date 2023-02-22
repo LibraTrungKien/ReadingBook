@@ -37,4 +37,13 @@
     <string name="content">Nội dung: </string>
     <string name="image_story">Ảnh:</string>
     <string name="save_Story">Đăng truyện</string>
+    <string name="date_updated">Ngày cập nhật:</string>
+    <string name="notification">Thông báo</string>
+    <string name="congraduation">Chúc mừng</string>
+    <string name="content_congraduation">Bạn đã update thành công truyện</string>
+    <string name="content_congratulation">Bạn đã update thành công!</string>
+    <string name="congradulations">Chúc mừng</string>
+    <string name="congratulations">Chúc mừng</string>
+    <string name="ok">Ok</string>
+    <string name="off_dialog">Tắt thông báo</string>
 </resources>

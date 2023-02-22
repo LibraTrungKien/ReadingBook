@@ -19,7 +19,7 @@ interface StoryDao {
         """
         SELECT * 
         FROM StoryEntity 
-        ORDER BY dateCreated DESC"""
+        ORDER BY dateUpdated"""
     )
     suspend fun getAllStory(): List<StoryEntity>
 
@@ -77,4 +77,6 @@ interface StoryDao {
     )
     suspend fun getStoryByAuthor(author: String): List<StoryEntity>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun save(storyEntity: StoryEntity)
 }

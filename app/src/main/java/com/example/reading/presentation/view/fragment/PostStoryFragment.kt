@@ -1,11 +1,17 @@
 package com.example.reading.presentation.view.fragment
 
 import android.view.View
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentPostStoryBinding
+import com.example.reading.domain.model.Story
+import com.example.reading.presentation.view.MessageDialog
 import com.example.reading.presentation.view.base.BaseFragment
+import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.view.popup.StoryPopup
 import com.example.reading.presentation.viewmodel.PostStoryViewModel
@@ -27,12 +33,18 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
     }
 
     override fun initializeEvents() {
+        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+
         binding.rdgNew.setOnCheckedChangeListener { _, checkedId ->
             binding.lytNewChap.visibleOrGone(checkedId == R.id.btnNewChap)
             binding.lytNewStory.visibleOrGone(checkedId != R.id.btnNewChap)
         }
 
         binding.tilStoryName.setEndIconOnClickListener { showStoryPopup(it) }
+        binding.edtChapNameV2.doAfterTextChanged { viewModel.copyChapName(it.toString()) }
+        binding.edtContentV2.doAfterTextChanged { viewModel.copyContent(it.toString()) }
+
+        binding.btnSave.setOnClickListener { postStory() }
 
     }
 
@@ -42,7 +54,25 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
 
     private fun showStoryPopup(anchor: View) {
         StoryPopup.show(viewModel.stories, requireContext(), anchor) {
-            binding.txtStoryName.setText(it.name)
+            handleWhenClicked(it)
         }
+    }
+
+    private fun handleWhenClicked(story: Story) {
+        viewModel.story = story
+        binding.txtStoryName.setText(story.name)
+    }
+
+    private fun postStory() {
+        MessageDialog().show(parentFragmentManager, null)
+//        apiCall(viewModel.postStory(), viewLifecycleOwner, {
+//            viewModel.loadPercent(100)
+//            Toast.makeText(requireContext(), "đăng bài thành công!", Toast.LENGTH_LONG).show()
+//
+//        }, {
+//            viewModel.loadPercent(100)
+//            false
+//        })
+
     }
 }
