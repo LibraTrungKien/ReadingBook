@@ -80,4 +80,10 @@ class RepositoryImpl @Inject constructor(
         return true
     }
 
+    override suspend fun postStory(story: Story): Boolean {
+        val response = apiService.postStory(story.toDTO()).body()!!
+        localDataSource.save(response.toEntity())
+        return true
+    }
+
 }

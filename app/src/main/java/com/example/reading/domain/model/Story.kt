@@ -1,5 +1,7 @@
 package com.example.reading.domain.model
 
+import com.example.reading.presentation.model.Category
+
 data class Story(
     var id: Int = 0,
     var name: String = "",
@@ -14,11 +16,12 @@ data class Story(
 ) {
     fun getCategory(): String {
         return when (category) {
-            0 -> "Truyện ma"
-            1 -> "Anime"
-            2 -> "Truyện cười"
-            3 -> "Truyện cổ tích"
-            else -> "Truyện ngắn"
+            Category.GHOST -> "Truyện ma"
+            Category.FAIRY_TALES -> "Truyện cổ tích thế giới"
+            Category.JOKES -> "Truyện cười"
+            Category.FAIRY_TALES_VI -> "Truyện cổ tích Việt Nam"
+            Category.FOLK_TALE -> "Truyện dân gian"
+            else -> ""
         }
     }
 }
