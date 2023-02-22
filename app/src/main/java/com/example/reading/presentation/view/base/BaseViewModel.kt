@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 abstract class BaseViewModel : ViewModel() {
-    protected val coroutineContext by lazy { viewModelScope.coroutineContext + Dispatchers.IO }
+    private val coroutineContext by lazy { viewModelScope.coroutineContext + Dispatchers.IO }
 
     fun <T> callSafeApiWithLiveData(call: suspend () -> T): LiveData<ApiResult<T>> {
         return liveData(coroutineContext) {

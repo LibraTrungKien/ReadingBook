@@ -1,12 +1,13 @@
 package com.example.reading.data
 
-import com.example.reading.data.dto.UserDTO
+import android.util.Log
 import com.example.reading.data.locadatasource.StoryLocalDataSource
 import com.example.reading.data.mapper.toDTO
 import com.example.reading.data.mapper.toEntity
 import com.example.reading.data.mapper.toFavouriteEntity
 import com.example.reading.data.mapper.toModel
 import com.example.reading.domain.Repository
+import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -16,10 +17,12 @@ class RepositoryImpl @Inject constructor(
     private val apiService: AppService,
     private val localDataSource: StoryLocalDataSource
 ) : Repository {
-
-    override suspend fun fetchUsers(): List<UserDTO> {
-        return apiService.fetchUsers().body()!!
+    override suspend fun login(login: Login): Boolean {
+        val response = apiService.login(login.toDTO())
+        Log.d("RepositoryImpl", "login()...${response.body()}")
+        return true
     }
+
 
     override suspend fun fetchAllStory() {
         val response = apiService.fetchAllStory().body()!!

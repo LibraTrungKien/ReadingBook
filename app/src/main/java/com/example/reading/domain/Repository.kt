@@ -1,11 +1,11 @@
 package com.example.reading.domain
 
-import com.example.reading.data.dto.UserDTO
+import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    suspend fun fetchUsers(): List<UserDTO>
+    suspend fun login(login: Login): Boolean
     suspend fun fetchAllStory()
     suspend fun getAllStory(): List<Story>
     suspend fun searchStoryByName(name: String): List<Story>

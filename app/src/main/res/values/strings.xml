@@ -10,6 +10,7 @@
     <string name="story_name">Tên truyện: </string>
     <string name="chap_name">Tên chap: </string>
     <string name="author">Tác giả: </string>
+    <string name="author_No_colons">Tác giả </string>
     <string name="date_created">Ngày tạo: </string>
     <string name="read_story">Đọc truyện</string>
     <string name="description">Mô tả: </string>
@@ -46,4 +47,9 @@
     <string name="congratulations">Chúc mừng</string>
     <string name="ok">Ok</string>
     <string name="off_dialog">Tắt thông báo</string>
+    <string name="who_areYou">Bạn là ai?</string>
+    <string name="reader">Độc giả</string>
+    <string name="login">Đăng nhập</string>
+    <string name="account">Tài khoản</string>
+    <string name="password">Mật khẩu</string>
 </resources>

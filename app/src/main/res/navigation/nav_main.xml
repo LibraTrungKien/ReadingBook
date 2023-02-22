@@ -11,9 +11,34 @@
         tools:layout="@layout/fragment_splash">
 
         <action
-            android:id="@+id/actMainFragment"
+            android:id="@+id/actStartFragment"
+            app:destination="@id/startFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.reading.presentation.view.fragment.StartFragment"
+        tools:layout="@layout/fragment_start">
+
+        <action
+            android:id="@+id/actLoginFragment"
+            app:destination="@id/loginFragment" />
+
+        <action
+            android:id="@id/actMainFragment"
             app:destination="@id/mainFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.reading.presentation.view.fragment.LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/actMainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
     <fragment

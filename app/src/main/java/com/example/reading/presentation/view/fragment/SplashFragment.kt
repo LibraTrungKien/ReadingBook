@@ -14,7 +14,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     override fun initializeView() {
         Handler(Looper.getMainLooper()).postDelayed({
-            MainFragment.open(findNavController())
+            StartFragment.open(findNavController())
         }, 2000)
     }
 
