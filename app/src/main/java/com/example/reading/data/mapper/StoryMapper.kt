@@ -9,6 +9,7 @@ import com.example.reading.domain.model.Chapter
 import com.example.reading.domain.model.Story
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 fun Story.toDTO(): StoryDTO {
     val dto = this
@@ -146,7 +147,7 @@ fun FavouriteEntity.toModel(): Story {
 
 fun Long.toDateString(): String {
     val date = Date(this)
-    val localDateTime = SimpleDateFormat("hh: mm dd/MM/yyyy")
+    val localDateTime = SimpleDateFormat("hh:mm dd/MM/yyyy aa", Locale("VINA"))
     return localDateTime.format(date)
 }
 

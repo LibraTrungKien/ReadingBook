@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentPostStoryBinding
-import com.example.reading.domain.model.Story
 import com.example.reading.presentation.model.Category
 import com.example.reading.presentation.view.MessageDialog
 import com.example.reading.presentation.view.base.BaseFragment
@@ -43,6 +42,20 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
             binding.lytNewStory.visibleOrGone(checkedId != R.id.btnNewChap)
         }
 
+        binding.edtStoryName.doAfterTextChanged {
+            viewModel.copyNameStory(it.toString())
+        }
+        binding.edtChapName.doAfterTextChanged {
+            viewModel.copyChapName(it.toString())
+        }
+        binding.edtDescription.doAfterTextChanged {
+            viewModel.copyDescription(it.toString())
+        }
+        binding.edtImage.doAfterTextChanged {
+            viewModel.copyImageLink(it.toString())
+        }
+        binding.edtContent.doAfterTextChanged { viewModel.copyContent(it.toString()) }
+
         binding.tilCategory.setEndIconOnClickListener {
             showCategoryPopup(it)
         }
@@ -61,6 +74,24 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
     }
 
     private fun clearData() {
+        viewModel.story.apply {
+            id = 0
+            author = ""
+            category = 0
+            chapters = arrayListOf()
+            description = ""
+            name = ""
+            image = ""
+            dateCreated = ""
+            dateUpdated = ""
+        }
+
+        viewModel.chapter.apply {
+            id = ""
+            index = 0
+            title = ""
+            content = ""
+        }
         binding.edtChapName.setText("")
         binding.edtChapNameV2.setText("")
         binding.edtContentV2.setText("")
@@ -70,7 +101,6 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         binding.edtImage.setText("")
         binding.txtCategory.setText("")
         binding.txtStoryName.setText("")
-        viewModel.story = Story()
     }
 
     private fun showCategoryPopup(anchor: View) {
@@ -94,14 +124,11 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
 
     private fun showStoryPopup(anchor: View) {
         StoryPopup.show(viewModel.stories, requireContext(), anchor) {
-            handleWhenClicked(it)
+            viewModel.story = it
+            binding.txtStoryName.setText(it.name)
         }
     }
 
-    private fun handleWhenClicked(story: Story) {
-        viewModel.story = story
-        binding.txtStoryName.setText(story.name)
-    }
 
     private fun putStory() {
         bindViewProgress(true)
@@ -112,8 +139,9 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
                 "Chúc mừng",
                 "Bạn đã đẩy thành công!",
                 R.drawable.satisfied
-            ) {}
+            ) { findNavController().popBackStack() }
         }, {
+            bindViewProgress(false)
             true
         })
     }
@@ -127,8 +155,9 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
                 "Chúc mừng",
                 "Bạn đã đẩy thành công!",
                 R.drawable.satisfied
-            ) {}
+            ) { findNavController().popBackStack() }
         }, {
+            bindViewProgress(false)
             true
         })
     }
