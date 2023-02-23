@@ -87,6 +87,9 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun postStory(story: Story): Boolean {
+        val author = appStorageLocalDataSource.getInfoAccount().username
+        story.author = author
+
         val response = apiService.postStory(story.toDTO()).body()!!
         localDataSource.save(response.toEntity())
         return true
