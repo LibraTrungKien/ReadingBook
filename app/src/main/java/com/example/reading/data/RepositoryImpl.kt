@@ -20,7 +20,7 @@ class RepositoryImpl @Inject constructor(
 ) : Repository {
     override suspend fun login(login: Login): Boolean {
         val response = apiService.login(login.toDTO()).body()!!
-//        appStorageLocalDataSource.saveAccount(response)
+        appStorageLocalDataSource.saveAccount(response)
         return true
     }
 
