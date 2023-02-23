@@ -92,11 +92,27 @@ class RepositoryImpl @Inject constructor(
         return true
     }
 
-    override fun getInfoAccount(): Account {
+    override suspend fun getPermission(): Int {
+        return appStorageLocalDataSource.getPermission()
+    }
+
+    override suspend fun setPermission(permission: Int) {
+        appStorageLocalDataSource.setPermission(permission)
+    }
+
+    override suspend fun saveInfoReader(readerName: String, imageProfile: String) {
+        appStorageLocalDataSource.saveInfoReader(readerName, imageProfile)
+    }
+
+    override suspend fun getInfoReader(): Pair<String, String> {
+        return appStorageLocalDataSource.getInfoReader()
+    }
+
+    override suspend fun getInfoAccount(): Account {
         return appStorageLocalDataSource.getInfoAccount().toModel()
     }
 
-    override fun removeAccount() {
+    override suspend fun removeAccount() {
         appStorageLocalDataSource.removeAccount()
     }
 

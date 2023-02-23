@@ -11,5 +11,8 @@ interface Key {
         const val AVATAR = "avatar"
         const val GENDER = "gender"
         const val PHONE = "phone"
+        const val PERMISSION = "permission"
+        const val READER_NAME = "reader_name"
+        const val IMAGE_PROFILE = "image_profile"
     }
 }

@@ -21,6 +21,10 @@ interface Repository {
     suspend fun getStoryByAuthor(author: String): List<Story>
     suspend fun putStory(story: Story): Boolean
     suspend fun postStory(story: Story): Boolean
-    fun getInfoAccount(): Account
-    fun removeAccount()
+    suspend fun getInfoAccount(): Account
+    suspend fun removeAccount()
+    suspend fun getPermission(): Int
+    suspend fun setPermission(permission: Int)
+    suspend fun saveInfoReader(readerName: String , imageProfile: String)
+    suspend fun getInfoReader(): Pair<String , String>
 }

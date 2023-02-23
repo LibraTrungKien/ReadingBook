@@ -48,7 +48,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun loadDataUser() {
-        account = repository.getInfoAccount()
+        viewModelScope.launch {
+            account = repository.getInfoAccount()
+        }
     }
 
     fun loadData() {
@@ -58,8 +60,10 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun logout(){
-        repository.removeAccount()
+    fun logout() {
+        viewModelScope.launch {
+            repository.removeAccount()
+        }
     }
 
 }

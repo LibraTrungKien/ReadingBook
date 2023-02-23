@@ -17,7 +17,7 @@ class StartFragment : BaseFragment<FragmentStartBinding>() {
     override fun createViewBinding() = FragmentStartBinding.inflate(layoutInflater)
 
     override fun initializeEvents() {
-        binding.btnReader.setOnClickListener { MainFragment.open(findNavController()) }
+        binding.btnReader.setOnClickListener { RegisterFragment.open(findNavController()) }
         binding.btnAuthor.setOnClickListener { LoginFragment.open(findNavController()) }
     }
 }

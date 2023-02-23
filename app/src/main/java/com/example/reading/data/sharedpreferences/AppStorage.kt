@@ -34,7 +34,41 @@ class AppStorage @Inject constructor(
         }
     }
 
-    fun removeAccount() {
+    fun saveInfoReader(readerName: String, imageProfile: String) {
+        with(editor) {
+            putString(Key.READER_NAME, readerName)
+            putString(Key.IMAGE_PROFILE, imageProfile)
+            apply()
+        }
+    }
+
+    fun getInfoReader(): Pair<String, String> {
+        val readerName = sharedPreferences.getString(Key.READER_NAME, "") ?: ""
+        val imageProfile = sharedPreferences.getString(Key.IMAGE_PROFILE, "") ?: ""
+        return Pair(readerName, imageProfile)
+    }
+
+    fun removeInfoReader() {
+        with(editor) {
+            remove(Key.READER_NAME)
+            remove(Key.IMAGE_PROFILE)
+            apply()
+        }
+    }
+
+    fun setPermission(permission: Int) {
+        //  0: author   1: user 2: admin
+        with(editor) {
+            putInt(Key.PERMISSION, permission)
+            apply()
+        }
+    }
+
+    suspend fun getPermission(): Int {
+        return sharedPreferences.getInt(Key.PERMISSION, -1)
+    }
+
+    suspend fun removeAccount() {
         with(editor) {
             remove(Key.ACCOUNT_ID)
             remove(Key.USERNAME)
@@ -58,5 +92,6 @@ class AppStorage @Inject constructor(
             phone = sharedPreferences.getString(Key.PHONE, "") ?: "",
         )
     }
+
 
 }
