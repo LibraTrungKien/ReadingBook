@@ -54,7 +54,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         }
 
         binding.btnSearch.setOnClickListener { SearchStoryFragment.open(findNavController()) }
-        binding.navLeftMenu.setNavigationItemSelectedListener(this)
+        binding.navReader.setNavigationItemSelectedListener(this)
     }
 
     override fun initializeData() {

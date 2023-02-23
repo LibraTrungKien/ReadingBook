@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/manageStoryPage"
+        android:icon="@drawable/ic_manage"
+        android:title="@string/manage_story" />
+    <item
+        android:id="@+id/postPage"
+        android:icon="@drawable/ic_create"
+        android:title="@string/postPage" />
+    <item
+        android:id="@+id/logoutPage"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout" />
+</menu>
