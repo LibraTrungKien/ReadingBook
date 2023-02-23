@@ -2,7 +2,9 @@ package com.example.reading.data.di
 
 import com.example.reading.data.AppService
 import com.example.reading.data.RepositoryImpl
+import com.example.reading.data.locadatasource.AppStorageLocalDataSource
 import com.example.reading.data.locadatasource.StoryLocalDataSource
+import com.example.reading.data.sharedpreferences.AppStorage
 import com.example.reading.domain.Repository
 import dagger.Module
 import dagger.Provides
@@ -39,7 +41,6 @@ object ServiceModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            //    .baseUrl("https://63eb5614f1a969340db5d273.mockapi.io/")
             .baseUrl("http://192.168.1.38:8000/")
             .client(okHttpClient)
             .build()
@@ -53,8 +54,9 @@ object ServiceModule {
     @Provides
     fun provideRepository(
         appService: AppService,
-        localDataSource: StoryLocalDataSource
+        localDataSource: StoryLocalDataSource,
+        appStorageLocalDataSource: AppStorageLocalDataSource
     ): Repository {
-        return RepositoryImpl(appService, localDataSource)
+        return RepositoryImpl(appService, localDataSource, appStorageLocalDataSource)
     }
 }

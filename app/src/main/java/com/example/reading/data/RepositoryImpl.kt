@@ -1,5 +1,6 @@
 package com.example.reading.data
 
+import com.example.reading.data.locadatasource.AppStorageLocalDataSource
 import com.example.reading.data.locadatasource.StoryLocalDataSource
 import com.example.reading.data.mapper.toDTO
 import com.example.reading.data.mapper.toEntity
@@ -14,10 +15,12 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val apiService: AppService,
-    private val localDataSource: StoryLocalDataSource
+    private val localDataSource: StoryLocalDataSource,
+    private val appStorageLocalDataSource: AppStorageLocalDataSource
 ) : Repository {
     override suspend fun login(login: Login): Boolean {
-        apiService.login(login.toDTO()).body()!!
+        val response = apiService.login(login.toDTO()).body()!!
+//        appStorageLocalDataSource.saveAccount(response)
         return true
     }
 

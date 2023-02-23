@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/content_congratulation"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:textColor="@color/black" />
 

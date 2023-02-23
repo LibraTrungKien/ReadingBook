@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okio.IOException
 
 abstract class BaseViewModel : ViewModel() {
     private val coroutineContext by lazy { viewModelScope.coroutineContext + Dispatchers.IO }

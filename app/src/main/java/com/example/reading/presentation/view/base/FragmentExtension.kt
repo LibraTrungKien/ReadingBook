@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.example.reading.R
 import com.example.reading.presentation.view.MessageDialog
+import java.lang.NullPointerException
 
 fun <T> Fragment.apiCall(
     liveData: LiveData<ApiResult<T>>,
@@ -32,11 +33,18 @@ fun Fragment.handleException(
     throwable: Throwable?,
     onButtonClicked: () -> Unit
 ) {
+    var message = ""
     throwable ?: return
+    message = if (throwable is NullPointerException){
+         "Không thành công!\nTài khoản hoặc mật khẩu không chính xác..."
+    }else{
+        "Không thành công!\nVui lòng kiểm tra kết nối mạng..."
+    }
+
     MessageDialog.show(
         this.parentFragmentManager,
         "Thông báo",
-        throwable.message.toString(),
+        message,
         R.drawable.ic_sad,
         onButtonClicked
     )
