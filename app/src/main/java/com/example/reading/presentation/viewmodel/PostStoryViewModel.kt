@@ -36,7 +36,8 @@ class PostStoryViewModel @Inject constructor(
 
     fun loadStoryByAuthor() {
         viewModelScope.launch {
-            stories = repository.getStoryByAuthor("Trần Đan")
+            val authorName = repository.getInfoAccount().username
+            stories = repository.getStoryByAuthor(authorName)
         }
     }
 

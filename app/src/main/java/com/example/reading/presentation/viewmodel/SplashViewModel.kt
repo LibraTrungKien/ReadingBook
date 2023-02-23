@@ -27,6 +27,6 @@ class SplashViewModel @Inject constructor(private val repository: Repository) : 
     }
 
     private fun hasAccount(account: Account): Boolean {
-        return account.email.isNotBlank() && account.password.isNotBlank()
+        return account.email.isNotBlank()
     }
 }
