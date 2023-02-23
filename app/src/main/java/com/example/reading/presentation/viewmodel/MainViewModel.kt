@@ -75,4 +75,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun isReader() = readerName.isNotBlank()
+
 }

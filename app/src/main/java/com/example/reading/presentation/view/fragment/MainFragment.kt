@@ -58,7 +58,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         binding.navReader.setNavigationItemSelectedListener(this)
         binding.navAuthor.setNavigationItemSelectedListener(this)
 
-        viewModel.dataUserLiveData.observe(viewLifecycleOwner){
+        viewModel.dataUserLiveData.observe(viewLifecycleOwner) {
             bindViewAccount()
         }
     }
@@ -108,8 +108,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         binding.drwLayout.closeDrawer(GravityCompat.START)
         when (item.itemId) {
-            R.id.postPage -> PostStoryFragment.open(findNavController())
             R.id.favoritePage -> StoryFavouriteFragment.open(findNavController())
+            R.id.infoPage -> Unit
+            R.id.manageStoryPage -> openManageStory()
+            R.id.postPage -> openPostStory()
             R.id.logoutPage -> showConfirmDialogLogout()
             else -> Unit
         }
@@ -124,6 +126,31 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         ) {
             viewModel.logout()
             StartFragment.open(findNavController())
+        }
+    }
+
+    private fun openPostStory() {
+        if (viewModel.isReader()) {
+            MessageDialog.show(
+                parentFragmentManager,
+                "Thông báo",
+                "Bạn cần quyền Admin để sử dụng chức năng này!",
+                R.drawable.ic_sad
+            ) {}
+            return
+        }
+        PostStoryFragment.open(findNavController())
+    }
+
+    private fun openManageStory() {
+        if (viewModel.isReader()) {
+            MessageDialog.show(
+                parentFragmentManager,
+                "Thông báo",
+                "Bạn cần quyền Admin để sử dụng chức năng này!",
+                R.drawable.ic_sad
+            ) {}
+            return
         }
     }
 }
