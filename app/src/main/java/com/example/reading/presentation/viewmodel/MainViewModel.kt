@@ -20,10 +20,15 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : BaseViewModel() {
     val images = arrayListOf<SlideModel>()
-    lateinit var account: Account
+    var account: Account = Account()
+    var readerName: String = ""
     private var _dataLiveData: MutableLiveData<List<StoryModelHolder>> = MutableLiveData()
     val dataLiveData: LiveData<List<StoryModelHolder>>
         get() = _dataLiveData
+
+    private var _dataUserLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val dataUserLiveData: LiveData<Boolean>
+        get() = _dataUserLiveData
 
     fun loadDataImage() {
         images.clear()
@@ -50,6 +55,10 @@ class MainViewModel @Inject constructor(
     fun loadDataUser() {
         viewModelScope.launch {
             account = repository.getInfoAccount()
+            if (account.password.isNotBlank())
+                return@launch
+            readerName = repository.getInfoReader().first
+            _dataUserLiveData.value = true
         }
     }
 

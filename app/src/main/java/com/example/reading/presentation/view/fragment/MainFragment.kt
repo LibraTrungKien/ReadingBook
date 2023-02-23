@@ -8,12 +8,12 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentMainBinding
-import com.example.reading.domain.model.Account
 import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.view.diglog.ConfirmDialog
+import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +57,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         binding.btnSearch.setOnClickListener { SearchStoryFragment.open(findNavController()) }
         binding.navReader.setNavigationItemSelectedListener(this)
         binding.navAuthor.setNavigationItemSelectedListener(this)
+
+        viewModel.dataUserLiveData.observe(viewLifecycleOwner){
+            bindViewAccount()
+        }
     }
 
     override fun initializeData() {
@@ -67,18 +71,34 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
     override fun bindView() {
         bindViewImageSlider()
-        bindViewAccount(viewModel.account)
     }
 
     private fun bindViewImageSlider() {
         binding.imgAuthor.setImageList(viewModel.images)
     }
 
-    private fun bindViewAccount(account: Account) {
-        binding.txtName.text = account.username
-        Glide.with(binding.crdUser)
-            .load(account.avatar)
-            .into(binding.crdUser)
+    private fun bindViewAccount() {
+        val isAdmin = viewModel.readerName.isBlank()
+        var name = ""
+        if (isAdmin) {
+            val account = viewModel.account
+            name = account.username
+
+            Glide.with(binding.crdUser)
+                .load(account.avatar)
+                .into(binding.crdUser)
+        } else {
+            name = viewModel.readerName
+        }
+
+        binding.txtName.text = name
+        MessageDialog.show(
+            parentFragmentManager,
+            "Xin chào",
+            "Chúc mừng $name đến với app của tao",
+            R.drawable.satisfied
+        ) {}
+
     }
 
     private fun bindViewProgress(isVisible: Boolean) {
