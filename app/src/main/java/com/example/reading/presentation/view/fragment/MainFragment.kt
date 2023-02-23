@@ -13,6 +13,7 @@ import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
+import com.example.reading.presentation.view.diglog.ConfirmDialog
 import com.example.reading.presentation.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,6 +56,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
         binding.btnSearch.setOnClickListener { SearchStoryFragment.open(findNavController()) }
         binding.navReader.setNavigationItemSelectedListener(this)
+        binding.navAuthor.setNavigationItemSelectedListener(this)
     }
 
     override fun initializeData() {
@@ -88,8 +90,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         when (item.itemId) {
             R.id.postPage -> PostStoryFragment.open(findNavController())
             R.id.favoritePage -> StoryFavouriteFragment.open(findNavController())
+            R.id.logoutPage -> showConfirmDialogLogout()
             else -> Unit
         }
         return true
+    }
+
+    private fun showConfirmDialogLogout() {
+        ConfirmDialog.show(
+            parentFragmentManager,
+            requireContext().getString(R.string.confirm),
+            requireContext().getString(R.string.are_you_sure)
+        ) {
+            viewModel.logout()
+            StartFragment.open(findNavController())
+        }
     }
 }

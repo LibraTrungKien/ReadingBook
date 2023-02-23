@@ -12,4 +12,8 @@ class AppStorageLocalDataSource @Inject constructor(private val appStorage: AppS
     fun getInfoAccount(): AccountDTO{
         return appStorage.getAccount()
     }
+
+    fun removeAccount(){
+        appStorage.removeAccount()
+    }
 }

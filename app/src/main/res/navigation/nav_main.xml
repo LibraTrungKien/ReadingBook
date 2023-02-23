@@ -62,6 +62,10 @@
             android:id="@+id/actPostStoryFragment"
             app:destination="@id/postStoryFragment" />
 
+        <action
+            android:id="@+id/actStartFragment"
+            app:destination="@id/startFragment" />
+
     </fragment>
 
     <fragment

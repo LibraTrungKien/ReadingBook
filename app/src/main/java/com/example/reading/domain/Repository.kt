@@ -22,4 +22,5 @@ interface Repository {
     suspend fun putStory(story: Story): Boolean
     suspend fun postStory(story: Story): Boolean
     fun getInfoAccount(): Account
+    fun removeAccount()
 }

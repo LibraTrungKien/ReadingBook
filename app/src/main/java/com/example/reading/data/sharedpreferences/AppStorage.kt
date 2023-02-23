@@ -19,8 +19,10 @@ class AppStorage @Inject constructor(
         context.getSharedPreferences(name, Context.MODE_PRIVATE)
     }
 
+    private val editor: SharedPreferences.Editor by lazy { sharedPreferences.edit() }
+
     fun saveAccount(accountDTO: AccountDTO) {
-        with(sharedPreferences.edit()) {
+        with(editor) {
             putInt(Key.ACCOUNT_ID, accountDTO.id)
             putString(Key.USERNAME, accountDTO.username)
             putString(Key.EMAIL, accountDTO.email)
@@ -28,6 +30,19 @@ class AppStorage @Inject constructor(
             putString(Key.AVATAR, accountDTO.avatar)
             putString(Key.GENDER, accountDTO.gender)
             putString(Key.PHONE, accountDTO.phone)
+            apply()
+        }
+    }
+
+    fun removeAccount() {
+        with(editor) {
+            remove(Key.ACCOUNT_ID)
+            remove(Key.USERNAME)
+            remove(Key.EMAIL)
+            remove(Key.PASSWORD)
+            remove(Key.AVATAR)
+            remove(Key.GENDER)
+            remove(Key.PHONE)
             apply()
         }
     }

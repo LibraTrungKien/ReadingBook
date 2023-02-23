@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentPostStoryBinding
 import com.example.reading.presentation.model.Category
-import com.example.reading.presentation.view.MessageDialog
+import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone

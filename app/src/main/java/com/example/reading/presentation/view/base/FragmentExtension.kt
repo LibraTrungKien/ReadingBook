@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.example.reading.R
-import com.example.reading.presentation.view.MessageDialog
+import com.example.reading.presentation.view.diglog.MessageDialog
 import java.lang.NullPointerException
 
 fun <T> Fragment.apiCall(

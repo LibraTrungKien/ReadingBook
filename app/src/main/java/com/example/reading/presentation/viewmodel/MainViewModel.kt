@@ -58,4 +58,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun logout(){
+        repository.removeAccount()
+    }
+
 }

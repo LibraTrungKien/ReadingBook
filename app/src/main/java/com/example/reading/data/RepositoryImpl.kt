@@ -96,4 +96,8 @@ class RepositoryImpl @Inject constructor(
         return appStorageLocalDataSource.getInfoAccount().toModel()
     }
 
+    override fun removeAccount() {
+        appStorageLocalDataSource.removeAccount()
+    }
+
 }
