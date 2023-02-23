@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.example.reading.R
 import com.example.reading.presentation.view.diglog.MessageDialog
-import java.lang.NullPointerException
+import java.net.SocketTimeoutException
 
 fun <T> Fragment.apiCall(
     liveData: LiveData<ApiResult<T>>,
@@ -35,9 +35,11 @@ fun Fragment.handleException(
 ) {
     var message = ""
     throwable ?: return
-    message = if (throwable is NullPointerException){
-         "Không thành công!\nTài khoản hoặc mật khẩu không chính xác..."
-    }else{
+    message = if (throwable is NullPointerException) {
+        "Không thành công!\nTài khoản hoặc mật khẩu không chính xác..."
+    } else if (throwable is SocketTimeoutException) {
+        "Không thành công!\nVui lòng kiểm Server(có vẻ bạn chưa run server)..."
+    } else {
         "Không thành công!\nVui lòng kiểm tra kết nối mạng..."
     }
 

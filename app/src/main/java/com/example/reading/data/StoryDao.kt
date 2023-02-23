@@ -17,7 +17,7 @@ interface StoryDao {
         """
         SELECT * 
         FROM StoryEntity 
-        ORDER BY dateUpdated"""
+        ORDER BY dateUpdated desc"""
     )
     suspend fun getAllStory(): List<StoryEntity>
 
