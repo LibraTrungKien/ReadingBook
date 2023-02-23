@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.reading.domain.Repository
+import com.example.reading.domain.model.Account
 import com.example.reading.domain.usecase.GetDataStoryUseCase
 import com.example.reading.presentation.model.StoryModelHolder
 import com.example.reading.presentation.view.base.BaseViewModel
@@ -14,10 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getDataStoryUseCase: GetDataStoryUseCase
+    private val getDataStoryUseCase: GetDataStoryUseCase,
+    private val repository: Repository
 ) : BaseViewModel() {
     val images = arrayListOf<SlideModel>()
-
+    lateinit var account: Account
     private var _dataLiveData: MutableLiveData<List<StoryModelHolder>> = MutableLiveData()
     val dataLiveData: LiveData<List<StoryModelHolder>>
         get() = _dataLiveData
@@ -42,6 +45,10 @@ class MainViewModel @Inject constructor(
                 ScaleTypes.CENTER_CROP
             )
         )
+    }
+
+    fun loadDataUser() {
+        account = repository.getInfoAccount()
     }
 
     fun loadData() {

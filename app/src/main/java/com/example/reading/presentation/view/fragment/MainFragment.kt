@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentMainBinding
+import com.example.reading.domain.model.Account
 import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
@@ -59,26 +60,23 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     override fun initializeData() {
         viewModel.loadDataImage()
         viewModel.loadData()
+        viewModel.loadDataUser()
     }
 
     override fun bindView() {
         bindViewImageSlider()
-        bindViewImageUser()
-        bindViewUserName()
+        bindViewAccount(viewModel.account)
     }
 
     private fun bindViewImageSlider() {
         binding.imgAuthor.setImageList(viewModel.images)
     }
 
-    private fun bindViewImageUser() {
+    private fun bindViewAccount(account: Account) {
+        binding.txtName.text = account.username
         Glide.with(binding.crdUser)
-            .load("https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-1-480x600.jpg")
+            .load(account.avatar)
             .into(binding.crdUser)
-    }
-
-    private fun bindViewUserName() {
-        binding.txtName.text = "Lee Viet Toan Hoo"
     }
 
     private fun bindViewProgress(isVisible: Boolean) {

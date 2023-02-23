@@ -7,6 +7,7 @@ import com.example.reading.data.mapper.toEntity
 import com.example.reading.data.mapper.toFavouriteEntity
 import com.example.reading.data.mapper.toModel
 import com.example.reading.domain.Repository
+import com.example.reading.domain.model.Account
 import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
@@ -88,6 +89,10 @@ class RepositoryImpl @Inject constructor(
         val response = apiService.postStory(story.toDTO()).body()!!
         localDataSource.save(response.toEntity())
         return true
+    }
+
+    override fun getInfoAccount(): Account {
+        return appStorageLocalDataSource.getInfoAccount().toModel()
     }
 
 }

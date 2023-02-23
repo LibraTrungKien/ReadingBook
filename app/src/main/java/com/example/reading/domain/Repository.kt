@@ -1,5 +1,6 @@
 package com.example.reading.domain
 
+import com.example.reading.domain.model.Account
 import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
@@ -20,4 +21,5 @@ interface Repository {
     suspend fun getStoryByAuthor(author: String): List<Story>
     suspend fun putStory(story: Story): Boolean
     suspend fun postStory(story: Story): Boolean
+    fun getInfoAccount(): Account
 }

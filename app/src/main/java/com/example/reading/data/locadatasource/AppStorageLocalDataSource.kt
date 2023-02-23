@@ -8,4 +8,8 @@ class AppStorageLocalDataSource @Inject constructor(private val appStorage: AppS
     fun saveAccount(accountDTO: AccountDTO) {
         appStorage.saveAccount(accountDTO)
     }
+
+    fun getInfoAccount(): AccountDTO{
+        return appStorage.getAccount()
+    }
 }

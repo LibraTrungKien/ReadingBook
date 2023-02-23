@@ -36,11 +36,11 @@ class AppStorage @Inject constructor(
         return AccountDTO(
             id = sharedPreferences.getInt(Key.ACCOUNT_ID, 0),
             username = sharedPreferences.getString(Key.USERNAME, "") ?: "",
-            email = sharedPreferences.getString(Key.USERNAME, "") ?: "",
-            password = sharedPreferences.getString(Key.USERNAME, "") ?: "",
-            avatar = sharedPreferences.getString(Key.USERNAME, "") ?: "",
-            gender = sharedPreferences.getString(Key.USERNAME, "") ?: "",
-            phone = sharedPreferences.getString(Key.USERNAME, "") ?: "",
+            email = sharedPreferences.getString(Key.EMAIL, "") ?: "",
+            password = sharedPreferences.getString(Key.PASSWORD, "") ?: "",
+            avatar = sharedPreferences.getString(Key.AVATAR, "") ?: "",
+            gender = sharedPreferences.getString(Key.GENDER, "") ?: "",
+            phone = sharedPreferences.getString(Key.PHONE, "") ?: "",
         )
     }
 
