@@ -12,8 +12,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StoryDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(story: List<StoryEntity>)
 
     @Query(
         """
@@ -47,6 +45,9 @@ interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavourite(story: FavouriteEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun save(story: List<StoryEntity>)
+
     @Query(
         """
         SELECT *
@@ -79,4 +80,12 @@ interface StoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(storyEntity: StoryEntity)
+
+    @Query(
+        """
+        DELETE 
+        FROM StoryEntity
+    """
+    )
+    suspend fun deleteAllStory()
 }

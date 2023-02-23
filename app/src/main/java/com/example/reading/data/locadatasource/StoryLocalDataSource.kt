@@ -53,4 +53,8 @@ class StoryLocalDataSource @Inject constructor(
     suspend fun getStoryByAuthor(author: String) = withContext(coroutineContext) {
         storyDao.getStoryByAuthor(author)
     }
+
+    suspend fun deleteAllStory() = withContext(coroutineContext) {
+        storyDao.deleteAllStory()
+    }
 }

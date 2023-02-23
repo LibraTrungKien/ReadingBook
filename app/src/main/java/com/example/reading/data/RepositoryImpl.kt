@@ -29,6 +29,7 @@ class RepositoryImpl @Inject constructor(
     override suspend fun fetchAllStory() {
         val response = apiService.fetchAllStory().body()!!
         val storiesEntity = response.map { it.toEntity() }
+        localDataSource.deleteAllStory()
         localDataSource.save(storiesEntity)
     }
 
