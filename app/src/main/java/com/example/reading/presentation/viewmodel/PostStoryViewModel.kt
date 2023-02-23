@@ -84,7 +84,8 @@ class PostStoryViewModel @Inject constructor(
 
     fun postStory() = callSafeApiWithLiveData {
         chapter.apply {
-            id = "0"
+            id = "1"
+            index = 1
         }
         story.apply {
             dateUpdated = sdf.format(now)
