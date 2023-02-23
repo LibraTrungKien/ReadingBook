@@ -91,13 +91,16 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             name = viewModel.readerName
         }
 
+        if (!viewModel.isFirst())
+            return
+
         binding.txtName.text = name
         MessageDialog.show(
             parentFragmentManager,
             "Xin chào",
             "Chúc mừng $name đến với app của tao",
             R.drawable.satisfied
-        ) {}
+        ) { viewModel.isFirst++ }
 
     }
 

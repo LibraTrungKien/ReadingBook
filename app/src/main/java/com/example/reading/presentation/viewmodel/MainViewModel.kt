@@ -19,6 +19,7 @@ class MainViewModel @Inject constructor(
     private val getDataStoryUseCase: GetDataStoryUseCase,
     private val repository: Repository
 ) : BaseViewModel() {
+    var isFirst = 0
     val images = arrayListOf<SlideModel>()
     var account: Account = Account()
     var readerName: String = ""
@@ -76,5 +77,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun isReader() = readerName.isNotBlank()
-
+    fun isFirst(): Boolean {
+        return isFirst == 0
+    }
 }
