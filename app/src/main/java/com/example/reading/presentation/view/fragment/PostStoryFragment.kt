@@ -8,10 +8,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentPostStoryBinding
 import com.example.reading.presentation.model.Category
-import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone
+import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.view.popup.CategoryPopup
 import com.example.reading.presentation.view.popup.StoryPopup
 import com.example.reading.presentation.viewmodel.PostStoryViewModel
@@ -28,10 +28,6 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         }
     }
 
-    override fun initializeComponent() {
-
-    }
-
     override fun initializeEvents() {
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 
@@ -43,26 +39,26 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         }
 
         binding.edtStoryName.doAfterTextChanged {
-            viewModel.copyNameStory(it.toString())
+            viewModel.copyNameStory(it.toString().trim())
         }
         binding.edtChapName.doAfterTextChanged {
-            viewModel.copyChapName(it.toString())
+            viewModel.copyChapName(it.toString().trim())
         }
         binding.edtDescription.doAfterTextChanged {
-            viewModel.copyDescription(it.toString())
+            viewModel.copyDescription(it.toString().trim())
         }
         binding.edtImage.doAfterTextChanged {
-            viewModel.copyImageLink(it.toString())
+            viewModel.copyImageLink(it.toString().trim())
         }
-        binding.edtContent.doAfterTextChanged { viewModel.copyContent(it.toString()) }
+        binding.edtContent.doAfterTextChanged { viewModel.copyContent(it.toString().trim()) }
 
         binding.tilCategory.setEndIconOnClickListener {
             showCategoryPopup(it)
         }
 
         binding.tilStoryName.setEndIconOnClickListener { showStoryPopup(it) }
-        binding.edtChapNameV2.doAfterTextChanged { viewModel.copyChapName(it.toString()) }
-        binding.edtContentV2.doAfterTextChanged { viewModel.copyContent(it.toString()) }
+        binding.tilStoryName.setErrorIconOnClickListener { showStoryPopup(it) }
+        binding.edtChapNameV2.doAfterTextChanged { viewModel.copyChapName(it.toString().trim()) }
 
         binding.btnSave.setOnClickListener {
             if (viewModel.isAddStory) {
@@ -126,18 +122,37 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         StoryPopup.show(viewModel.stories, requireContext(), anchor) {
             viewModel.story = it
             binding.txtStoryName.setText(it.name)
+            binding.tilStoryName.error = null
+            binding.tilStoryName.isErrorEnabled = false
         }
     }
 
 
     private fun putStory() {
+        val story = viewModel.story
+        val chapter = viewModel.chapter
+        if (story.name.isBlank()) {
+            binding.tilStoryName.error = "Vui lòng chọn tên truyện"
+            return
+        }
+
+        if (chapter.title.isBlank()) {
+            binding.edtChapNameV2.error = "Vui lòng nhập tên chap"
+            return
+        }
+
+        if (chapter.content.isBlank()) {
+            binding.edtContentV2.error = "Vui lòng chọn nội dung truyện"
+            return
+        }
+
         bindViewProgress(true)
         apiCall(viewModel.putStory(), viewLifecycleOwner, {
             bindViewProgress(false)
             MessageDialog.show(
                 parentFragmentManager,
                 "Chúc mừng",
-                "Bạn đã đẩy thành công!",
+                "Bạn đã đăng thành công!",
                 R.drawable.satisfied
             ) { findNavController().popBackStack() }
         }, {

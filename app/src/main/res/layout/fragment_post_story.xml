@@ -217,6 +217,8 @@
                     app:boxStrokeColor="@color/bg_text_input_layout"
                     app:endIconDrawable="@drawable/ic_drop_down"
                     app:endIconMode="custom"
+                    app:errorEnabled="false"
+                    app:errorIconDrawable="@drawable/ic_drop_down"
                     app:expandedHintEnabled="false"
                     app:hintTextColor="@color/gray_text_input_layout">
 
@@ -255,6 +257,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilContentV2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

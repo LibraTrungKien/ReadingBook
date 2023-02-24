@@ -56,9 +56,9 @@ class MainViewModel @Inject constructor(
     fun loadDataUser() {
         viewModelScope.launch {
             account = repository.getInfoAccount()
-            if (account.password.isNotBlank())
-                return@launch
-            readerName = repository.getInfoReader().first
+            account.email.ifBlank {
+                readerName = repository.getInfoReader().first
+            }
             _dataUserLiveData.value = true
         }
     }
