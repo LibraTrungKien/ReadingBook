@@ -85,6 +85,10 @@
             android:id="@+id/actStartFragment"
             app:destination="@id/startFragment" />
 
+        <action
+            android:id="@+id/actManagerStoryFragment"
+            app:destination="@id/managerStoryFragment" />
+
     </fragment>
 
     <fragment
@@ -129,4 +133,9 @@
         android:id="@+id/postStoryFragment"
         android:name="com.example.reading.presentation.view.fragment.PostStoryFragment"
         tools:layout="@layout/fragment_post_story" />
+
+    <fragment
+        android:id="@+id/managerStoryFragment"
+        android:name="com.example.reading.presentation.view.fragment.ManagerStoryFragment"
+        tools:layout="@layout/fragment_manager_story" />
 </navigation>

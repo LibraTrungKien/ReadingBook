@@ -156,5 +156,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             ) {}
             return
         }
+
+        ManagerStoryFragment.open(findNavController(), viewModel.account)
     }
 }
