@@ -34,10 +34,4 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     override fun initializeData() {
         viewModel.getInfoAccount()
     }
-
-    override fun bindView() {
-        Glide.with(binding.imgLogo)
-            .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROdNCij3qBF3VI97g1KRLu6TtXZuqOR3YflxkcfKv0xotEAOgmMzv20s-aW4-2TCqyaFA&usqp=CAU")
-            .into(binding.imgLogo)
-    }
 }

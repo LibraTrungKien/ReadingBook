@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Đọc Truyện</string>
+    <string name="app_name">Thế giới truyện</string>
     <string name="library">Tủ truyện</string>
     <string name="bookcase">Tủ sách</string>
     <string name="book_name">Tên sách</string>
@@ -60,4 +60,5 @@
     <string name="are_you_sure">Bạn có chắc chắn muốn thoát?</string>
     <string name="display_name">Tên hiển thị</string>
     <string name="register">Đăng ký</string>
+    <string name="form_login">Giao diện đăng nhập cổ điển</string>
 </resources>

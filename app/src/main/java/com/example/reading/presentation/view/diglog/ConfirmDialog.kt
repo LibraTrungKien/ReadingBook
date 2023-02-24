@@ -44,6 +44,10 @@ class ConfirmDialog(
         bindView()
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return Dialog(requireContext(), R.style.CustomBottomSheetDialogTheme)
+    }
+
     private fun bindView() {
         binding.txtTitle.text = title
         binding.txtContent.text = content
@@ -58,7 +62,4 @@ class ConfirmDialog(
         binding.btnCancel.setOnClickListener { dismiss() }
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return Dialog(requireContext(), R.style.CustomBottomSheetDialogTheme)
-    }
 }

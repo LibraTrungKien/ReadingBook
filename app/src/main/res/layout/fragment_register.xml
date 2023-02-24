@@ -3,20 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@drawable/ic_background"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_search_view"
+        android:backgroundTint="#52FFFFFF"
         android:orientation="vertical"
         android:padding="16dp">
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/display_name">
+            android:hint="@string/display_name"
+            app:startIconDrawable="@drawable/ic_account">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtName"
@@ -27,16 +31,18 @@
 
         <TextView
             android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button_round_4dp"
-            android:backgroundTint="@color/black"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_button_stroke_1dp"
             android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
-            android:text="@string/register"
+            android:text="@string/login"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/white" />
 
     </LinearLayout>
@@ -47,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
+        android:visibility="gone"
         app:indicatorColor="@color/teal_700" />
 
 </FrameLayout>
