@@ -37,7 +37,7 @@
                             app:layout_scrollFlags="scroll|snap"
                             app:navigationIcon="@drawable/ic_menu"
                             app:navigationIconTint="@color/white"
-                            app:title="@string/bookcase"
+                            app:title="@string/app_name"
                             app:titleTextColor="@color/white">
 
                             <ImageView
@@ -127,7 +127,7 @@
                 android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="16dp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
         </LinearLayout>
 
