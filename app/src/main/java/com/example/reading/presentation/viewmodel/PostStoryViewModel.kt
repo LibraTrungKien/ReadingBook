@@ -19,7 +19,7 @@ class PostStoryViewModel @Inject constructor(
     var story: Story = Story()
     var chapter: Chapter = Chapter()
     var stories = listOf<Story>()
-    private val sdf = SimpleDateFormat("hh:mm:ss aa dd/MM/yyyy", Locale("VINA"))
+    private val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("VINA"))
     private val now = Calendar.getInstance().time
 
     val categories = listOf(

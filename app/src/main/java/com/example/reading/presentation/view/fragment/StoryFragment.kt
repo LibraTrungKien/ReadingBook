@@ -12,7 +12,7 @@ import com.example.reading.databinding.FragmentStoryBinding
 import com.example.reading.domain.model.Story
 import com.example.reading.presentation.Key
 import com.example.reading.presentation.view.adapter.ChapterController
-import com.example.reading.presentation.view.adapter.Interactor
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.viewmodel.StoryViewModel
 import com.google.gson.Gson

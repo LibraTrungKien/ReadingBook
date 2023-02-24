@@ -11,14 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginTop="16dp"
         android:text="@string/who_areYou"
         android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
@@ -51,6 +43,5 @@
         android:text="@string/author_No_colons"
         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
         android:textColor="@color/white" />
-
 
 </LinearLayout>

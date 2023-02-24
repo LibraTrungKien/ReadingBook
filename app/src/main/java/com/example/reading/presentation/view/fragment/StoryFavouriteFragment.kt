@@ -1,12 +1,11 @@
 package com.example.reading.presentation.view.fragment
 
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentStoryFavouriteBinding
-import com.example.reading.presentation.view.adapter.Interactor
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.adapter.StoryFavouriteController
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.viewmodel.StoryFavouriteViewModel

@@ -6,6 +6,7 @@ import com.example.reading.data.mapper.toDTO
 import com.example.reading.data.mapper.toEntity
 import com.example.reading.data.mapper.toFavouriteEntity
 import com.example.reading.data.mapper.toModel
+import com.example.reading.data.mapper.toStoryEntity
 import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Account
 import com.example.reading.domain.model.Login
@@ -109,6 +110,11 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getInfoReader(): Pair<String, String> {
         return appStorageLocalDataSource.getInfoReader()
+    }
+
+    override suspend fun deleteStory(story: Story) {
+        apiService.deleteStory(story.id)
+        localDataSource.deleteStory(story = story.toStoryEntity())
     }
 
     override suspend fun getInfoAccount(): Account {

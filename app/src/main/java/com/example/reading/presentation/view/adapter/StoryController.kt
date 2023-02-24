@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.ItemImageStoryBinding
 import com.example.reading.domain.model.Story
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.base.ViewBindingEpoxyModelWithHolder
 import com.example.reading.presentation.view.fragment.StoryFragment
 import com.example.reading.presentation.viewmodel.SearchStoryViewModel

@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#558B2F"
+        android:textAlignment="center"
         app:navigationIcon="@drawable/ic_back"
-        app:title="Harry potter"
-        app:titleTextColor="@color/white" />
+        app:navigationIconTint="@color/black"
+        app:title="Harry potter" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -5,6 +5,7 @@ import com.example.reading.data.dto.LoginDTO
 import com.example.reading.data.dto.StoryDTO
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -22,4 +23,7 @@ interface AppService {
 
     @POST("story")
     suspend fun postStory(@Body storyDTO: StoryDTO): Response<StoryDTO>
+
+    @DELETE("story/{id}")
+    suspend fun deleteStory(@Path("id") id: Int)
 }

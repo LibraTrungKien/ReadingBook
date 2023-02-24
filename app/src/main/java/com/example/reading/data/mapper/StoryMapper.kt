@@ -58,7 +58,11 @@ fun StoryDTO.toEntity(): StoryEntity {
         category = dto.category,
         author = dto.author,
         dateCreated = dto.dateCreated,
-        dateUpdated = dto.modifiedAt.toDateString(),
+        dateUpdated = if (dto.dateUpdated.isBlank()) {
+            dateCreated
+        } else {
+            dto.modifiedAt.toDateString()
+        },
         status = dto.status,
         description = dto.description,
         chapters = ArrayList(dto.chapters.map { it.toModel() })
@@ -145,9 +149,25 @@ fun FavouriteEntity.toModel(): Story {
     )
 }
 
+fun Story.toStoryEntity(): StoryEntity {
+    val model = this
+    return StoryEntity(
+        id = model.id,
+        name = model.name,
+        image = model.image,
+        category = model.category,
+        author = model.author,
+        dateCreated = model.dateCreated,
+        dateUpdated = model.dateUpdated,
+        status = model.status,
+        description = model.description,
+        chapters = model.chapters
+    )
+}
+
 fun Long.toDateString(): String {
     val date = Date(this)
-    val localDateTime = SimpleDateFormat("hh:mm:ss aa dd/MM/yyyy", Locale("VINA"))
+    val localDateTime = SimpleDateFormat("dd/MM/yyyy", Locale("VINA"))
     return localDateTime.format(date)
 }
 

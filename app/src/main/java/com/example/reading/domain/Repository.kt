@@ -25,6 +25,7 @@ interface Repository {
     suspend fun removeAccount()
     suspend fun getPermission(): Int
     suspend fun setPermission(permission: Int)
-    suspend fun saveInfoReader(readerName: String , imageProfile: String)
-    suspend fun getInfoReader(): Pair<String , String>
+    suspend fun saveInfoReader(readerName: String, imageProfile: String)
+    suspend fun getInfoReader(): Pair<String, String>
+    suspend fun deleteStory(story: Story)
 }

@@ -4,6 +4,7 @@ import com.airbnb.epoxy.TypedEpoxyController
 import com.example.reading.R
 import com.example.reading.databinding.ItemChapterBinding
 import com.example.reading.domain.model.Chapter
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.base.ViewBindingEpoxyModelWithHolder
 import com.example.reading.presentation.view.fragment.StoryDetailFragment
 

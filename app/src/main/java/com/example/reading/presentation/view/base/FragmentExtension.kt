@@ -59,7 +59,13 @@ fun Fragment.showConfirmDialog(
     onYesClick: () -> Unit,
     onNoClicked: () -> Unit
 ) {
-    AlertDialog.Builder(context).setTitle(title).setMessage(message).setPositiveButton(
-        "Có"
-    ) { _, _ -> onYesClick() }.setNegativeButton("Không") { _, _ -> onNoClicked() }.create().show()
+    AlertDialog.Builder(context)
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton(
+            "Có"
+        ) { _, _ -> onYesClick() }
+        .setNegativeButton("Không") { _, _ -> onNoClicked() }
+        .create()
+        .show()
 }

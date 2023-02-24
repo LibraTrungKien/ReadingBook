@@ -3,6 +3,7 @@ package com.example.reading.presentation.view.adapter
 import com.example.reading.R
 import com.example.reading.databinding.HolderStoryBinding
 import com.example.reading.presentation.model.StoryModelHolder
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.base.ViewBindingEpoxyModelWithHolder
 
 class StoryHolder(

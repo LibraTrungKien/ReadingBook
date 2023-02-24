@@ -34,4 +34,8 @@ class ManagerStoryViewModel @Inject constructor(
             _dataLiveData.postValue(result)
         }
     }
+
+    fun deleteStory(story: Story) = callSafeApiWithLiveData {
+        repository.deleteStory(story)
+    }
 }

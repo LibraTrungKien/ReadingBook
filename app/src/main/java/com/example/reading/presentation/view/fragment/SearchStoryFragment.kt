@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentSearchStoryBinding
-import com.example.reading.presentation.view.adapter.Interactor
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.adapter.StoryController
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone

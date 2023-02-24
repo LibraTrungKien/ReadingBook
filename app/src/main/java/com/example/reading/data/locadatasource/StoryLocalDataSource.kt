@@ -57,4 +57,8 @@ class StoryLocalDataSource @Inject constructor(
     suspend fun deleteAllStory() = withContext(coroutineContext) {
         storyDao.deleteAllStory()
     }
+
+    suspend fun deleteStory(story: StoryEntity) = withContext(coroutineContext) {
+        storyDao.deleteStory(story)
+    }
 }

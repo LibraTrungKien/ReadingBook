@@ -1,4 +1,4 @@
-package com.example.reading.presentation.view.adapter
+package com.example.reading.presentation.view
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel

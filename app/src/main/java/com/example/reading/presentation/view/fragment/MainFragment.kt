@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentMainBinding
 import com.example.reading.presentation.view.adapter.CategoryController
-import com.example.reading.presentation.view.adapter.Interactor
+import com.example.reading.presentation.view.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.view.diglog.ConfirmDialog

@@ -88,4 +88,7 @@ interface StoryDao {
     """
     )
     suspend fun deleteAllStory()
+
+    @Delete
+    suspend fun deleteStory(storyEntity: StoryEntity)
 }
