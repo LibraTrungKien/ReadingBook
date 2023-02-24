@@ -55,6 +55,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         binding.tilCategory.setEndIconOnClickListener {
             showCategoryPopup(it)
         }
+        binding.tilCategory.setErrorIconOnClickListener { showCategoryPopup(it) }
 
         binding.tilStoryName.setEndIconOnClickListener { showStoryPopup(it) }
         binding.tilStoryName.setErrorIconOnClickListener { showStoryPopup(it) }
@@ -73,7 +74,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         viewModel.story.apply {
             id = 0
             author = ""
-            category = 0
+            category = -1
             chapters = arrayListOf()
             description = ""
             name = ""
@@ -103,6 +104,8 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         CategoryPopup.show(viewModel.categories, requireContext(), anchor) {
             binding.txtCategory.setText(Category.getName(it))
             viewModel.copyCategory(it)
+            binding.tilCategory.error = null
+            binding.tilCategory.isErrorEnabled = false
         }
     }
 
@@ -120,7 +123,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
 
     private fun showStoryPopup(anchor: View) {
         StoryPopup.show(viewModel.stories, requireContext(), anchor) {
-            viewModel.story = it
+            viewModel.copyStory(it)
             binding.txtStoryName.setText(it.name)
             binding.tilStoryName.error = null
             binding.tilStoryName.isErrorEnabled = false
@@ -162,6 +165,33 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
     }
 
     private fun postStory() {
+        val story = viewModel.story
+        val chapter = viewModel.chapter
+        if (story.category == -1) {
+            binding.tilCategory.error = "Vui lòng chọn thể loại"
+            return
+        }
+
+        if (story.name.isBlank()) {
+            binding.edtStoryName.error = "Vui lòng nhập tên truyện"
+            return
+        }
+
+        if (chapter.title.isBlank()) {
+            binding.edtChapName.error = "Vui lòng nhập tên chapter"
+            return
+        }
+
+        if (story.description.isBlank()) {
+            binding.edtDescription.error = "Vui lòng nhập mô tả"
+            return
+        }
+
+        if (chapter.content.isBlank()) {
+            binding.edtContent.error = "Vui lòng nhập nội dung chap"
+            return
+        }
+
         bindViewProgress(true)
         apiCall(viewModel.postStory(), viewLifecycleOwner, {
             bindViewProgress(false)

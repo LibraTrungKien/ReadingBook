@@ -38,6 +38,22 @@ class PostStoryViewModel @Inject constructor(
         }
     }
 
+    fun copyStory(value: Story) {
+        story.apply {
+            id = value.id
+            name = value.name
+            description = value.description
+            dateCreated = value.dateCreated
+            dateUpdated = value.dateUpdated
+            chapters = value.chapters
+            category = value.category
+            image = value.image
+            author = value.author
+            status = value.status
+        }
+    }
+
+
     fun copyCategory(value: Int) {
         story.category = value
     }

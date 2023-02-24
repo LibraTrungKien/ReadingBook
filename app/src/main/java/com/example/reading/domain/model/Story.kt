@@ -6,11 +6,11 @@ data class Story(
     var id: Int = 0,
     var name: String = "",
     var image: String = "",
-    var category: Int = 0,
+    var category: Int = -1,
     var author: String = "",
     var dateCreated: String = "",
     var dateUpdated: String = "",
-    var status: String = "",
+    var status: String = "Đang update",
     var description: String = "",
     var chapters: ArrayList<Chapter> = arrayListOf()
 ) {
