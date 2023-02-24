@@ -55,10 +55,13 @@
     <string name="manage_story">Quản lý truyện</string>
     <string name="logout">Đăng xuất</string>
     <string name="agree">Đồng ý</string>
+    <string name="close">Đóng</string>
     <string name="cancel">Hủy bỏ</string>
     <string name="confirm">Xác nhận</string>
     <string name="are_you_sure">Bạn có chắc chắn muốn thoát?</string>
     <string name="display_name">Tên hiển thị</string>
     <string name="register">Đăng ký</string>
     <string name="form_login">Giao diện đăng nhập cổ điển</string>
+    <string name="app_information">Thông tin ứng dụng</string>
+    <string name="version_app">phiên bản 1.0.0</string>
 </resources>

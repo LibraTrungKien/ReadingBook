@@ -13,6 +13,7 @@ import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.view.diglog.ConfirmDialog
+import com.example.reading.presentation.view.diglog.InfoAppDialog
 import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
@@ -112,7 +113,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         binding.drwLayout.closeDrawer(GravityCompat.START)
         when (item.itemId) {
             R.id.favoritePage -> StoryFavouriteFragment.open(findNavController())
-            R.id.infoPage -> Unit
+            R.id.infoPage -> InfoAppDialog.show(parentFragmentManager)
             R.id.manageStoryPage -> openManageStory()
             R.id.postPage -> openPostStory()
             R.id.logoutPage -> showConfirmDialogLogout()
