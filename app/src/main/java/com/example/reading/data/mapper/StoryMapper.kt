@@ -147,7 +147,7 @@ fun FavouriteEntity.toModel(): Story {
 
 fun Long.toDateString(): String {
     val date = Date(this)
-    val localDateTime = SimpleDateFormat("hh:mm dd/MM/yyyy aa", Locale("VINA"))
+    val localDateTime = SimpleDateFormat("hh:mm:ss aa dd/MM/yyyy", Locale("VINA"))
     return localDateTime.format(date)
 }
 

@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import java.util.TimeZone
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,9 +19,7 @@ class PostStoryViewModel @Inject constructor(
     var story: Story = Story()
     var chapter: Chapter = Chapter()
     var stories = listOf<Story>()
-    private val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa", Locale("VINA")).apply {
-        timeZone = TimeZone.getDefault()
-    }
+    private val sdf = SimpleDateFormat("hh:mm:ss aa dd/MM/yyyy", Locale("VINA"))
     private val now = Calendar.getInstance().time
 
     val categories = listOf(
