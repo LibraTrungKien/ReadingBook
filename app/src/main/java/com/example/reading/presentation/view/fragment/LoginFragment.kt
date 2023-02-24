@@ -6,11 +6,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentLoginBinding
-import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone
+import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.LoginViewModel
+import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,12 +31,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     override fun initializeEvents() {
-        binding.edtAccount.doAfterTextChanged { viewModel.copyEmail(it.toString()) }
-        binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString()) }
+        binding.edtAccount.doAfterTextChanged { viewModel.copyEmail(it.toString().trim()) }
+        binding.edtPassword.doAfterTextChanged {
+            binding.tilPassword.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            viewModel.copyPassword(it.toString().trim())
+        }
         binding.btnLogin.setOnClickListener { handleLogin() }
     }
 
     private fun handleLogin() {
+        if (viewModel.login.email.isBlank()) {
+            binding.edtAccount.error = "Vui lòng nhập tài khoản!"
+            return
+        }
+
+        if (viewModel.login.password.isBlank()) {
+            binding.tilPassword.endIconMode = END_ICON_NONE
+            binding.edtPassword.error = "Vui lòng nhập mật khẩu!"
+            return
+        }
+
         binding.prgIndicator.visibleOrGone(true)
         apiCall(viewModel.login(), viewLifecycleOwner, {
             handleLoginSuccess()

@@ -23,8 +23,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     }
 
     override fun initializeEvents() {
-        binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString()) }
-        binding.btnRegister.setOnClickListener { viewModel.saveInfoReader() }
+        binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString().trim()) }
+        binding.btnRegister.setOnClickListener { handleClickRegister() }
 
         viewModel.dataLiveData.observe(viewLifecycleOwner) {
             bindViewProgress(it)
@@ -39,5 +39,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     private fun bindViewProgress(isVisible: Boolean) {
         binding.prgIndicator.visibleOrGone(isVisible)
+    }
+
+    private fun handleClickRegister() {
+        if (viewModel.name.isBlank()) {
+            binding.edtName.error = "Vui lòng nhập tên hiển thị"
+            return
+        }
+        viewModel.saveInfoReader()
     }
 }
