@@ -79,7 +79,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
     private fun bindViewAccount() {
         val isAdmin = viewModel.readerName.isBlank()
-        var name = ""
+        val name: String
         if (isAdmin) {
             val account = viewModel.account
             name = account.username
@@ -90,11 +90,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         } else {
             name = viewModel.readerName
         }
+        binding.txtName.text = name
 
         if (!viewModel.isFirst())
             return
 
-        binding.txtName.text = name
         MessageDialog.show(
             parentFragmentManager,
             "Xin chào",
