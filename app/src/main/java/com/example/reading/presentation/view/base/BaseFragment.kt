@@ -1,5 +1,7 @@
 package com.example.reading.presentation.view.base
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +46,12 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseView {
     }
 
     override fun bindView() {
+    }
+
+    fun openGoogleSearch(url: String) {
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(Intent.createChooser(intent, "Mở với"))
     }
 
 }

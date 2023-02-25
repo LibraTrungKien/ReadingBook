@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.example.reading.R
 import com.example.reading.databinding.FragmentMainBinding
 import com.example.reading.presentation.view.Interactor
@@ -88,6 +89,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
     private fun bindViewImageSlider() {
         binding.imgAuthor.setImageList(viewModel.images)
+        binding.imgAuthor.setItemClickListener(object : ItemClickListener {
+            override fun onItemSelected(position: Int) {
+                when (position) {
+                    0 -> openGoogleSearch("https://play.google.com/store/apps/details?id=com.sihamabdulrahman.quizlogodetectiveconan&hl=vi&gl=US")
+                    1 -> openGoogleSearch("https://play.google.com/store/apps/details?id=com.bandainamcoent.dblegends_ww&hl=vi&gl=US")
+                    2 -> openGoogleSearch("https://play.google.com/store/apps/details?id=com.namcobandaigames.spmoja010E&hl=vi&gl=US")
+                }
+            }
+        })
     }
 
     private fun bindViewAccount() {
