@@ -111,7 +111,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         MessageDialog.show(
             parentFragmentManager,
             "Xin chào",
-            "Chúc mừng $name đến với app của tao",
+            "Chúc mừng $name đến với THẾ GIỚI TRUYỆN",
             R.drawable.satisfied
         ) { viewModel.isFirst++ }
 

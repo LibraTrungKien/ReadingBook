@@ -53,6 +53,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
             viewModel.copyImageLink(it.toString().trim())
         }
         binding.edtContent.doAfterTextChanged { viewModel.copyContent(it.toString().trim()) }
+        binding.edtContentV2.doAfterTextChanged { viewModel.copyContent(it.toString().trim()) }
         binding.tilImage.setEndIconOnClickListener {
             openGoogleSearch()
         }
