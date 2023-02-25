@@ -1,6 +1,7 @@
 package com.example.reading.presentation.view.fragment
 
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -8,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentMainBinding
-import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.Interactor
+import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.view.diglog.ConfirmDialog
@@ -45,6 +46,17 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     override fun initializeEvents() {
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    ConfirmDialog.show(
+                        parentFragmentManager,
+                        "Xác nhận",
+                        "Bạn có chắc chắn muốn thoát?"
+                    ) { requireActivity().finish() }
+                }
+            })
+
         binding.toolbar.setNavigationOnClickListener {
             binding.drwLayout.openDrawer(GravityCompat.START)
         }

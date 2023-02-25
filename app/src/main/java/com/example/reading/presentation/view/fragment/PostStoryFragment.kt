@@ -1,5 +1,7 @@
 package com.example.reading.presentation.view.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -51,7 +53,9 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
             viewModel.copyImageLink(it.toString().trim())
         }
         binding.edtContent.doAfterTextChanged { viewModel.copyContent(it.toString().trim()) }
-
+        binding.tilImage.setEndIconOnClickListener {
+            openGoogleSearch()
+        }
         binding.tilCategory.setEndIconOnClickListener {
             showCategoryPopup(it)
         }
@@ -107,6 +111,13 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
             binding.tilCategory.error = null
             binding.tilCategory.isErrorEnabled = false
         }
+    }
+
+    private fun openGoogleSearch() {
+        val url = "https://www.google.com/"
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(Intent.createChooser(intent, "Mở với"))
     }
 
     override fun initializeData() {

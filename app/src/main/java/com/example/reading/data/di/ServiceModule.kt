@@ -4,7 +4,6 @@ import com.example.reading.data.AppService
 import com.example.reading.data.RepositoryImpl
 import com.example.reading.data.locadatasource.AppStorageLocalDataSource
 import com.example.reading.data.locadatasource.StoryLocalDataSource
-import com.example.reading.data.sharedpreferences.AppStorage
 import com.example.reading.domain.Repository
 import dagger.Module
 import dagger.Provides
@@ -41,7 +40,7 @@ object ServiceModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://192.168.1.38:8000/")
+            .baseUrl("http://192.168.43.25:8000/")
             .client(okHttpClient)
             .build()
     }

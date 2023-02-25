@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        app:titleTextColor="@color/white"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#558B2F"
         app:navigationIcon="@drawable/ic_back"
-        app:title="@string/post_Story" />
+        app:title="@string/post_Story"
+        app:titleTextColor="@color/white" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -157,6 +157,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilImage"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -165,6 +166,8 @@
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="@color/bg_text_input_layout"
+                    app:endIconDrawable="@drawable/ic_search"
+                    app:endIconMode="custom"
                     app:expandedHintEnabled="false"
                     app:hintTextColor="@color/gray_text_input_layout">
 

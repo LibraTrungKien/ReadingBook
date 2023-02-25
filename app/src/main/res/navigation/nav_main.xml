@@ -132,10 +132,21 @@
     <fragment
         android:id="@+id/postStoryFragment"
         android:name="com.example.reading.presentation.view.fragment.PostStoryFragment"
-        tools:layout="@layout/fragment_post_story" />
+        tools:layout="@layout/fragment_post_story">
+
+        <action
+            android:id="@+id/actSearchFragment"
+            app:destination="@id/searchFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/managerStoryFragment"
         android:name="com.example.reading.presentation.view.fragment.ManagerStoryFragment"
         tools:layout="@layout/fragment_manager_story" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.reading.presentation.view.fragment.SearchFragment"
+        tools:layout="@layout/fragment_search" />
 </navigation>
