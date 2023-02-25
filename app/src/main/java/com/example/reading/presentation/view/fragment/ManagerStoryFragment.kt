@@ -15,6 +15,7 @@ import com.example.reading.presentation.view.adapter.ManagerStoryController
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.showConfirmDialog
+import com.example.reading.presentation.view.base.visibleOrGone
 import com.example.reading.presentation.viewmodel.ManagerStoryViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,15 +61,33 @@ class ManagerStoryFragment : BaseFragment<FragmentManagerStoryBinding>() {
         viewModel.getStories()
     }
 
+    override fun bindView() {
+        bindViewProgress(false)
+    }
+
+    private fun bindViewProgress(isVisible: Boolean) {
+        binding.prgIndicator.visibleOrGone(isVisible)
+    }
+
     private fun deleteStory(story: Story) {
-        showConfirmDialog(requireContext(), "Xác nhận", "Bạn có chắc chắn muốn xóa truyện ${story.name}", {
-            handleDelete(story)
-        }, { })
+        showConfirmDialog(
+            requireContext(),
+            "Xác nhận",
+            "Bạn có chắc chắn muốn xóa truyện ${story.name}",
+            {
+                handleDelete(story)
+            },
+            { })
     }
 
     private fun handleDelete(story: Story) {
+        bindViewProgress(true)
         apiCall(viewModel.deleteStory(story), viewLifecycleOwner, {
             viewModel.getStories()
-        }, { true })
+            bindViewProgress(false)
+        }, {
+            bindViewProgress(false)
+            true
+        })
     }
 }
