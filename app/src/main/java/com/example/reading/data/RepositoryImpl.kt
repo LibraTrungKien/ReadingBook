@@ -124,6 +124,8 @@ class RepositoryImpl @Inject constructor(
     override suspend fun removeAccount() {
         appStorageLocalDataSource.removeAccount()
         appStorageLocalDataSource.removeInfoReader()
+        localDataSource.deleteAllFavourite()
+        localDataSource.deleteAllHistory()
     }
 
 }

@@ -61,4 +61,12 @@ class StoryLocalDataSource @Inject constructor(
     suspend fun deleteStory(story: StoryEntity) = withContext(coroutineContext) {
         storyDao.deleteStory(story)
     }
+
+    suspend fun deleteAllHistory() = withContext(coroutineContext) {
+        storyDao.deleteAllHistory()
+    }
+
+    suspend fun deleteAllFavourite() = withContext(coroutineContext) {
+        storyDao.deleteAllFavourite()
+    }
 }

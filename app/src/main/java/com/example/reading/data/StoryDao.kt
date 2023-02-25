@@ -91,4 +91,20 @@ interface StoryDao {
 
     @Delete
     suspend fun deleteStory(storyEntity: StoryEntity)
+
+    @Query(
+        """
+        DELETE 
+        FROM FavouriteEntity
+    """
+    )
+    suspend fun deleteAllFavourite()
+
+    @Query(
+        """
+        DELETE 
+        FROM HistoryEntity
+    """
+    )
+    suspend fun deleteAllHistory()
 }
