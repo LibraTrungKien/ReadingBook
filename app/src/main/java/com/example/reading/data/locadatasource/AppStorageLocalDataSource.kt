@@ -40,4 +40,6 @@ class AppStorageLocalDataSource @Inject constructor(private val appStorage: AppS
         withContext(coroutineContext) {
             appStorage.saveInfoReader(readerName, imageProfile)
         }
+
+    fun saveImageReader(imageProfile: String) = appStorage.saveImageReader(imageProfile)
 }

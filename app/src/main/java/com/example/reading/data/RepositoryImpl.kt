@@ -128,4 +128,8 @@ class RepositoryImpl @Inject constructor(
         localDataSource.deleteAllHistory()
     }
 
+    override fun saveImageProfile(imageProfile: String) {
+        appStorageLocalDataSource.saveImageReader(imageProfile)
+    }
+
 }

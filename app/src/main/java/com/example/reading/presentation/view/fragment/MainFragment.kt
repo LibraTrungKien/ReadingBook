@@ -2,6 +2,7 @@ package com.example.reading.presentation.view.fragment
 
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -25,6 +26,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelectedListener {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var controller: CategoryController
+
+    private val callback = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        viewModel.saveImageProfile(it.toString())
+        bindViewImageUser(it.toString())
+    }
 
     companion object {
         fun open(navController: NavController) {
@@ -75,6 +81,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         viewModel.dataUserLiveData.observe(viewLifecycleOwner) {
             bindViewAccount()
         }
+
+        binding.btnUpload.setOnClickListener { openGallery() }
     }
 
     override fun initializeData() {
@@ -85,6 +93,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
     override fun bindView() {
         bindViewImageSlider()
+    }
+
+    private fun openGallery() {
+        val input = "image/image"
+        callback.launch(input)
     }
 
     private fun bindViewImageSlider() {
@@ -100,19 +113,26 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         })
     }
 
+    private fun bindViewImageUser(image: String) {
+        binding.btnUpload.visibleOrGone(image.isBlank())
+        Glide.with(binding.crdUser)
+            .load(image)
+            .into(binding.crdUser)
+    }
+
     private fun bindViewAccount() {
         val isAdmin = viewModel.readerName.isBlank()
         val name: String
+        val imageProfile: String
         if (isAdmin) {
             val account = viewModel.account
             name = account.username
-
-            Glide.with(binding.crdUser)
-                .load(account.avatar)
-                .into(binding.crdUser)
+            imageProfile = account.avatar
         } else {
             name = viewModel.readerName
+            imageProfile = viewModel.imageProfile
         }
+        bindViewImageUser(imageProfile)
         binding.txtName.text = name
 
         if (!viewModel.isFirst())
@@ -124,7 +144,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             "Chúc mừng $name đến với THẾ GIỚI TRUYỆN",
             R.drawable.satisfied
         ) { viewModel.isFirst++ }
-
     }
 
     private fun bindViewProgress(isVisible: Boolean) {

@@ -28,4 +28,5 @@ interface Repository {
     suspend fun saveInfoReader(readerName: String, imageProfile: String)
     suspend fun getInfoReader(): Pair<String, String>
     suspend fun deleteStory(story: Story)
+    fun saveImageProfile(imageProfile: String)
 }

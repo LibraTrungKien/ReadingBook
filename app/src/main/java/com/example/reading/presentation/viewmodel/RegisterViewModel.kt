@@ -22,7 +22,7 @@ class RegisterViewModel @Inject constructor(private val repository: Repository) 
 
     fun saveInfoReader() {
         viewModelScope.launch {
-            repository.saveInfoReader(name, "aaa")
+            repository.saveInfoReader(name, "")
             _dataLiveData.postValue(false)
         }
     }

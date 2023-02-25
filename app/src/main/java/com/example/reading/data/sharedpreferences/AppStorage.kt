@@ -42,6 +42,11 @@ class AppStorage @Inject constructor(
         }
     }
 
+    fun saveImageReader(imageProfile: String) {
+        editor.putString(Key.IMAGE_PROFILE, imageProfile)
+        editor.apply()
+    }
+
     fun getInfoReader(): Pair<String, String> {
         val readerName = sharedPreferences.getString(Key.READER_NAME, "") ?: ""
         val imageProfile = sharedPreferences.getString(Key.IMAGE_PROFILE, "") ?: ""

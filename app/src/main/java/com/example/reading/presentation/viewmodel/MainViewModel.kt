@@ -23,6 +23,9 @@ class MainViewModel @Inject constructor(
     val images = arrayListOf<SlideModel>()
     var account: Account = Account()
     var readerName: String = ""
+
+    var imageProfile: String = ""
+
     private var _dataLiveData: MutableLiveData<List<StoryModelHolder>> = MutableLiveData()
     val dataLiveData: LiveData<List<StoryModelHolder>>
         get() = _dataLiveData
@@ -57,7 +60,11 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             account = repository.getInfoAccount()
             account.email.ifBlank {
-                readerName = repository.getInfoReader().first
+                repository.getInfoReader().apply {
+                    readerName = first
+                    imageProfile = second
+                }
+
             }
             _dataUserLiveData.value = true
         }
@@ -77,7 +84,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun isReader() = readerName.isNotBlank()
-    fun isFirst(): Boolean {
-        return isFirst == 0
+    fun isFirst() = isFirst == 0
+
+    fun saveImageProfile(imageProfile: String) {
+        repository.saveImageProfile(imageProfile)
     }
 }
