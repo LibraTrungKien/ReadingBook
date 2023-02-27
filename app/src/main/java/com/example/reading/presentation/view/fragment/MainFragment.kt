@@ -82,6 +82,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             bindViewAccount()
         }
 
+        binding.lyt2.setOnClickListener { }
         binding.btnUpload.setOnClickListener { openGallery() }
     }
 
