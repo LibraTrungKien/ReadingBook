@@ -29,4 +29,5 @@ interface Repository {
     suspend fun getInfoReader(): Pair<String, String>
     suspend fun deleteStory(story: Story)
     fun saveImageProfile(imageProfile: String)
+    suspend fun registerAccount(account: Account): Boolean
 }

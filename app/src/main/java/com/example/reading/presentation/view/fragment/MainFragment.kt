@@ -158,6 +158,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             R.id.infoPage -> InfoAppDialog.show(parentFragmentManager)
             R.id.manageStoryPage -> openManageStory()
             R.id.postPage -> openPostStory()
+            R.id.addAccountPage -> openAddAccount()
             R.id.logoutPage -> showConfirmDialogLogout()
             else -> Unit
         }
@@ -186,6 +187,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             return
         }
         PostStoryFragment.open(findNavController())
+    }
+
+    private fun openAddAccount() {
+        AddAccountFragment.open(findNavController())
     }
 
     private fun openManageStory() {

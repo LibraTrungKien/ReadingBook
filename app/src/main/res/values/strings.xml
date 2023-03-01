@@ -67,4 +67,9 @@
     <string name="manage_your_story">Danh sách truyện của bạn</string>
     <string name="admin">Quản trị viên</string>
     <string name="add_NewAccount">Thêm tài khoản tác giả</string>
+    <string name="again_password">Nhập lại mật khẩu</string>
+    <string name="phoneNumber">Số điện thoại</string>
+    <string name="user_name">Tên hiển thị</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
 </resources>

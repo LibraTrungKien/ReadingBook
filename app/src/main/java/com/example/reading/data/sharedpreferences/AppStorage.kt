@@ -28,6 +28,7 @@ class AppStorage @Inject constructor(
             putString(Key.EMAIL, accountDTO.email)
             putString(Key.PASSWORD, accountDTO.password)
             putString(Key.AVATAR, accountDTO.avatar)
+            putString(Key.PERMISSION, accountDTO.permission)
             putString(Key.GENDER, accountDTO.gender)
             putString(Key.PHONE, accountDTO.phone)
             apply()
@@ -69,11 +70,11 @@ class AppStorage @Inject constructor(
         }
     }
 
-    suspend fun getPermission(): Int {
+    fun getPermission(): Int {
         return sharedPreferences.getInt(Key.PERMISSION, -1)
     }
 
-    suspend fun removeAccount() {
+    fun removeAccount() {
         with(editor) {
             remove(Key.ACCOUNT_ID)
             remove(Key.USERNAME)
@@ -82,6 +83,7 @@ class AppStorage @Inject constructor(
             remove(Key.AVATAR)
             remove(Key.GENDER)
             remove(Key.PHONE)
+            remove(Key.PERMISSION)
             apply()
         }
     }
@@ -95,6 +97,7 @@ class AppStorage @Inject constructor(
             avatar = sharedPreferences.getString(Key.AVATAR, "") ?: "",
             gender = sharedPreferences.getString(Key.GENDER, "") ?: "",
             phone = sharedPreferences.getString(Key.PHONE, "") ?: "",
+            permission = sharedPreferences.getString(Key.PERMISSION, "") ?: ""
         )
     }
 

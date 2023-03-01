@@ -25,3 +25,17 @@ fun AccountDTO.toModel(): Account {
         phone = model.phone
     )
 }
+
+fun Account.toDTO(): AccountDTO {
+    val dto = this
+    return AccountDTO(
+        id = dto.id,
+        username = dto.username,
+        email = dto.email,
+        password = dto.password,
+        avatar = dto.avatar,
+        permission = dto.permission,
+        gender = dto.gender,
+        phone = dto.phone
+    )
+}

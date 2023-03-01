@@ -132,4 +132,9 @@ class RepositoryImpl @Inject constructor(
         appStorageLocalDataSource.saveImageReader(imageProfile)
     }
 
+    override suspend fun registerAccount(account: Account): Boolean {
+        apiService.registerAccount(account.toDTO()).body()!!
+        return true
+    }
+
 }

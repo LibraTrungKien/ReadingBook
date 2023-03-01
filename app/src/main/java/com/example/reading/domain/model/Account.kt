@@ -6,6 +6,7 @@ data class Account(
     var email: String = "",
     var password: String = "",
     var avatar: String = "",
+    var permission: String = "",
     var gender: String = "",
     var phone: String = ""
 )

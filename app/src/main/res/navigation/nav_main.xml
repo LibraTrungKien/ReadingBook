@@ -89,6 +89,9 @@
             android:id="@+id/actManagerStoryFragment"
             app:destination="@id/managerStoryFragment" />
 
+        <action
+            android:id="@+id/actAddNewAccountFragment"
+            app:destination="@id/addNewAccountFragment" />
     </fragment>
 
     <fragment
@@ -149,4 +152,9 @@
         android:id="@+id/searchFragment"
         android:name="com.example.reading.presentation.view.fragment.SearchFragment"
         tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/addNewAccountFragment"
+        android:name="com.example.reading.presentation.view.fragment.AddAccountFragment"
+        tools:layout="@layout/fragment_add_account" />
 </navigation>
