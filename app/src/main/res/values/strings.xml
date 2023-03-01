@@ -65,4 +65,6 @@
     <string name="app_information">Thông tin ứng dụng</string>
     <string name="version_app">phiên bản 1.0.0</string>
     <string name="manage_your_story">Danh sách truyện của bạn</string>
+    <string name="admin">Quản trị viên</string>
+    <string name="add_NewAccount">Thêm tài khoản tác giả</string>
 </resources>
