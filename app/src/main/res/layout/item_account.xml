@@ -42,12 +42,15 @@
         android:background="@drawable/bg_item_manage"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
 
         <ImageView
             android:id="@+id/imgUser"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:background="@drawable/bg_image_circle"
             android:contentDescription="@null"
             android:src="@drawable/ic_account" />
 
@@ -55,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="4dp">
 
             <TextView
                 android:id="@+id/txtUserName"
@@ -67,8 +70,14 @@
                 android:id="@+id/txtPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/phoneNumber" />
+
+            <TextView
+                android:id="@+id/txtPermission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
     </LinearLayout>
 
