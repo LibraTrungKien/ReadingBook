@@ -29,7 +29,6 @@ class AddAccountFragment : BaseFragment<FragmentAddAccountBinding>() {
                 it.toString().trim()
             )
         }
-        binding.edtAccount.doAfterTextChanged { viewModel.copyUserName(it.toString().trim()) }
         binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
         binding.edtAgainPassword.doAfterTextChanged {
             viewModel.copyAgainPassword(

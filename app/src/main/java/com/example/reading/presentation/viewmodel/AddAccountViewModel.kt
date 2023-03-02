@@ -20,10 +20,6 @@ class AddAccountViewModel @Inject constructor(
         account.phone = value
     }
 
-    fun copyUserName(value: String) {
-        account.email = value
-    }
-
     fun copyPassword(value: String) {
         account.password = value
     }

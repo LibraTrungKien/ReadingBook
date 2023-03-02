@@ -57,21 +57,3 @@ fun Fragment.handleException(
         onButtonClicked
     )
 }
-
-fun Fragment.showConfirmDialog(
-    context: Context,
-    title: String,
-    message: String,
-    onYesClick: () -> Unit,
-    onNoClicked: () -> Unit
-) {
-    AlertDialog.Builder(context)
-        .setTitle(title)
-        .setMessage(message)
-        .setPositiveButton(
-            "Có"
-        ) { _, _ -> onYesClick() }
-        .setNegativeButton("Không") { _, _ -> onNoClicked() }
-        .create()
-        .show()
-}

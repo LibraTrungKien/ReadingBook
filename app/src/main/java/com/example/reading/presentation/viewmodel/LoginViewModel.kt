@@ -12,8 +12,8 @@ class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
     var login = Login("", "")
 
-    fun copyEmail(value: String) {
-        login.email = value
+    fun copyPhoneNumber(value: String) {
+        login.phone = value
     }
 
     fun copyPassword(value: String) {

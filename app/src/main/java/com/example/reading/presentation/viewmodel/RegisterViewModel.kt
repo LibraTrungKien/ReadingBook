@@ -10,9 +10,13 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
     var account = Account(permission = "reader")
     var againPassword = ""
+
     fun copyName(value: String) {
         account.username = value
-        account.email = value
+    }
+
+    fun copyPhoneNumber(value: String) {
+        account.phone = value
     }
 
     fun copyPassword(value: String) {
@@ -27,6 +31,8 @@ class RegisterViewModel @Inject constructor(private val repository: Repository) 
         repository.registerAccount(account)
     }
 
-    fun validateData() = account.username.isNotBlank() && account.password.isNotBlank()
+    fun validateData() =
+        account.username.isNotBlank() && account.password.isNotBlank() && account.phone.isNotBlank()
+
     fun checkDuplicate() = account.password == againPassword
 }

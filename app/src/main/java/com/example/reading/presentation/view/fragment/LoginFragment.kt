@@ -31,7 +31,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     override fun initializeEvents() {
-        binding.edtAccount.doAfterTextChanged { viewModel.copyEmail(it.toString().trim()) }
+        binding.edtPhoneNumber.doAfterTextChanged {
+            viewModel.copyPhoneNumber(
+                it.toString().trim()
+            )
+        }
         binding.edtPassword.doAfterTextChanged {
             binding.tilPassword.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
             viewModel.copyPassword(it.toString().trim())
@@ -54,8 +58,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun validateData(): Boolean {
-        if (viewModel.login.email.isBlank()) {
-            binding.edtAccount.error = requireContext().getString(R.string.enter_username_please)
+        if (viewModel.login.phone.isBlank()) {
+            binding.edtPhoneNumber.error =
+                requireContext().getString(R.string.enter_username_please)
             return false
         }
 

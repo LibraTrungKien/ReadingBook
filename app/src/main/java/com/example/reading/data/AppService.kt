@@ -14,7 +14,7 @@ import retrofit2.http.Query
 interface AppService {
     @GET("users")
     suspend fun login(
-        @Query("email") email: String,
+        @Query("phone") phone: String,
         @Query("password") password: String
     ): Response<List<AccountDTO>>
 

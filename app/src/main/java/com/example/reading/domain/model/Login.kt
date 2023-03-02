@@ -1,3 +1,3 @@
 package com.example.reading.domain.model
 
-data class Login(var email: String, var password: String)
+data class Login(var phone: String, var password: String)

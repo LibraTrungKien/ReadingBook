@@ -82,4 +82,5 @@
     <string name="youNeedAuthorPermission">Bạn cần quyền Tác giả để sử dụng tính năng này</string>
     <string name="youNeedAdminPermission">Bạn cần quyền Admin để sử dụng tính năng này</string>
     <string name="areYouSureDelete">Bạn có chắc chắn muốn xóa truyện: </string>
+    <string name="email">Email</string>
 </resources>

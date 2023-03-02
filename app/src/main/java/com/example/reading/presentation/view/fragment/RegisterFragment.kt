@@ -26,6 +26,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initializeEvents() {
         binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString().trim()) }
+        binding.edtPhoneNumber.doAfterTextChanged { viewModel.copyPhoneNumber(it.toString().trim()) }
         binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
         binding.edtAgainPassword.doAfterTextChanged {
             viewModel.copyAgainPassword(
@@ -71,7 +72,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             ) {}
             return false
         }
-        if (viewModel.checkDuplicate()) {
+        if (!viewModel.checkDuplicate()) {
             showMessageDialog(
                 requireContext().getString(R.string.warning),
                 requireContext().getString(R.string.password_not_duplicate),
