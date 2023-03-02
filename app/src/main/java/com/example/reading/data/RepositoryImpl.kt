@@ -120,4 +120,9 @@ class RepositoryImpl @Inject constructor(
         return true
     }
 
+    override suspend fun fetchAllAccount(): List<Account> {
+        val response = apiService.fetchAllAccount().body()!!
+        return response.map { it.toModel() }
+    }
+
 }

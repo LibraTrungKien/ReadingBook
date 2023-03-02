@@ -26,4 +26,5 @@ interface Repository {
     suspend fun getPermission(): Int
     suspend fun deleteStory(story: Story)
     suspend fun registerAccount(account: Account): Boolean
+    suspend fun fetchAllAccount(): List<Account>
 }

@@ -64,7 +64,7 @@
     <string name="version_app">phiên bản 1.0.0</string>
     <string name="manage_your_story">Danh sách truyện của bạn</string>
     <string name="admin">Quản trị viên</string>
-    <string name="add_NewAccount">Thêm tài khoản tác giả</string>
+    <string name="manage_account">Quản lý tài khoản</string>
     <string name="again_password">Nhập lại mật khẩu</string>
     <string name="phoneNumber">Số điện thoại</string>
     <string name="user_name">Tên hiển thị</string>
@@ -83,4 +83,5 @@
     <string name="youNeedAdminPermission">Bạn cần quyền Admin để sử dụng tính năng này</string>
     <string name="areYouSureDelete">Bạn có chắc chắn muốn xóa truyện: </string>
     <string name="email">Email</string>
+    <string name="add_Account">Tạo tài khoản</string>
 </resources>

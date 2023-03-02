@@ -32,4 +32,7 @@ interface AppService {
 
     @POST("users")
     suspend fun registerAccount(@Body accountDTO: AccountDTO): Response<AccountDTO>
+
+    @GET("users")
+    suspend fun fetchAllAccount(): Response<List<AccountDTO>>
 }

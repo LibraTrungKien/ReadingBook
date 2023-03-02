@@ -44,6 +44,9 @@ ext {
 }
 
 dependencies {
+    //    swipe
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
     //  room db
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")

@@ -132,7 +132,7 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="8dp"
-                android:text="@string/add_NewAccount"
+                android:text="@string/add_Account"
                 android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:textColor="@color/white" />
         </LinearLayout>

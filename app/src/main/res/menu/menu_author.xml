@@ -9,9 +9,9 @@
         android:icon="@drawable/ic_create"
         android:title="@string/postPage" />
     <item
-        android:id="@+id/addAccountPage"
+        android:id="@+id/manageAccountPage"
         android:icon="@drawable/ic_add_account"
-        android:title="@string/add_NewAccount" />
+        android:title="@string/manage_account" />
     <item
         android:id="@+id/logoutPage"
         android:icon="@drawable/ic_logout"
