@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.reading.presentation.view.diglog.MessageDialog
 
 abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseView {
     private lateinit var _binding: T
@@ -52,6 +53,10 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseView {
         val uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(Intent.createChooser(intent, "Mở với"))
+    }
+
+    fun showMessageDialog(title: String, content: String, image: Int, onButtonClicked: () -> Unit) {
+        MessageDialog.show(parentFragmentManager, title, content, image, onButtonClicked)
     }
 
 }

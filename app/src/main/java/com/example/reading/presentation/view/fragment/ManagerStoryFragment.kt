@@ -14,8 +14,8 @@ import com.example.reading.presentation.view.adapter.Interactor
 import com.example.reading.presentation.view.adapter.ManagerStoryController
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
-import com.example.reading.presentation.view.base.showConfirmDialog
 import com.example.reading.presentation.view.base.visibleOrGone
+import com.example.reading.presentation.view.diglog.ConfirmDialog
 import com.example.reading.presentation.viewmodel.ManagerStoryViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,14 +70,11 @@ class ManagerStoryFragment : BaseFragment<FragmentManagerStoryBinding>() {
     }
 
     private fun deleteStory(story: Story) {
-        showConfirmDialog(
-            requireContext(),
-            "Xác nhận",
-            "Bạn có chắc chắn muốn xóa truyện ${story.name}",
-            {
-                handleDelete(story)
-            },
-            { })
+        ConfirmDialog.show(
+            parentFragmentManager,
+            requireContext().getString(R.string.confirm),
+            " ${requireContext().getString(R.string.areYouSureDelete)} ${story.name}"
+        ) { handleDelete(story) }
     }
 
     private fun handleDelete(story: Story) {

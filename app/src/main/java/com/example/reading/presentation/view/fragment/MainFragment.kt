@@ -2,7 +2,6 @@ package com.example.reading.presentation.view.fragment
 
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -26,11 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelectedListener {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var controller: CategoryController
-
-    private val callback = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        viewModel.saveImageProfile(it.toString())
-        bindViewImageUser(it.toString())
-    }
 
     companion object {
         fun open(navController: NavController) {
@@ -58,8 +52,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
                 override fun handleOnBackPressed() {
                     ConfirmDialog.show(
                         parentFragmentManager,
-                        "Xác nhận",
-                        "Bạn có chắc chắn muốn thoát?"
+                        requireContext().getString(R.string.confirm),
+                        requireContext().getString(R.string.are_you_sure)
                     ) { requireActivity().finish() }
                 }
             })
@@ -97,8 +91,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     private fun openGallery() {
-        val input = "image/image"
-        callback.launch(input)
     }
 
     private fun bindViewImageSlider() {
@@ -122,27 +114,21 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     private fun bindViewAccount() {
-        val isAdmin = viewModel.readerName.isBlank()
-        val name: String
-        val imageProfile: String
-        if (isAdmin) {
-            val account = viewModel.account
-            name = account.username
-            imageProfile = account.avatar
-        } else {
-            name = viewModel.readerName
-            imageProfile = viewModel.imageProfile
-        }
-        bindViewImageUser(imageProfile)
-        binding.txtName.text = name
+        val account = viewModel.account
+        bindViewImageUser(account.avatar)
+        binding.txtName.text = account.username
 
         if (!viewModel.isFirst())
             return
 
         MessageDialog.show(
             parentFragmentManager,
-            "Xin chào",
-            "Chúc mừng $name đến với THẾ GIỚI TRUYỆN",
+            requireContext().getString(R.string.hello),
+            "${requireContext().getString(R.string.congratulation)} ${account.username} ${
+                requireContext().getString(
+                    R.string.goToStoryWorld
+                )
+            }",
             R.drawable.satisfied
         ) { viewModel.isFirst++ }
     }
@@ -172,7 +158,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             requireContext().getString(R.string.are_you_sure)
         ) {
             viewModel.logout()
-            StartFragment.open(findNavController())
+            LoginFragment.open(findNavController())
         }
     }
 
@@ -180,8 +166,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         if (viewModel.isReader()) {
             MessageDialog.show(
                 parentFragmentManager,
-                "Thông báo",
-                "Bạn cần quyền Admin để sử dụng chức năng này!",
+                requireContext().getString(R.string.notification),
+                requireContext().getString(R.string.youNeedAuthorPermission),
                 R.drawable.ic_sad
             ) {}
             return
@@ -190,6 +176,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     private fun openAddAccount() {
+        if (!viewModel.isAdmin()) {
+            MessageDialog.show(
+                parentFragmentManager,
+                requireContext().getString(R.string.notification),
+                requireContext().getString(R.string.youNeedAdminPermission),
+                R.drawable.ic_sad
+            ) {}
+            return
+        }
         AddAccountFragment.open(findNavController())
     }
 
@@ -197,8 +192,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         if (viewModel.isReader()) {
             MessageDialog.show(
                 parentFragmentManager,
-                "Thông báo",
-                "Bạn cần quyền Admin để sử dụng chức năng này!",
+                requireContext().getString(R.string.notification),
+                requireContext().getString(R.string.youNeedAuthorPermission),
                 R.drawable.ic_sad
             ) {}
             return

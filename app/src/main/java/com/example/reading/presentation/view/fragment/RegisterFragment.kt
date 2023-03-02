@@ -7,7 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentRegisterBinding
 import com.example.reading.presentation.view.base.BaseFragment
+import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone
+import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,12 +26,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initializeEvents() {
         binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString().trim()) }
-        binding.btnRegister.setOnClickListener { handleClickRegister() }
-
-        viewModel.dataLiveData.observe(viewLifecycleOwner) {
-            bindViewProgress(it)
-            MainFragment.open(findNavController())
+        binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
+        binding.edtAgainPassword.doAfterTextChanged {
+            viewModel.copyAgainPassword(
+                it.toString().trim()
+            )
         }
+
+        binding.btnRegister.setOnClickListener { handleClickRegister() }
     }
 
 
@@ -42,10 +46,39 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     }
 
     private fun handleClickRegister() {
-        if (viewModel.name.isBlank()) {
-            binding.edtName.error = "Vui lòng nhập tên hiển thị"
-            return
+        if (!validateData()) return
+
+        bindViewProgress(true)
+        apiCall(viewModel.registerAccount(), viewLifecycleOwner, {
+            bindViewProgress(false)
+            MessageDialog.show(
+                parentFragmentManager,
+                requireContext().getString(R.string.congratulation),
+                requireContext().getString(R.string.register_success),
+                R.drawable.satisfied
+            ) {
+                findNavController().popBackStack()
+            }
+        }, { true })
+    }
+
+    private fun validateData(): Boolean {
+        if (!viewModel.validateData()) {
+            showMessageDialog(
+                requireContext().getString(R.string.warning),
+                requireContext().getString(R.string.enter_all_field),
+                R.drawable.ic_sad
+            ) {}
+            return false
         }
-        viewModel.saveInfoReader()
+        if (viewModel.checkDuplicate()) {
+            showMessageDialog(
+                requireContext().getString(R.string.warning),
+                requireContext().getString(R.string.password_not_duplicate),
+                R.drawable.ic_sad
+            ) {}
+            return false
+        }
+        return true
     }
 }

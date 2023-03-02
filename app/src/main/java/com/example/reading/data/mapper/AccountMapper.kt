@@ -21,21 +21,22 @@ fun AccountDTO.toModel(): Account {
         email = model.email,
         password = model.password,
         avatar = model.avatar,
+        permission = model.permission,
         gender = model.gender,
         phone = model.phone
     )
 }
 
 fun Account.toDTO(): AccountDTO {
-    val dto = this
+    val model = this
     return AccountDTO(
-        id = dto.id,
-        username = dto.username,
-        email = dto.email,
-        password = dto.password,
-        avatar = dto.avatar,
-        permission = dto.permission,
-        gender = dto.gender,
-        phone = dto.phone
+        id = model.id,
+        username = model.username,
+        email = model.email,
+        password = model.password,
+        avatar = model.avatar,
+        permission = model.permission,
+        gender = model.gender,
+        phone = model.phone
     )
 }

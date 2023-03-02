@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/congratulations"
+        android:text="@string/congratulation"
         android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
         android:textColor="@color/white" />
 

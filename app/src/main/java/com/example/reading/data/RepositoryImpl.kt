@@ -21,7 +21,7 @@ class RepositoryImpl @Inject constructor(
     private val appStorageLocalDataSource: AppStorageLocalDataSource
 ) : Repository {
     override suspend fun login(login: Login): Boolean {
-        val response = apiService.login(login.toDTO()).body()!!
+        val response = apiService.login(login.email, login.password).body()!!.first()
         appStorageLocalDataSource.saveAccount(response)
         return true
     }
@@ -100,18 +100,6 @@ class RepositoryImpl @Inject constructor(
         return appStorageLocalDataSource.getPermission()
     }
 
-    override suspend fun setPermission(permission: Int) {
-        appStorageLocalDataSource.setPermission(permission)
-    }
-
-    override suspend fun saveInfoReader(readerName: String, imageProfile: String) {
-        appStorageLocalDataSource.saveInfoReader(readerName, imageProfile)
-    }
-
-    override suspend fun getInfoReader(): Pair<String, String> {
-        return appStorageLocalDataSource.getInfoReader()
-    }
-
     override suspend fun deleteStory(story: Story) {
         apiService.deleteStory(story.id)
         localDataSource.deleteStory(story = story.toStoryEntity())
@@ -123,13 +111,8 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun removeAccount() {
         appStorageLocalDataSource.removeAccount()
-        appStorageLocalDataSource.removeInfoReader()
         localDataSource.deleteAllFavourite()
         localDataSource.deleteAllHistory()
-    }
-
-    override fun saveImageProfile(imageProfile: String) {
-        appStorageLocalDataSource.saveImageReader(imageProfile)
     }
 
     override suspend fun registerAccount(account: Account): Boolean {

@@ -35,41 +35,6 @@ class AppStorage @Inject constructor(
         }
     }
 
-    fun saveInfoReader(readerName: String, imageProfile: String) {
-        with(editor) {
-            putString(Key.READER_NAME, readerName)
-            putString(Key.IMAGE_PROFILE, imageProfile)
-            apply()
-        }
-    }
-
-    fun saveImageReader(imageProfile: String) {
-        editor.putString(Key.IMAGE_PROFILE, imageProfile)
-        editor.apply()
-    }
-
-    fun getInfoReader(): Pair<String, String> {
-        val readerName = sharedPreferences.getString(Key.READER_NAME, "") ?: ""
-        val imageProfile = sharedPreferences.getString(Key.IMAGE_PROFILE, "") ?: ""
-        return Pair(readerName, imageProfile)
-    }
-
-    fun removeInfoReader() {
-        with(editor) {
-            remove(Key.READER_NAME)
-            remove(Key.IMAGE_PROFILE)
-            apply()
-        }
-    }
-
-    fun setPermission(permission: Int) {
-        //  0: author   1: user 2: admin
-        with(editor) {
-            putInt(Key.PERMISSION, permission)
-            apply()
-        }
-    }
-
     fun getPermission(): Int {
         return sharedPreferences.getInt(Key.PERMISSION, -1)
     }
@@ -100,6 +65,5 @@ class AppStorage @Inject constructor(
             permission = sharedPreferences.getString(Key.PERMISSION, "") ?: ""
         )
     }
-
 
 }

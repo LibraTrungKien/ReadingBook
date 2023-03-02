@@ -20,13 +20,9 @@ class SplashViewModel @Inject constructor(private val repository: Repository) : 
     fun getInfoAccount() {
         viewModelScope.launch {
             account = repository.getInfoAccount()
-            val readerName = repository.getInfoReader().first
-            val hasAccount = hasAccount(account) || readerName.isNotBlank()
-            _dataLiveData.value = hasAccount
+            _dataLiveData.value = hasAccount(account)
         }
     }
 
-    private fun hasAccount(account: Account): Boolean {
-        return account.email.isNotBlank()
-    }
+    private fun hasAccount(account: Account) = account.username.isNotBlank()
 }

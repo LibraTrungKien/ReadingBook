@@ -11,31 +11,12 @@
         tools:layout="@layout/fragment_splash">
 
         <action
-            android:id="@+id/actStartFragment"
-            app:destination="@id/startFragment" />
-
-        <action
             android:id="@+id/actMainFragment"
             app:destination="@id/mainFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/startFragment"
-        android:name="com.example.reading.presentation.view.fragment.StartFragment"
-        tools:layout="@layout/fragment_start">
 
         <action
             android:id="@+id/actLoginFragment"
             app:destination="@id/loginFragment" />
-
-        <action
-            android:id="@+id/actRegisterFragment"
-            app:destination="@id/registerFragment" />
-
-        <action
-            android:id="@id/actMainFragment"
-            app:destination="@id/mainFragment" />
 
     </fragment>
 
@@ -43,10 +24,6 @@
         android:id="@+id/registerFragment"
         android:name="com.example.reading.presentation.view.fragment.RegisterFragment"
         tools:layout="@layout/fragment_register">
-
-        <action
-            android:id="@+id/actMainFragment"
-            app:destination="@id/mainFragment" />
 
     </fragment>
 
@@ -58,6 +35,10 @@
         <action
             android:id="@+id/actMainFragment"
             app:destination="@id/mainFragment" />
+
+        <action
+            android:id="@+id/actRegisterFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
 
     <fragment
@@ -82,16 +63,16 @@
             app:destination="@id/postStoryFragment" />
 
         <action
-            android:id="@+id/actStartFragment"
-            app:destination="@id/startFragment" />
-
-        <action
             android:id="@+id/actManagerStoryFragment"
             app:destination="@id/managerStoryFragment" />
 
         <action
             android:id="@+id/actAddNewAccountFragment"
             app:destination="@id/addNewAccountFragment" />
+
+        <action
+            android:id="@+id/actLoginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment

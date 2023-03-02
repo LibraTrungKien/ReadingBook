@@ -21,8 +21,7 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel() {
     var isFirst = 0
     val images = arrayListOf<SlideModel>()
-    var account: Account = Account()
-    var readerName: String = ""
+    lateinit var account: Account
 
     var imageProfile: String = ""
 
@@ -59,13 +58,6 @@ class MainViewModel @Inject constructor(
     fun loadDataUser() {
         viewModelScope.launch {
             account = repository.getInfoAccount()
-            account.email.ifBlank {
-                repository.getInfoReader().apply {
-                    readerName = first
-                    imageProfile = second
-                }
-
-            }
             _dataUserLiveData.value = true
         }
     }
@@ -83,10 +75,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun isReader() = readerName.isNotBlank()
+    fun isReader() = account.permission == "reader"
     fun isFirst() = isFirst == 0
-
-    fun saveImageProfile(imageProfile: String) {
-        repository.saveImageProfile(imageProfile)
-    }
+    fun isAdmin() = account.permission == "admin"
 }

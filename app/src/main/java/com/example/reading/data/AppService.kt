@@ -1,7 +1,6 @@
 package com.example.reading.data
 
 import com.example.reading.data.dto.AccountDTO
-import com.example.reading.data.dto.LoginDTO
 import com.example.reading.data.dto.StoryDTO
 import retrofit2.Response
 import retrofit2.http.Body
@@ -10,10 +9,14 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface AppService {
-    @POST("login")
-    suspend fun login(@Body loginDTO: LoginDTO): Response<AccountDTO>
+    @GET("users")
+    suspend fun login(
+        @Query("email") email: String,
+        @Query("password") password: String
+    ): Response<List<AccountDTO>>
 
     @GET("story")
     suspend fun fetchAllStory(): Response<List<StoryDTO>>

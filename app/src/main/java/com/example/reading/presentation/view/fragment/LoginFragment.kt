@@ -27,7 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     override fun initializeComponent() {
-        binding.prgIndicator.visibleOrGone(false)
+        bindViewProgress(false)
     }
 
     override fun initializeEvents() {
@@ -37,31 +37,38 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             viewModel.copyPassword(it.toString().trim())
         }
         binding.btnLogin.setOnClickListener { handleLogin() }
+        binding.btnRegister.setOnClickListener { openRegisterFragment() }
     }
 
     private fun handleLogin() {
-        if (viewModel.login.email.isBlank()) {
-            binding.edtAccount.error = "Vui lòng nhập tài khoản!"
+        if (!validateData())
             return
-        }
 
-        if (viewModel.login.password.isBlank()) {
-            binding.tilPassword.endIconMode = END_ICON_NONE
-            binding.edtPassword.error = "Vui lòng nhập mật khẩu!"
-            return
-        }
-
-        binding.prgIndicator.visibleOrGone(true)
+        bindViewProgress(true)
         apiCall(viewModel.login(), viewLifecycleOwner, {
             handleLoginSuccess()
         }, {
-            binding.prgIndicator.visibleOrGone(false)
+            bindViewProgress(false)
             true
         })
     }
 
+    private fun validateData(): Boolean {
+        if (viewModel.login.email.isBlank()) {
+            binding.edtAccount.error = requireContext().getString(R.string.enter_username_please)
+            return false
+        }
+
+        if (viewModel.login.password.isBlank()) {
+            binding.tilPassword.endIconMode = END_ICON_NONE
+            binding.edtPassword.error = requireContext().getString(R.string.enter_password_please)
+            return false
+        }
+        return true
+    }
+
     private fun handleLoginSuccess() {
-        binding.prgIndicator.visibleOrGone(false)
+        bindViewProgress(false)
         MessageDialog.show(
             parentFragmentManager,
             "Chúc mừng",
@@ -70,5 +77,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         ) {
             MainFragment.open(findNavController())
         }
+    }
+
+    private fun openRegisterFragment() {
+        RegisterFragment.open(findNavController())
+    }
+
+    private fun bindViewProgress(isVisible: Boolean) {
+        binding.prgIndicator.visibleOrGone(isVisible)
     }
 }
