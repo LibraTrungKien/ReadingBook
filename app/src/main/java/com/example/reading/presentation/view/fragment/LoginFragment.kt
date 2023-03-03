@@ -50,7 +50,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         bindViewProgress(true)
         apiCall(viewModel.login(), viewLifecycleOwner, {
-            handleLoginSuccess()
+            MainFragment.open(findNavController())
         }, {
             bindViewProgress(false)
             true
@@ -70,18 +70,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             return false
         }
         return true
-    }
-
-    private fun handleLoginSuccess() {
-        bindViewProgress(false)
-        MessageDialog.show(
-            parentFragmentManager,
-            "Chúc mừng",
-            "Đăng nhập thành công",
-            R.drawable.satisfied
-        ) {
-            MainFragment.open(findNavController())
-        }
     }
 
     private fun openRegisterFragment() {

@@ -1,20 +1,25 @@
 package com.example.reading.presentation.viewmodel
 
-import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Account
-import com.example.reading.presentation.Key
 import com.example.reading.presentation.view.base.BaseViewModel
-import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor() : BaseViewModel() {
+class ProfileViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
     lateinit var account: Account
         private set
 
-    fun initializeArgument(bundle: Bundle) {
-        val result = bundle.getString(Key.DATA)
-        account = Gson().fromJson(result, Account::class.java)
+    val dataLiveData: MutableLiveData<Account> = MutableLiveData()
+
+    fun loadData() {
+        viewModelScope.launch {
+            account = repository.getInfoAccount()
+            dataLiveData.postValue(account)
+        }
     }
 }
