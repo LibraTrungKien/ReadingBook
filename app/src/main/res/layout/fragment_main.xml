@@ -124,14 +124,6 @@
                     android:contentDescription="@null"
                     android:scaleType="centerCrop" />
 
-                <ImageView
-                    android:id="@+id/btnUpload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_camera" />
-
             </androidx.cardview.widget.CardView>
 
             <TextView

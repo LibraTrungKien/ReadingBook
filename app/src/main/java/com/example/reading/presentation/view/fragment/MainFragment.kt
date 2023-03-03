@@ -77,7 +77,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         }
 
         binding.lytProfile.setOnClickListener { ProfileFragment.open(findNavController()) }
-        binding.btnUpload.setOnClickListener { openGallery() }
     }
 
     override fun initializeData() {
@@ -88,9 +87,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
     override fun bindView() {
         bindViewImageSlider()
-    }
-
-    private fun openGallery() {
     }
 
     private fun bindViewImageSlider() {
@@ -107,9 +103,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     private fun bindViewImageUser(image: String) {
-        binding.btnUpload.visibleOrGone(image.isBlank())
+        val src = image.ifBlank { R.drawable.ic_account }
         Glide.with(binding.crdUser)
-            .load(image)
+            .load(src)
             .into(binding.crdUser)
     }
 
