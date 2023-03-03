@@ -89,4 +89,6 @@
     <string name="gender">Giới tính</string>
     <string name="permission">Quyền</string>
     <string name="my_account">Tài khoản của tôi</string>
+    <string name="account_edit">Sửa thông tin tài khoản</string>
+    <string name="upload">Thay ảnh</string>
 </resources>

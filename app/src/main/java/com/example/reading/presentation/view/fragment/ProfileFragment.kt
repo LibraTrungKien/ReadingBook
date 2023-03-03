@@ -1,7 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -35,11 +34,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun initializeEvents() {
         binding.toolbar.setOnNavigationClick { findNavController().popBackStack() }
         binding.toolbar.setOnActionClick {
-            Toast.makeText(
-                requireContext(),
-                "setting...",
-                Toast.LENGTH_SHORT
-            ).show()
+            EditProfileFragment.open(findNavController(), viewModel.account)
         }
     }
 

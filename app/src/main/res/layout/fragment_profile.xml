@@ -141,5 +141,4 @@
         android:padding="8dp"
         android:textColor="#01579B"
         tools:text="Giới tính" />
-
 </LinearLayout>

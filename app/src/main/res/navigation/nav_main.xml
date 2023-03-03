@@ -157,5 +157,16 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.reading.presentation.view.fragment.ProfileFragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/actEditProfileFragment"
+            app:destination="@id/editProfileFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.reading.presentation.view.fragment.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

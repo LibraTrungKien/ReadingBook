@@ -13,7 +13,13 @@ class MyToolbar @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) :
     Toolbar(context, attrs, defStyleAttr) {
-    val binding: ToolbarCustomBinding
+    private val binding: ToolbarCustomBinding
+    private val actionIndex: Int
+
+    enum class ActionIcon {
+        SETTING,
+        DONE
+    }
 
     init {
 
@@ -24,15 +30,26 @@ class MyToolbar @JvmOverloads constructor(
         context.theme.obtainStyledAttributes(attrs, R.styleable.MyToolbar, 0, 0).apply {
             try {
                 val title = getString(R.styleable.MyToolbar_title)
+                actionIndex = getInt(R.styleable.MyToolbar_actionIcon, 1)
+
                 binding.btnBack.setImageResource(R.drawable.ic_back)
 
                 binding.txtTitle.text = title
 
-                binding.btnAction.setImageResource(R.drawable.ic_setting)
+                bindViewAction()
             } finally {
                 recycle()
             }
         }
+    }
+
+    private fun bindViewAction() {
+        val resource = if (actionIndex == 1) {
+            R.drawable.ic_setting
+        } else {
+            R.drawable.ic_done
+        }
+        binding.btnAction.setImageResource(resource)
     }
 
     fun setOnNavigationClick(onNavigationClicked: () -> Unit) {
