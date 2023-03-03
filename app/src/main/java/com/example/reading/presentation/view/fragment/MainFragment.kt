@@ -76,7 +76,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             bindViewAccount()
         }
 
-        binding.lyt2.setOnClickListener { }
+        binding.lytProfile.setOnClickListener { ProfileFragment.open(findNavController() , viewModel.account)}
         binding.btnUpload.setOnClickListener { openGallery() }
     }
 

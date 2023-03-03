@@ -102,10 +102,11 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/lyt2"
+            android:id="@+id/lytProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFC1C1"
+            android:foreground="?attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="4dp">

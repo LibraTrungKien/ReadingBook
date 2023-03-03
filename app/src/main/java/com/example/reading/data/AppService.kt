@@ -30,6 +30,9 @@ interface AppService {
     @DELETE("story/{id}")
     suspend fun deleteStory(@Path("id") id: Int)
 
+    @DELETE("users/{id}")
+    suspend fun deleteAccount(@Path("id") id: Int)
+
     @POST("users")
     suspend fun registerAccount(@Body accountDTO: AccountDTO): Response<AccountDTO>
 

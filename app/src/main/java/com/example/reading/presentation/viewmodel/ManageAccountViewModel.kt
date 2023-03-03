@@ -33,4 +33,8 @@ class ManageAccountViewModel @Inject constructor(
         }
         _dataLiveData.postValue(result)
     }
+
+    fun deleteAccount(id: Int) = callSafeApiWithLiveData {
+        repository.deleteAccount(id)
+    }
 }

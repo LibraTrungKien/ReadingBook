@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.reading.presentation.view.custom.MyToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#558B2F"
+        app:title="@string/my_account"
+        app:titleTextColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:background="#CBE65100"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_account" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#558B2F"
+        android:padding="8dp"
+        android:text="@string/account_information"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:text="@string/user_name"
+        app:drawableStartCompat="@drawable/ic_account" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="#80000000" />
+
+    <TextView
+        android:id="@+id/txtUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:padding="8dp"
+        android:textColor="#01579B"
+        tools:text="Nguyễn Trung Kiên" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:text="@string/phoneNumber"
+        app:drawableStartCompat="@drawable/ic_phone_number" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="#80000000" />
+
+    <TextView
+        android:id="@+id/txtPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:padding="8dp"
+        android:textColor="#01579B"
+        tools:text="098587462" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:text="@string/permission"
+        app:drawableStartCompat="@drawable/ic_permission" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="#80000000" />
+
+    <TextView
+        android:id="@+id/txtPermission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:padding="8dp"
+        android:textColor="#01579B"
+        tools:text="Nguyễn Trung Kiên" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:text="@string/gender"
+        app:drawableStartCompat="@drawable/ic_female" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="#80000000" />
+
+    <TextView
+        android:id="@+id/txtGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="4dp"
+        android:padding="8dp"
+        android:textColor="#01579B"
+        tools:text="Giới tính" />
+
+</LinearLayout>

@@ -7,21 +7,21 @@ import com.example.reading.databinding.ItemAccountBinding
 import com.example.reading.domain.model.Account
 import com.example.reading.presentation.view.base.ViewBindingEpoxyModelWithHolder
 
-class AccountController : TypedEpoxyController<List<Account>>() {
+class AccountController(private val onMenuClick: OnMenuClick) :
+    TypedEpoxyController<List<Account>>() {
     override fun buildModels(data: List<Account>?) {
         data ?: return
         data.forEach {
-            Holder(it).id(it.hashCode()).addTo(this)
+            Holder(onMenuClick, it).id(it.hashCode()).addTo(this)
         }
     }
 
-    class Holder(private val account: Account) :
+    class Holder(private val onMenuClick: OnMenuClick, private val account: Account) :
         ViewBindingEpoxyModelWithHolder<ItemAccountBinding>() {
         override fun getDefaultLayout() = R.layout.item_account
 
         override fun initializeView() {
-            binding.btnRemoveAccount.setOnClickListener { }
-            binding.root.setOnClickListener { }
+            binding.btnRemoveAccount.setOnClickListener { onMenuClick.onMenuClicked(account) }
         }
 
         override fun bindView() {
@@ -31,4 +31,8 @@ class AccountController : TypedEpoxyController<List<Account>>() {
             Glide.with(binding.imgUser).load(account.avatar).into(binding.imgUser)
         }
     }
+}
+
+interface OnMenuClick {
+    fun onMenuClicked(account: Account)
 }

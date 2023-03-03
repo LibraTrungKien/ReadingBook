@@ -125,4 +125,9 @@ class RepositoryImpl @Inject constructor(
         return response.map { it.toModel() }
     }
 
+    override suspend fun deleteAccount(id: Int): Boolean {
+        apiService.deleteAccount(id)
+        return true
+    }
+
 }

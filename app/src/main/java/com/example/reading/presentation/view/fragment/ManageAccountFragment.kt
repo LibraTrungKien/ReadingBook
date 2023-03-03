@@ -6,9 +6,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentManageAccountBinding
+import com.example.reading.domain.model.Account
 import com.example.reading.presentation.view.adapter.AccountController
+import com.example.reading.presentation.view.adapter.OnMenuClick
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
+import com.example.reading.presentation.view.diglog.ConfirmDialog
 import com.example.reading.presentation.viewmodel.ManageAccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +28,11 @@ class ManageAccountFragment : BaseFragment<FragmentManageAccountBinding>() {
     }
 
     override fun initializeComponent() {
-        controller = AccountController()
+        controller = AccountController(object : OnMenuClick {
+            override fun onMenuClicked(account: Account) {
+                handleDeleteAccount(account)
+            }
+        })
         binding.lstAccount.setHasFixedSize(false)
         binding.lstAccount.setController(controller)
     }
@@ -47,5 +54,19 @@ class ManageAccountFragment : BaseFragment<FragmentManageAccountBinding>() {
         apiCall(viewModel.loadData(), viewLifecycleOwner, {
             controller.setData(it)
         }, { true })
+    }
+
+    private fun handleDeleteAccount(account: Account) {
+        ConfirmDialog.show(
+            parentFragmentManager,
+            requireContext().getString(R.string.confirm),
+            "Bạn có chắn chắn muốn xóa tài khoản ${account.username} ?"
+        ) {
+            apiCall(
+                viewModel.deleteAccount(account.id),
+                viewLifecycleOwner,
+                { viewModel.loadData() },
+                { true })
+        }
     }
 }

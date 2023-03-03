@@ -73,6 +73,10 @@
         <action
             android:id="@+id/actManageAccountFragment"
             app:destination="@id/manageAccountFragment" />
+
+        <action
+            android:id="@+id/actProfileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -149,4 +153,9 @@
             app:destination="@id/addNewAccountFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.reading.presentation.view.fragment.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
