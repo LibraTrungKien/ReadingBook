@@ -19,4 +19,24 @@ class EditProfileViewModel @Inject constructor(private val repository: Repositor
         val result = bundle.getString(Key.DATA)
         account = Gson().fromJson(result, Account::class.java)
     }
+
+    fun copyUsername(value: String) {
+        account.username = value
+    }
+
+    fun copyPhoneNumber(value: String) {
+        account.phone = value
+    }
+
+    fun copyPassword(value: String) {
+        account.password = value
+    }
+
+    fun copyGender(value: String) {
+        account.gender = value
+    }
+
+    fun saveAccount() = callSafeApiWithLiveData {
+        repository.editAccount(account)
+    }
 }

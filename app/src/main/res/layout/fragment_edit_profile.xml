@@ -66,7 +66,7 @@
                 android:background="#80000000" />
 
             <EditText
-                android:id="@+id/txtUserName"
+                android:id="@+id/edtUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -93,7 +93,7 @@
                 android:background="#80000000" />
 
             <EditText
-                android:id="@+id/txtPhoneNumber"
+                android:id="@+id/edtPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -102,6 +102,40 @@
                 android:padding="8dp"
                 android:textColor="#01579B"
                 tools:text="098587462" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:padding="4dp"
+                android:text="@string/password"
+                app:drawableStartCompat="@drawable/ic_password" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#80000000" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:drawablePadding="4dp"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:textColor="#01579B"
+                    tools:text="098587462" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
@@ -121,6 +155,7 @@
                 android:background="#80000000" />
 
             <RadioGroup
+                android:id="@+id/rdgGender"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

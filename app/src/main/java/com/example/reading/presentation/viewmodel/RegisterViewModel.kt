@@ -27,6 +27,10 @@ class RegisterViewModel @Inject constructor(private val repository: Repository) 
         againPassword = value
     }
 
+    fun copyGender(value: String) {
+        account.gender = value
+    }
+
     fun registerAccount() = callSafeApiWithLiveData {
         repository.registerAccount(account)
     }

@@ -38,4 +38,7 @@ interface AppService {
 
     @GET("users")
     suspend fun fetchAllAccount(): Response<List<AccountDTO>>
+
+    @PUT("users/{id}")
+    suspend fun editAccount(@Body accountDTO: AccountDTO, @Path("id") id: Int): AccountDTO
 }

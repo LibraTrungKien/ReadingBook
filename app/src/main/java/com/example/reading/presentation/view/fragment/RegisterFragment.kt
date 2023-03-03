@@ -26,12 +26,23 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initializeEvents() {
         binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString().trim()) }
-        binding.edtPhoneNumber.doAfterTextChanged { viewModel.copyPhoneNumber(it.toString().trim()) }
+        binding.edtPhoneNumber.doAfterTextChanged {
+            viewModel.copyPhoneNumber(
+                it.toString().trim()
+            )
+        }
         binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
         binding.edtAgainPassword.doAfterTextChanged {
             viewModel.copyAgainPassword(
                 it.toString().trim()
             )
+        }
+        binding.rdgGender.setOnCheckedChangeListener { _, checkedId ->
+            val gender =
+                if (checkedId == R.id.rdbMale) requireContext().getString(R.string.male) else requireContext().getString(
+                    R.string.female
+                )
+            viewModel.copyGender(gender)
         }
 
         binding.btnRegister.setOnClickListener { handleClickRegister() }

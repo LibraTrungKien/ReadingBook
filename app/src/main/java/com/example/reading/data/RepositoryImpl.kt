@@ -130,4 +130,11 @@ class RepositoryImpl @Inject constructor(
         return true
     }
 
+    override suspend fun editAccount(account: Account): Boolean {
+        val response = apiService.editAccount(account.toDTO(), account.id)
+        appStorageLocalDataSource.removeAccount()
+        appStorageLocalDataSource.saveAccount(response)
+        return true
+    }
+
 }

@@ -2,13 +2,17 @@ package com.example.reading.presentation.view.fragment
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.reading.R
 import com.example.reading.databinding.FragmentEditProfileBinding
 import com.example.reading.domain.model.Account
 import com.example.reading.presentation.Key
 import com.example.reading.presentation.view.base.BaseFragment
+import com.example.reading.presentation.view.base.apiCall
+import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.EditProfileViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,14 +34,47 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
         viewModel.initializeArgument(requireArguments())
     }
 
+    override fun initializeEvents() {
+        binding.toolbar.setOnNavigationClick { findNavController().popBackStack() }
+        binding.toolbar.setOnActionClick { saveAccount() }
+
+        binding.edtUsername.doAfterTextChanged { viewModel.copyUsername(it.toString().trim()) }
+        binding.edtPhoneNumber.doAfterTextChanged {
+            viewModel.copyPhoneNumber(
+                it.toString().trim()
+            )
+        }
+        binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
+        binding.rdgGender.setOnCheckedChangeListener { _, id ->
+            val gender = if (id == R.id.rdbMale) "nam" else "nữ"
+            viewModel.copyGender(gender)
+        }
+    }
+
     override fun bindView() {
         val account = viewModel.account
-        binding.txtUserName.setText(account.username)
-        binding.txtPhoneNumber.setText(account.phone)
+        binding.edtUsername.setText(account.username)
+        binding.edtPhoneNumber.setText(account.phone)
+        binding.edtPassword.setText(account.password)
+
         if (account.gender == "nam") {
             binding.rdbMale.isChecked = true
         } else {
             binding.rdbFeMale.isChecked = true
         }
+    }
+
+    private fun saveAccount() {
+        apiCall(viewModel.saveAccount(), viewLifecycleOwner, {
+            MessageDialog.show(
+                parentFragmentManager,
+                "Thông báo",
+                "Cập nhật thông tin thành công",
+                R.drawable.satisfied
+            ) {
+
+            }
+        }, { true })
+
     }
 }
