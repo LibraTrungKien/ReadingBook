@@ -26,15 +26,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     private lateinit var auth: FirebaseAuth
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-        override fun onVerificationCompleted(credential: PhoneAuthCredential) {}
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+        }
 
         override fun onVerificationFailed(e: FirebaseException) {
             MessageDialog.show(
                 parentFragmentManager,
                 requireContext().getString(R.string.notification),
-                "Không thành công!Vui lòng nhập đúng định dạng số điện thoại!",
+                requireContext().getString(R.string.phone_number_not_like_format),
                 R.drawable.ic_sad,
-                {})
+            ) {}
         }
 
         override fun onCodeSent(
@@ -42,7 +43,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             token: PhoneAuthProvider.ForceResendingToken
         ) {
             bindViewProgress(false)
-            HandleOtpDialog.show(parentFragmentManager, verificationId)
+            HandleOtpDialog.show(
+                parentFragmentManager,
+                verificationId
+            ) { viewModel.isCheckVerifyPhoneNumber = true }
         }
     }
 
@@ -121,6 +125,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 requireContext().getString(R.string.register_success),
                 R.drawable.satisfied
             ) {
+                bindViewProgress(false)
                 findNavController().popBackStack()
             }
         }, { true })
@@ -139,6 +144,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             showMessageDialog(
                 requireContext().getString(R.string.warning),
                 requireContext().getString(R.string.password_not_duplicate),
+                R.drawable.ic_sad
+            ) {}
+            return false
+        }
+
+        if (!viewModel.isCheckVerifyPhoneNumber) {
+            showMessageDialog(
+                requireContext().getString(R.string.warning),
+                requireContext().getString(R.string.verify_phone_number_please),
                 R.drawable.ic_sad
             ) {}
             return false

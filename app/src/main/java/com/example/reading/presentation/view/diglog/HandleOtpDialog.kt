@@ -14,18 +14,23 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
-class HandleOtpDialog(private val verificationId: String) : DialogFragment() {
+class HandleOtpDialog(
+    private val verificationId: String
+) : DialogFragment() {
     private lateinit var binding: DialogHandleOtpBinding
     private lateinit var code: String
     private lateinit var auth: FirebaseAuth
+    private lateinit var isSuccess: () -> Unit
 
     companion object {
         fun show(
             fragmentManager: FragmentManager,
-            verificationId: String
+            verificationId: String,
+            isSuccess: () -> Unit
         ) {
             val dialog = HandleOtpDialog(verificationId)
             dialog.show(fragmentManager, null)
+            dialog.isSuccess = isSuccess
         }
     }
 
@@ -76,15 +81,16 @@ class HandleOtpDialog(private val verificationId: String) : DialogFragment() {
                 if (task.isSuccessful) {
                     MessageDialog.show(
                         parentFragmentManager,
-                        "Thành công",
-                        " Xác nhận thành công",
+                        requireContext().getString(R.string.success),
+                        "Xác nhận thành công",
                         R.drawable.satisfied
                     ) {}
+                    isSuccess()
                     dismiss()
                 } else {
                     MessageDialog.show(
                         parentFragmentManager,
-                        "Thất bại",
+                        requireContext().getString(R.string.failed),
                         " Xác nhận không thành công",
                         R.drawable.ic_sad
                     ) {

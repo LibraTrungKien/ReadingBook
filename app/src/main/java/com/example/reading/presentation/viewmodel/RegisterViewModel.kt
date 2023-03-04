@@ -11,6 +11,7 @@ class RegisterViewModel @Inject constructor(private val repository: Repository) 
     var account = Account(permission = "reader")
     var againPassword = ""
     var code = ""
+    var isCheckVerifyPhoneNumber = false
 
     fun copyName(value: String) {
         account.username = value
