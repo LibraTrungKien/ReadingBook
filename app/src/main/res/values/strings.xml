@@ -68,6 +68,7 @@
     <string name="manage_account">Quản lý tài khoản</string>
     <string name="again_password">Nhập lại mật khẩu</string>
     <string name="phoneNumber">Số điện thoại</string>
+    <string name="phone">+84 số điện thoại của bạn</string>
     <string name="user_name">Tên hiển thị</string>
     <string name="male">Nam</string>
     <string name="female">Nữ</string>
@@ -75,6 +76,7 @@
     <string name="enter_username_please">Vui lòng nhập tài khoản!</string>
     <string name="enter_password_please">Vui lòng nhập mật khẩu!</string>
     <string name="enter_all_field">Vui lòng nhập tất cả các trường!</string>
+    <string name="enter_otp">Vui lòng nhập mã OTP!</string>
     <string name="register_success">Bạn đã đăng ký thành công!</string>
     <string name="warning">Cảnh báo</string>
     <string name="password_not_duplicate">Mật khẩu không trùng nhau</string>
@@ -91,4 +93,5 @@
     <string name="my_account">Tài khoản của tôi</string>
     <string name="account_edit">Sửa thông tin tài khoản</string>
     <string name="upload">Thay ảnh</string>
+    <string name="otp">mã OTP</string>
 </resources>

@@ -9,13 +9,43 @@ import com.example.reading.databinding.FragmentRegisterBinding
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone
+import com.example.reading.presentation.view.diglog.HandleOtpDialog
 import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.RegisterViewModel
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     private val viewModel: RegisterViewModel by viewModels()
+    private lateinit var auth: FirebaseAuth
+    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+        override fun onVerificationCompleted(credential: PhoneAuthCredential) {}
+
+        override fun onVerificationFailed(e: FirebaseException) {
+            MessageDialog.show(
+                parentFragmentManager,
+                requireContext().getString(R.string.notification),
+                "Không thành công!Vui lòng nhập đúng định dạng số điện thoại!",
+                R.drawable.ic_sad,
+                {})
+        }
+
+        override fun onCodeSent(
+            verificationId: String,
+            token: PhoneAuthProvider.ForceResendingToken
+        ) {
+            bindViewProgress(false)
+            HandleOtpDialog.show(parentFragmentManager, verificationId)
+        }
+    }
+
     override fun createViewBinding() = FragmentRegisterBinding.inflate(layoutInflater)
 
     companion object {
@@ -24,13 +54,25 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         }
     }
 
+    override fun initializeComponent() {
+        auth = FirebaseAuth.getInstance().apply {
+            this.useAppLanguage()
+        }
+    }
+
     override fun initializeEvents() {
         binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString().trim()) }
+
+        binding.tilPhoneNumber.setEndIconOnClickListener {
+            bindViewProgress(true)
+            verifyPhoneNumber()
+        }
         binding.edtPhoneNumber.doAfterTextChanged {
             viewModel.copyPhoneNumber(
                 it.toString().trim()
             )
         }
+
         binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
         binding.edtAgainPassword.doAfterTextChanged {
             viewModel.copyAgainPassword(
@@ -55,6 +97,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     private fun bindViewProgress(isVisible: Boolean) {
         binding.prgIndicator.visibleOrGone(isVisible)
+    }
+
+    private fun verifyPhoneNumber() {
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(viewModel.account.phone)       // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(requireActivity())                 // Activity (for callback binding)
+            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
     private fun handleClickRegister() {

@@ -30,9 +30,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/phoneNumber"
+            android:hint="@string/phone"
+            app:endIconDrawable="@drawable/ic_send"
+            app:endIconMode="custom"
             app:startIconDrawable="@drawable/ic_phone_number">
 
             <com.google.android.material.textfield.TextInputEditText

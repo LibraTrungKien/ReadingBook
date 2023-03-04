@@ -10,6 +10,7 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
     var account = Account(permission = "reader")
     var againPassword = ""
+    var code = ""
 
     fun copyName(value: String) {
         account.username = value
