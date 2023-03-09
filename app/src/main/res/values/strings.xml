@@ -97,5 +97,6 @@
     <string name="my_account">Tài khoản của tôi</string>
     <string name="account_edit">Sửa thông tin tài khoản</string>
     <string name="upload">Thay ảnh</string>
+    <string name="upload_image">Chọn ảnh</string>
     <string name="otp">mã OTP</string>
 </resources>

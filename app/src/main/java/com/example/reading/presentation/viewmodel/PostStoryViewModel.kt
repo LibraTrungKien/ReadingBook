@@ -1,5 +1,8 @@
 package com.example.reading.presentation.viewmodel
 
+import FileUtils
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Chapter
@@ -7,6 +10,10 @@ import com.example.reading.domain.model.Story
 import com.example.reading.presentation.view.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -19,6 +26,7 @@ class PostStoryViewModel @Inject constructor(
     var story: Story = Story()
     var chapter: Chapter = Chapter()
     var stories = listOf<Story>()
+    var imageUri: Uri? = null
     private val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("VINA"))
     private val now = Calendar.getInstance().time
 
@@ -66,10 +74,6 @@ class PostStoryViewModel @Inject constructor(
         story.description = value
     }
 
-    fun copyImageLink(value: String) {
-        story.image = value
-    }
-
     fun copyChapName(value: String) {
         chapter.title = value
     }
@@ -95,12 +99,23 @@ class PostStoryViewModel @Inject constructor(
 
     private fun getChapIndex() = story.chapters.last().index
 
-    fun postStory() = callSafeApiWithLiveData {
+    private suspend fun uploadImage(context: Context): String {
+        if (imageUri == null) return ""
+        val path = FileUtils.getRealPath(context, imageUri!!)
+        val file = File(path!!)
+        val requestBody = file.asRequestBody("multipart/form-data".toMediaType())
+        val multipleBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
+        return repository.uploadImage(multipleBody)
+    }
+
+    fun postStory(context: Context) = callSafeApiWithLiveData {
+        val imageUri = uploadImage(context)
         chapter.apply {
             id = "1"
             index = 1
         }
         story.apply {
+            image = imageUri
             dateUpdated = sdf.format(now)
             dateCreated = sdf.format(now)
             if (!isMatch()) {

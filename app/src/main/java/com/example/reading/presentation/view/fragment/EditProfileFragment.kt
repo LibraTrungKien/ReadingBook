@@ -27,19 +27,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
     private val viewModel: EditProfileViewModel by viewModels()
 
-    private val getContent =
-        registerForActivityResult(ActivityResultContracts.GetContent()) {
-            it ?: return@registerForActivityResult
-            getContentCallback(it)
-        }
-    private var getContentCallback: (uri: Uri) -> Unit = {}
-
-    private val requestPermissionLaunch =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            permissionCallback(it)
-        }
-    private var permissionCallback: (isGranted: Boolean) -> Unit = {}
-
     override fun createViewBinding() = FragmentEditProfileBinding.inflate(layoutInflater)
 
     companion object {
@@ -116,10 +103,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
         }
     }
 
-    private fun openGallery() {
-        val input = "image/*"
-        getContent.launch(input)
-    }
+
 
     private fun saveAccount() {
         apiCall(viewModel.saveAccount(requireContext()), viewLifecycleOwner, {

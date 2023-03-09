@@ -1,12 +1,14 @@
 package com.example.reading.presentation.view.fragment
 
-import android.content.Intent
-import android.net.Uri
+import android.Manifest
+import android.content.pm.PackageManager
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentPostStoryBinding
 import com.example.reading.presentation.model.Category
@@ -49,14 +51,12 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         binding.edtDescription.doAfterTextChanged {
             viewModel.copyDescription(it.toString().trim())
         }
-        binding.edtImage.doAfterTextChanged {
-            viewModel.copyImageLink(it.toString().trim())
-        }
+
+        binding.btnUpload.setOnClickListener { requestPermission() }
+        binding.btnDelete.setOnClickListener { }
+
         binding.edtContent.doAfterTextChanged { viewModel.copyContent(it.toString().trim()) }
         binding.edtContentV2.doAfterTextChanged { viewModel.copyContent(it.toString().trim()) }
-        binding.tilImage.setEndIconOnClickListener {
-            openGoogleSearch()
-        }
         binding.tilCategory.setEndIconOnClickListener {
             showCategoryPopup(it)
         }
@@ -71,6 +71,28 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
                 postStory()
             } else {
                 putStory()
+            }
+        }
+
+        getContentCallback = {
+            viewModel.imageUri = it
+            bindViewImage(it.toString())
+        }
+    }
+
+    private fun requestPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            openGallery()
+        } else {
+            requestPermissionLaunch.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            permissionCallback = {
+                if (it) {
+                    openGallery()
+                }
             }
         }
     }
@@ -100,7 +122,6 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         binding.edtContent.setText("")
         binding.edtDescription.setText("")
         binding.edtStoryName.setText("")
-        binding.edtImage.setText("")
         binding.txtCategory.setText("")
         binding.txtStoryName.setText("")
     }
@@ -114,13 +135,6 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         }
     }
 
-    private fun openGoogleSearch() {
-        val url = "https://www.google.com/"
-        val uri = Uri.parse(url)
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        startActivity(Intent.createChooser(intent, "Mở với"))
-    }
-
     override fun initializeData() {
         viewModel.loadStoryByAuthor()
     }
@@ -131,6 +145,10 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
 
     private fun bindViewProgress(isVisible: Boolean) {
         binding.prgIndicator.visibleOrGone(isVisible)
+    }
+
+    private fun bindViewImage(image: String) {
+        Glide.with(binding.imgStory).load(image).into(binding.imgStory)
     }
 
     private fun showStoryPopup(anchor: View) {
@@ -205,7 +223,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         }
 
         bindViewProgress(true)
-        apiCall(viewModel.postStory(), viewLifecycleOwner, {
+        apiCall(viewModel.postStory(requireContext()), viewLifecycleOwner, {
             bindViewProgress(false)
             MessageDialog.show(
                 parentFragmentManager,
