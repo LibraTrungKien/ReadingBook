@@ -15,19 +15,18 @@
         app:titleTextColor="@color/white" />
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        app:cardCornerRadius="60dp">
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@null"
+            android:minHeight="256dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_account" />
 
     </com.google.android.material.card.MaterialCardView>

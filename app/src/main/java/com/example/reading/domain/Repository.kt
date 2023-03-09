@@ -4,6 +4,7 @@ import com.example.reading.domain.model.Account
 import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
 
 interface Repository {
     suspend fun login(login: Login): Boolean
@@ -28,5 +29,6 @@ interface Repository {
     suspend fun registerAccount(account: Account): Boolean
     suspend fun fetchAllAccount(): List<Account>
     suspend fun deleteAccount(id: Int): Boolean
-    suspend fun editAccount(account: Account): Boolean
+    suspend fun editAccount(account: Account): Account
+    suspend fun uploadImage(file: MultipartBody.Part): String
 }

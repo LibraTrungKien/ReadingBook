@@ -3,6 +3,7 @@ package com.example.reading.presentation.view.fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentProfileBinding
 import com.example.reading.presentation.view.base.BaseFragment
@@ -31,11 +32,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             binding.txtPhoneNumber.text = account.phone
             binding.txtPermission.text = account.permission
             binding.txtGender.text = account.gender
+            bindViewImage(account.avatar)
         }
     }
 
     override fun initializeData() {
         viewModel.loadData()
+    }
+
+    private fun bindViewImage(avt: String) {
+        Glide.with(binding.imgProfile).load(avt).into(binding.imgProfile)
     }
 
 }

@@ -1,5 +1,8 @@
 package com.example.reading.presentation.viewmodel
 
+import FileUtils
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Account
@@ -7,6 +10,10 @@ import com.example.reading.presentation.Key
 import com.example.reading.presentation.view.base.BaseViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,6 +21,7 @@ class EditProfileViewModel @Inject constructor(private val repository: Repositor
     BaseViewModel() {
     lateinit var account: Account
         private set
+    var imageUri: Uri? = null
 
     fun initializeArgument(bundle: Bundle) {
         val result = bundle.getString(Key.DATA)
@@ -36,7 +44,17 @@ class EditProfileViewModel @Inject constructor(private val repository: Repositor
         account.gender = value
     }
 
-    fun saveAccount() = callSafeApiWithLiveData {
+    private suspend fun uploadImage(context: Context): String {
+        if (imageUri == null) return ""
+        val path = FileUtils.getRealPath(context, imageUri!!)
+        val file = File(path!!)
+        val requestBody = file.asRequestBody("multipart/form-data".toMediaType())
+        val multipleBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
+        return repository.uploadImage(multipleBody)
+    }
+
+    fun saveAccount(context: Context) = callSafeApiWithLiveData {
+        account.avatar = uploadImage(context)
         repository.editAccount(account)
     }
 }

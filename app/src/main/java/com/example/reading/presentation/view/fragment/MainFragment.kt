@@ -80,7 +80,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     override fun initializeData() {
-        viewModel.loadDataImage()
+        viewModel.loadAd()
         viewModel.loadData()
         viewModel.loadDataUser()
     }

@@ -1,7 +1,6 @@
 package com.example.reading.presentation.view.base
 
-import android.content.Context
-import androidx.appcompat.app.AlertDialog
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -33,9 +32,9 @@ fun Fragment.handleException(
     throwable: Throwable?,
     onButtonClicked: () -> Unit
 ) {
-    var message = ""
     throwable ?: return
-    message = when (throwable) {
+    Log.d("", "handleException()...${throwable.message} ")
+    val message = when (throwable) {
         is NullPointerException, is NoSuchElementException -> {
             "Không thành công!\nTài khoản hoặc mật khẩu không chính xác..."
         }
@@ -50,8 +49,8 @@ fun Fragment.handleException(
     }
 
     MessageDialog.show(
-        this.parentFragmentManager,
-        "Thông báo",
+        parentFragmentManager,
+        requireContext().getString(R.string.notification),
         message,
         R.drawable.ic_sad,
         onButtonClicked

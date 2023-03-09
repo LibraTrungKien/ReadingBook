@@ -13,6 +13,7 @@ import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
@@ -130,11 +131,19 @@ class RepositoryImpl @Inject constructor(
         return true
     }
 
-    override suspend fun editAccount(account: Account): Boolean {
+    override suspend fun editAccount(account: Account): Account {
         val response = apiService.editAccount(account.toDTO(), account.id)
         appStorageLocalDataSource.removeAccount()
         appStorageLocalDataSource.saveAccount(response)
-        return true
+        return response.toModel()
+    }
+
+    override suspend fun uploadImage(file: MultipartBody.Part): String {
+        val response = apiService.uploadFile(file).body()!!
+        val filePath = response.filepath
+        val lastVirgule = response.filepath.lastIndexOf("/")
+        val path = filePath.substring(0, lastVirgule)
+        return path + "/" + response.originalFilename
     }
 
 }

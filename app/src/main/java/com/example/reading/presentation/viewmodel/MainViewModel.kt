@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor(
     val dataUserLiveData: LiveData<Boolean>
         get() = _dataUserLiveData
 
-    fun loadDataImage() {
+    fun loadAd() {
         images.clear()
         images.add(
             SlideModel(

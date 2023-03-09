@@ -1,11 +1,17 @@
 package com.example.reading.presentation.view.fragment
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.reading.R
 import com.example.reading.databinding.FragmentEditProfileBinding
 import com.example.reading.domain.model.Account
@@ -20,6 +26,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
     private val viewModel: EditProfileViewModel by viewModels()
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) {
+            it ?: return@registerForActivityResult
+            getContentCallback(it)
+        }
+    private var getContentCallback: (uri: Uri) -> Unit = {}
+
+    private val requestPermissionLaunch =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            permissionCallback(it)
+        }
+    private var permissionCallback: (isGranted: Boolean) -> Unit = {}
+
     override fun createViewBinding() = FragmentEditProfileBinding.inflate(layoutInflater)
 
     companion object {
@@ -44,10 +64,17 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
                 it.toString().trim()
             )
         }
+
+        binding.btnUploadImage.setOnClickListener { requestPermission() }
         binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
         binding.rdgGender.setOnCheckedChangeListener { _, id ->
             val gender = if (id == R.id.rdbMale) "nam" else "nữ"
             viewModel.copyGender(gender)
+        }
+
+        getContentCallback = { uri ->
+            viewModel.imageUri = uri
+            bindViewImage(uri.toString())
         }
     }
 
@@ -62,18 +89,46 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
         } else {
             binding.rdbFeMale.isChecked = true
         }
+
+        bindViewImage(account.avatar)
+    }
+
+    private fun bindViewImage(avatar: String) {
+        val data = avatar.ifBlank { R.drawable.ic_account }
+        Glide.with(binding.imgProfile)
+            .load(data).into(binding.imgProfile)
+    }
+
+    private fun requestPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            openGallery()
+        } else {
+            requestPermissionLaunch.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            permissionCallback = {
+                if (it) {
+                    openGallery()
+                }
+            }
+        }
+    }
+
+    private fun openGallery() {
+        val input = "image/*"
+        getContent.launch(input)
     }
 
     private fun saveAccount() {
-        apiCall(viewModel.saveAccount(), viewLifecycleOwner, {
+        apiCall(viewModel.saveAccount(requireContext()), viewLifecycleOwner, {
             MessageDialog.show(
                 parentFragmentManager,
-                "Thông báo",
-                "Cập nhật thông tin thành công",
+                requireContext().getString(R.string.notification),
+                requireContext().getString(R.string.content_congratulation),
                 R.drawable.satisfied
-            ) {
-
-            }
+            ) {}
         }, { true })
 
     }

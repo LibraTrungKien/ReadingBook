@@ -1,13 +1,17 @@
 package com.example.reading.data
 
 import com.example.reading.data.dto.AccountDTO
+import com.example.reading.data.dto.FileDTO
 import com.example.reading.data.dto.StoryDTO
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -41,4 +45,8 @@ interface AppService {
 
     @PUT("users/{id}")
     suspend fun editAccount(@Body accountDTO: AccountDTO, @Path("id") id: Int): AccountDTO
+
+    @Multipart
+    @POST("upload-file")
+    suspend fun uploadFile(@Part file: MultipartBody.Part): Response<FileDTO>
 }
