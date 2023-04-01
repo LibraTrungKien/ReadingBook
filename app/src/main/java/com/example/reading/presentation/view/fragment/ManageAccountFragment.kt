@@ -62,11 +62,8 @@ class ManageAccountFragment : BaseFragment<FragmentManageAccountBinding>() {
             requireContext().getString(R.string.confirm),
             "Bạn có chắn chắn muốn xóa tài khoản ${account.username} ?"
         ) {
-            apiCall(
-                viewModel.deleteAccount(account.id),
-                viewLifecycleOwner,
-                { viewModel.loadData() },
-                { true })
+            apiCall(viewModel.deleteAccount(account.id), viewLifecycleOwner, {
+                viewModel.loadData() }, { true })
         }
     }
 }

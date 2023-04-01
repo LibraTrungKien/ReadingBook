@@ -2,9 +2,7 @@ package com.example.reading.presentation.view.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
@@ -102,8 +100,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             }
         }
     }
-
-
 
     private fun saveAccount() {
         apiCall(viewModel.saveAccount(requireContext()), viewLifecycleOwner, {

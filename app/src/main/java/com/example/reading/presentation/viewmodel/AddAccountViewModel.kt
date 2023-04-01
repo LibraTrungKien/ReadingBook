@@ -39,5 +39,5 @@ class AddAccountViewModel @Inject constructor(
     fun checkPassword() = account.password == againPassword
 
     fun validateData() =
-        account.email.isNotBlank() && account.phone.isNotBlank() && account.password.isNotBlank() && account.username.isNotBlank()
+        account.phone.isNotBlank() && account.password.isNotBlank() && account.username.isNotBlank()
 }
