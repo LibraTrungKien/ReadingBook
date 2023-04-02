@@ -51,6 +51,10 @@ class ManageAccountFragment : BaseFragment<FragmentManageAccountBinding>() {
     }
 
     override fun initializeData() {
+        loadData()
+    }
+
+    private fun loadData() {
         apiCall(viewModel.loadData(), viewLifecycleOwner, {
             controller.setData(it)
         }, { true })
@@ -63,7 +67,8 @@ class ManageAccountFragment : BaseFragment<FragmentManageAccountBinding>() {
             "Bạn có chắn chắn muốn xóa tài khoản ${account.username} ?"
         ) {
             apiCall(viewModel.deleteAccount(account.id), viewLifecycleOwner, {
-                viewModel.loadData() }, { true })
+                loadData()
+            }, { true })
         }
     }
 }
