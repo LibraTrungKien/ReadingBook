@@ -1,5 +1,6 @@
 package com.example.reading.presentation.view.adapter
 
+import android.annotation.SuppressLint
 import com.airbnb.epoxy.TypedEpoxyController
 import com.bumptech.glide.Glide
 import com.example.reading.R
@@ -33,9 +34,10 @@ class StoryController(private val interactor: Interactor) : TypedEpoxyController
             }
         }
 
+        @SuppressLint("SetTextI18n")
         override fun bindView() {
             Glide.with(binding.imgStory).load(story.image).into(binding.imgStory)
-            binding.txtName.text = story.name
+            binding.txtName.text = "${story.name}\n${story.cost} ${context.getString(R.string.cast)}"
         }
     }
 }

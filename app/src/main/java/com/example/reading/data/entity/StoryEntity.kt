@@ -16,5 +16,6 @@ data class StoryEntity(
     val dateUpdated: String = "",
     val status: String = "",
     val description: String = "",
-    val chapters: ArrayList<Chapter> = arrayListOf()
+    val chapters: ArrayList<Chapter> = arrayListOf(),
+    val cost: Int = 0
 )

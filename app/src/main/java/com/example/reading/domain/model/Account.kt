@@ -8,5 +8,6 @@ data class Account(
     var avatar: String = "",
     var permission: String = "",
     var gender: String = "",
-    var phone: String = ""
+    var phone: String = "",
+    var cost: Int = 0
 )

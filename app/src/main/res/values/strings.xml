@@ -4,6 +4,7 @@
     <string name="bookcase">Tủ sách</string>
     <string name="book_name">Tên sách</string>
     <string name="homePage">Trang chủ</string>
+    <string name="rechargePage">Nạp xu</string>
     <string name="postPage">Đăng bài</string>
     <string name="infoPage">Thông tin ứng dụng</string>
     <string name="favoritePage">Truyện yêu thích</string>
@@ -99,4 +100,5 @@
     <string name="upload">Thay ảnh</string>
     <string name="upload_image">Chọn ảnh</string>
     <string name="otp">mã OTP</string>
+    <string name="cast">xu</string>
 </resources>

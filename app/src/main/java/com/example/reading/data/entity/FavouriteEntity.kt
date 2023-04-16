@@ -13,6 +13,7 @@ data class FavouriteEntity(
     val category: Int = 0,
     val author: String = "",
     val dateCreated: String = "",
+    val cost: Int = 0,
     val dateUpdated: String = "",
     val status: String = "",
     val description: String = "",

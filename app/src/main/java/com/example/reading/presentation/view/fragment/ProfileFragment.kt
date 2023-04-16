@@ -32,6 +32,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             binding.txtPhoneNumber.text = account.phone
             binding.txtPermission.text = account.permission
             binding.txtGender.text = account.gender
+            binding.txtCost.text = account.cost.toString()
             bindViewImage(account.avatar)
         }
     }

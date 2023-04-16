@@ -14,6 +14,7 @@ data class HistoryEntity(
     val author: String = "",
     val dateCreated: String = "",
     val dateUpdated: String = "",
+    val cost: Int = 0,
     val status: String = "",
     val description: String = "",
     val chapters: ArrayList<Chapter> = arrayListOf(),

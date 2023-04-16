@@ -3,6 +3,7 @@ package com.example.reading.presentation.view.base
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseView {
     abstract fun createViewBinding(): T
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(javaClass.name, "onViewCreated()...")
         initializeView()
         initializeComponent()
         initializeEvents()

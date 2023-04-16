@@ -8,5 +8,6 @@ data class AccountDTO(
     val avatar: String,
     var permission: String,
     val gender: String,
-    val phone: String
+    val phone: String,
+    val cost: Int
 )

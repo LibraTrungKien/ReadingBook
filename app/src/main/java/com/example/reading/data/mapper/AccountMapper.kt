@@ -11,6 +11,7 @@ fun AccountDTO.toModel(): Account {
         email = model.email,
         password = model.password,
         avatar = model.avatar,
+        cost = model.cost,
         permission = model.permission,
         gender = model.gender,
         phone = model.phone
@@ -27,6 +28,7 @@ fun Account.toDTO(): AccountDTO {
         avatar = model.avatar,
         permission = model.permission,
         gender = model.gender,
-        phone = model.phone
+        phone = model.phone,
+        cost = model.cost
     )
 }

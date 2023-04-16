@@ -14,5 +14,6 @@ data class StoryDTO(
     val status: String = "",
     val description: String = "",
     val chapters: ArrayList<ChapterDTO> = arrayListOf(),
-    var modifiedAt: Long = 0
+    var modifiedAt: Long = 0,
+    var cost: Int = 0
 )

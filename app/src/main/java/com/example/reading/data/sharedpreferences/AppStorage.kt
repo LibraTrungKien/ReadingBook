@@ -31,6 +31,7 @@ class AppStorage @Inject constructor(
             putString(Key.PERMISSION, accountDTO.permission)
             putString(Key.GENDER, accountDTO.gender)
             putString(Key.PHONE, accountDTO.phone)
+            putInt(Key.CAST, accountDTO.cost)
             apply()
         }
     }
@@ -49,6 +50,7 @@ class AppStorage @Inject constructor(
             remove(Key.GENDER)
             remove(Key.PHONE)
             remove(Key.PERMISSION)
+            remove(Key.CAST)
             apply()
         }
     }
@@ -62,7 +64,8 @@ class AppStorage @Inject constructor(
             avatar = sharedPreferences.getString(Key.AVATAR, "") ?: "",
             gender = sharedPreferences.getString(Key.GENDER, "") ?: "",
             phone = sharedPreferences.getString(Key.PHONE, "") ?: "",
-            permission = sharedPreferences.getString(Key.PERMISSION, "") ?: ""
+            permission = sharedPreferences.getString(Key.PERMISSION, "") ?: "",
+            cost = sharedPreferences.getInt(Key.CAST, 0)
         )
     }
 

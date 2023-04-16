@@ -7,6 +7,7 @@ data class Story(
     var name: String = "",
     var image: String = "",
     var category: Int = -1,
+    var cost: Int = 0,
     var author: String = "",
     var dateCreated: String = "",
     var dateUpdated: String = "",

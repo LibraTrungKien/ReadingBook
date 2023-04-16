@@ -1,5 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
+import android.annotation.SuppressLint
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
@@ -11,6 +12,7 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.example.reading.R
 import com.example.reading.databinding.FragmentMainBinding
 import com.example.reading.presentation.view.Interactor
+import com.example.reading.presentation.view.RechargeActivity
 import com.example.reading.presentation.view.adapter.CategoryController
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.visibleOrGone
@@ -109,10 +111,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             .into(binding.crdUser)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindViewAccount() {
         val account = viewModel.account
         bindViewImageUser(account.avatar)
         binding.txtName.text = account.username
+        binding.txtCost.text = "${account.cost} ${getString(R.string.cast)}"
 
         if (!viewModel.isFirst())
             return
@@ -142,6 +146,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             R.id.postPage -> openPostStory()
             R.id.manageAccountPage -> openManageAccountFragment()
             R.id.logoutPage -> showConfirmDialogLogout()
+            R.id.rechargePage -> rechargeFragment()
             else -> Unit
         }
         return true
@@ -156,6 +161,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             viewModel.logout()
             LoginFragment.open(findNavController())
         }
+    }
+
+    private fun rechargeFragment() {
+        RechargeActivity.open(findNavController())
     }
 
     private fun openPostStory() {
