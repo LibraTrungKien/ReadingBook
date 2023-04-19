@@ -17,7 +17,8 @@ interface StoryDao {
         """
         SELECT * 
         FROM StoryEntity 
-        ORDER BY dateUpdated"""
+        ORDER BY id DESC
+        """
     )
     suspend fun getAllStory(): List<StoryEntity>
 
@@ -107,4 +108,13 @@ interface StoryDao {
     """
     )
     suspend fun deleteAllHistory()
+
+    @Query(
+        """
+        SELECT *
+        FROM StoryEntity
+        WHERE id = :id
+    """
+    )
+    suspend fun getStoryById(id: Int): StoryEntity?
 }

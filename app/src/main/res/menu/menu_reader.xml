@@ -13,6 +13,10 @@
         android:icon="@drawable/ic_favorite"
         android:title="@string/favoritePage" />
     <item
+        android:id="@+id/buyStoryPage"
+        android:icon="@drawable/ic_books"
+        android:title="@string/boughStory" />
+    <item
         android:id="@+id/infoPage"
         android:icon="@drawable/ic_info"
         android:title="@string/infoPage" />

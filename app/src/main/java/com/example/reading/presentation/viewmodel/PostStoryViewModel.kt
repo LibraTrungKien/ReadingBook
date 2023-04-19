@@ -74,6 +74,14 @@ class PostStoryViewModel @Inject constructor(
         story.description = value
     }
 
+    fun copyCast(value: String) {
+        story.cost = try {
+            value.toInt()
+        } catch (ex: Exception) {
+            0
+        }
+    }
+
     fun copyChapName(value: String) {
         chapter.title = value
     }

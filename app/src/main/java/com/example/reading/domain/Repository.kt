@@ -2,6 +2,7 @@ package com.example.reading.domain
 
 import com.example.reading.domain.model.Account
 import com.example.reading.domain.model.Login
+import com.example.reading.domain.model.Products
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -31,4 +32,7 @@ interface Repository {
     suspend fun deleteAccount(id: Int): Boolean
     suspend fun editAccount(account: Account): Account
     suspend fun uploadImage(file: MultipartBody.Part): String
+    suspend fun getProductById(): Products
+    suspend fun updateProduct(products: Products, userId: Int): Products
+    suspend fun getStoryById(id: Int): Story?
 }

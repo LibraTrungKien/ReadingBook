@@ -2,6 +2,7 @@ package com.example.reading.data
 
 import com.example.reading.data.dto.AccountDTO
 import com.example.reading.data.dto.FileDTO
+import com.example.reading.data.dto.ProductsDTO
 import com.example.reading.data.dto.StoryDTO
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -49,4 +50,13 @@ interface AppService {
     @Multipart
     @POST("upload-file")
     suspend fun uploadFile(@Part file: MultipartBody.Part): Response<FileDTO>
+
+    @GET("products/{user_id}")
+    suspend fun fetchStoryById(@Path("user_id") userId: Int): Response<ProductsDTO>
+
+    @PUT("products/{user_id}")
+    suspend fun updateProducts(
+        @Body productsDTO: ProductsDTO,
+        @Path("user_id") userId: Int
+    ): Response<ProductsDTO>
 }

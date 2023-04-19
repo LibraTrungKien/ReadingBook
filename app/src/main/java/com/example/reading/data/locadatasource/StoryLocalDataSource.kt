@@ -69,4 +69,6 @@ class StoryLocalDataSource @Inject constructor(
     suspend fun deleteAllFavourite() = withContext(coroutineContext) {
         storyDao.deleteAllFavourite()
     }
+
+    suspend fun getStoryById(id: Int) = withContext(coroutineContext) { storyDao.getStoryById(id) }
 }

@@ -15,5 +15,6 @@ interface Key {
         const val READER_NAME = "reader_name"
         const val IMAGE_PROFILE = "image_profile"
         const val CAST = "cast"
+        const val READ_ABLE = "read_able"
     }
 }

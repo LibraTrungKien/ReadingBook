@@ -27,7 +27,7 @@ class StoryController(private val interactor: Interactor) : TypedEpoxyController
         override fun getDefaultLayout() = R.layout.item_image_story
         override fun initializeEvents() {
             binding.root.setOnClickListener {
-                StoryFragment.open(interactor.findNavController(), story = story)
+                StoryFragment.open(interactor.findNavController(), story = story, false)
                 if (interactor.isFromSearch()) {
                     (interactor.getViewModel() as SearchStoryViewModel).addHistory(story)
                 }

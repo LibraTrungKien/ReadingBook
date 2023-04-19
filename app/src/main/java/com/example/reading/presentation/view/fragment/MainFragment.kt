@@ -1,6 +1,7 @@
 package com.example.reading.presentation.view.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
@@ -87,6 +88,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         viewModel.loadDataUser()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadDataUser()
+    }
+
     override fun bindView() {
         bindViewImageSlider()
     }
@@ -147,6 +153,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
             R.id.manageAccountPage -> openManageAccountFragment()
             R.id.logoutPage -> showConfirmDialogLogout()
             R.id.rechargePage -> rechargeFragment()
+            R.id.buyStoryPage -> openBuyStory()
             else -> Unit
         }
         return true
@@ -164,7 +171,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     private fun rechargeFragment() {
-        RechargeActivity.open(findNavController())
+        val intent = Intent(requireContext(), RechargeActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openPostStory() {
@@ -205,5 +213,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         }
 
         ManagerStoryFragment.open(findNavController(), viewModel.account)
+    }
+
+    private fun openBuyStory() {
+        BuyStoryFragment.open(findNavController())
     }
 }

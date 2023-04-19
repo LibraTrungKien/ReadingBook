@@ -10,6 +10,7 @@ import com.example.reading.data.mapper.toStoryEntity
 import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Account
 import com.example.reading.domain.model.Login
+import com.example.reading.domain.model.Products
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -144,6 +145,23 @@ class RepositoryImpl @Inject constructor(
         val lastVirgule = response.filepath.lastIndexOf("/")
         val path = filePath.substring(0, lastVirgule)
         return path + "/" + response.originalFilename
+    }
+
+    override suspend fun getProductById(): Products {
+        val userId = getInfoAccount().id
+        val response = apiService.fetchStoryById(userId).body()!!
+        return response.toModel()
+    }
+
+    override suspend fun updateProduct(products: Products, userId: Int): Products {
+        val dto = products.toDTO()
+        val response = apiService.updateProducts(dto, userId).body()!!
+        return response.toModel()
+    }
+
+    override suspend fun getStoryById(id: Int): Story? {
+        val data = localDataSource.getStoryById(id)
+        return data?.toModel()
     }
 
 }

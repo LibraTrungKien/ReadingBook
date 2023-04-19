@@ -59,6 +59,7 @@ dependencies {
     //  room db
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation fileTree(dir: 'C:\\Users\\Admin\\Downloads\\zalo pay', include: ['*.aar', '*.jar'], exclude: [])
+    implementation fileTree(dir: 'C:\\Users\\Admin\\Downloads', include: ['*.aar', '*.jar'], exclude: [])
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")

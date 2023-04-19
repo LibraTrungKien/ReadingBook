@@ -52,6 +52,10 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
             viewModel.copyDescription(it.toString().trim())
         }
 
+        binding.edtCost.doAfterTextChanged {
+            viewModel.copyCast(it.toString().trim())
+        }
+
         binding.btnUpload.setOnClickListener { requestPermission() }
         binding.btnDelete.setOnClickListener { }
 

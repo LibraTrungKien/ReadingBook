@@ -14,6 +14,7 @@
     <string name="author_No_colons">Tác giả </string>
     <string name="date_created">Ngày tạo: </string>
     <string name="read_story">Đọc truyện</string>
+    <string name="buy_story">Mua truyện</string>
     <string name="description">Mô tả: </string>
     <string name="list_chapter">Danh sách tập</string>
     <string name="category">Thể loại: </string>
@@ -101,4 +102,19 @@
     <string name="upload_image">Chọn ảnh</string>
     <string name="otp">mã OTP</string>
     <string name="cast">xu</string>
+    <string name="confirm_BuyStory">Bạn chắc chắn muốn mua </string>
+    <string name="cost_not_enough">Xu trong tài khoản của bạn không đủ</string>
+    <string name="boughStory">Truyện đã mua</string>
+    <string name="list_buy_story">Danh sách truyện đã mua</string>
+    <string name="your_story">Bạn đã mua bộ truyện này rồi</string>
+    <string name="story_cast">Cửa hàng xu</string>
+    <string name="yourCost">Xu của bạn</string>
+    <string name="recharge_cost">Nạp xu</string>
+    <string name="create_Bill">Tạo hóa đơn</string>
+    <string name="token">Token</string>
+    <string name="ten_cost">10k = 10 xu</string>
+    <string name="twenty_cost">20k = 22 xu</string>
+    <string name="fifty_cost">50k = 70 xu</string>
+    <string name="oneHundred_cost">100k = 150 xu</string>
+    <string name="fiveHundred_cost">500k = 800 xu</string>
 </resources>

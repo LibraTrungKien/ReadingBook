@@ -1,137 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="345dp"
-        android:layout_height="54dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:text="đơn hàng"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/txtAmount"
-        android:layout_width="260dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="number"
-        android:labelFor="@id/lblSoTien"
-        android:textAlignment="center"
-        android:textColor="#FF5722"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/lblSoTien"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+    android:layout_height="match_parent"
+    android:background="@drawable/gunny"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/lblSoTien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="số tiền"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+        android:text="@string/yourCost"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+        android:id="@+id/txtYourCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="@string/yourCost"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:drawableStartCompat="@drawable/ic_diamond"
+        app:drawableTint="#F57F17" />
+
+    <RadioGroup
+        android:id="@+id/radGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/btnTen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/ten_cost"
+            android:textColor="#B71C1C" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/btnTwenty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/twenty_cost"
+            android:textColor="#B71C1C" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/btnFifty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fifty_cost"
+            android:textColor="#B71C1C" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/btnOneHundred"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oneHundred_cost"
+            android:textColor="#B71C1C" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/btnFiveHundred"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fiveHundred_cost"
+            android:textColor="#B71C1C" />
+
+    </RadioGroup>
+
 
     <TextView
         android:id="@+id/btnCreateOrder"
-        android:layout_width="347dp"
-        android:text="tạo hóa đon"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="30dp"
-        android:background="#2196F3"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAmount" />
-
-    <TextView
-        android:id="@+id/lblZpTransToken"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:text="tokennn"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCreateOrder" />
-
-    <TextView
-        android:id="@+id/btnPay"
-        android:layout_width="340dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
+        android:layout_margin="16dp"
         android:background="#2196F3"
-        android:text="thanh toán"
-        android:textColor="#FFFFFF"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblZpTransToken" />
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/create_Bill"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/txtToken"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
-        android:text="token"
-        android:textColor="#4CAF50"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toEndOf="@+id/lblZpTransToken"
-        app:layout_constraintTop_toBottomOf="@+id/btnCreateOrder" />
+        android:text="@string/token" />
 
     <TextView
-        android:id="@+id/txtResult"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnPay"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_margin="16dp"
+        android:background="#2196F3"
         android:gravity="center"
-        android:textSize="14sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPay" />
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/recharge_cost"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/txtDebug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtResult" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

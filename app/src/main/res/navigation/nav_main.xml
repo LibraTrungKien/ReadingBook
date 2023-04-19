@@ -79,8 +79,8 @@
             app:destination="@id/profileFragment" />
 
         <action
-            android:id="@+id/actRechargeFragment"
-            app:destination="@id/rechargeFragment" />
+            android:id="@+id/actBuyStoryFragment"
+            app:destination="@id/buyStoryFragment" />
     </fragment>
 
     <fragment
@@ -175,7 +175,14 @@
         tools:layout="@layout/fragment_edit_profile" />
 
     <fragment
-        android:id="@+id/rechargeFragment"
-        android:name="com.example.reading.presentation.view.fragment.RechargeFragment"
-        tools:layout="@layout/fragment_recharge" />
+        android:id="@+id/buyStoryFragment"
+        android:name="com.example.reading.presentation.view.fragment.BuyStoryFragment"
+        tools:layout="@layout/fragment_buy_story">
+
+        <action
+            android:id="@+id/actStoryFragment"
+            app:destination="@id/storyFragment" />
+
+    </fragment>
+
 </navigation>
