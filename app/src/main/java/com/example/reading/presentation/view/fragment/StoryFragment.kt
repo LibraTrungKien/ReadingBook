@@ -81,7 +81,7 @@ class StoryFragment : BaseFragment<FragmentStoryBinding>() {
 
     override fun initializeData() {
         viewModel.getAccount()
-        viewModel.getProduct()
+        apiCall(viewModel.getProduct(), viewLifecycleOwner, {}, { true })
     }
 
     @SuppressLint("SetTextI18n")

@@ -43,10 +43,8 @@ class StoryViewModel @Inject constructor(
         repository.editAccount(account)
     }
 
-    fun getProduct() {
-        viewModelScope.launch {
-            products = repository.getProductById()
-        }
+    fun getProduct() = callSafeApiWithLiveData {
+        products = repository.getProductById()
     }
 
     fun updateProduct() = callSafeApiWithLiveData {

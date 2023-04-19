@@ -44,9 +44,8 @@ class EditProfileViewModel @Inject constructor(private val repository: Repositor
         account.gender = value
     }
 
-    private suspend fun uploadImage(context: Context): String {
-        if (imageUri == null) return ""
-        val path = FileUtils.getRealPath(context, imageUri!!)
+    private suspend fun uploadImage(context: Context, imageUri: Uri): String {
+        val path = FileUtils.getRealPath(context, imageUri)
         val file = File(path!!)
         val requestBody = file.asRequestBody("multipart/form-data".toMediaType())
         val multipleBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
@@ -54,7 +53,9 @@ class EditProfileViewModel @Inject constructor(private val repository: Repositor
     }
 
     fun saveAccount(context: Context) = callSafeApiWithLiveData {
-        account.avatar = uploadImage(context)
+        imageUri?.let {
+            account.avatar = uploadImage(context, it)
+        }
         repository.editAccount(account)
     }
 }

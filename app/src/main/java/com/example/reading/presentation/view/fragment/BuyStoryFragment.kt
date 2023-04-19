@@ -7,6 +7,7 @@ import com.example.reading.R
 import com.example.reading.databinding.FragmentBuyStoryBinding
 import com.example.reading.presentation.view.adapter.BuyStoryController
 import com.example.reading.presentation.view.base.BaseFragment
+import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.viewmodel.BuyStoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +44,6 @@ class BuyStoryFragment : BaseFragment<FragmentBuyStoryBinding>() {
     }
 
     override fun initializeData() {
-        viewModel.getData()
+        apiCall(viewModel.getData(), viewLifecycleOwner, {}, { true })
     }
 }
