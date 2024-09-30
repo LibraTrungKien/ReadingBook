@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_manage"
         android:title="@string/manage_story" />
     <item
+        android:id="@+id/myStore"
+        android:icon="@drawable/ic_library_books"
+        android:title="@string/my_story" />
+    <item
         android:id="@+id/postPage"
         android:icon="@drawable/ic_create"
         android:title="@string/postPage" />

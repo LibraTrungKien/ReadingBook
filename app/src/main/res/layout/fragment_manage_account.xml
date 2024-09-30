@@ -16,7 +16,7 @@
         android:background="@drawable/bg_search_view"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="4dp"
-        android:hint="@string/phoneNumber"
+        android:hint="@string/email"
         android:padding="8dp" />
 
     <FrameLayout

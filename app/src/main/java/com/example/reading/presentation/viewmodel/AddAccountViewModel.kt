@@ -10,14 +10,14 @@ import javax.inject.Inject
 class AddAccountViewModel @Inject constructor(
     private val repository: Repository
 ) : BaseViewModel() {
-    var account = Account(permission = "author")
-    var againPassword = ""
+    var account = Account(permission = false)
+    private var againPassword = ""
     fun copyDisplayName(value: String) {
         account.username = value
     }
 
-    fun copyPhoneNumber(value: String) {
-        account.phone = value
+    fun copyGmail(value: String) {
+        account.email = value
     }
 
     fun copyPassword(value: String) {
@@ -28,10 +28,6 @@ class AddAccountViewModel @Inject constructor(
         againPassword = value
     }
 
-    fun isMale(isMale: Boolean) {
-        account.gender = if (isMale) "Nam" else "Nữ"
-    }
-
     fun registerAccount() = callSafeApiWithLiveData {
         repository.registerAccount(account)
     }
@@ -39,5 +35,5 @@ class AddAccountViewModel @Inject constructor(
     fun checkPassword() = account.password == againPassword
 
     fun validateData() =
-        account.phone.isNotBlank() && account.password.isNotBlank() && account.username.isNotBlank()
+        account.email.isNotBlank() && account.password.isNotBlank() && account.username.isNotBlank()
 }

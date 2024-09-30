@@ -88,11 +88,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         viewModel.loadDataUser()
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.loadDataUser()
-    }
-
     override fun bindView() {
         bindViewImageSlider()
     }
@@ -112,7 +107,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
 
     private fun bindViewImageUser(image: String) {
         val src = image.ifBlank { R.drawable.ic_account }
-        Glide.with(binding.crdUser)
+        Glide.with(requireActivity())
             .load(src)
             .into(binding.crdUser)
     }
@@ -122,7 +117,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         val account = viewModel.account
         bindViewImageUser(account.avatar)
         binding.txtName.text = account.username
-        binding.txtCost.text = "${account.cost} ${getString(R.string.cast)}"
 
         if (!viewModel.isFirst())
             return
@@ -148,15 +142,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         when (item.itemId) {
             R.id.favoritePage -> StoryFavouriteFragment.open(findNavController())
             R.id.infoPage -> InfoAppDialog.show(parentFragmentManager)
-            R.id.manageStoryPage -> openManageStory()
+            R.id.myStore -> openManageStory()
             R.id.postPage -> openPostStory()
             R.id.manageAccountPage -> openManageAccountFragment()
+            R.id.manageStoryPage -> manageStory()
             R.id.logoutPage -> showConfirmDialogLogout()
-            R.id.rechargePage -> rechargeFragment()
-            R.id.buyStoryPage -> openBuyStory()
+//            R.id.rechargePage -> rechargeFragment()
+//            R.id.buyStoryPage -> openBuyStory()
             else -> Unit
         }
         return true
+    }
+
+    private fun manageStory(){
+        PostManagementFragment.open(findNavController())
     }
 
     private fun showConfirmDialogLogout() {
@@ -170,21 +169,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
         }
     }
 
-    private fun rechargeFragment() {
-        val intent = Intent(requireContext(), RechargeActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun openPostStory() {
-        if (viewModel.isReader()) {
-            MessageDialog.show(
-                parentFragmentManager,
-                requireContext().getString(R.string.notification),
-                requireContext().getString(R.string.youNeedAuthorPermission),
-                R.drawable.ic_sad
-            ) {}
-            return
-        }
         PostStoryFragment.open(findNavController())
     }
 
@@ -202,20 +187,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(), OnNavigationItemSelect
     }
 
     private fun openManageStory() {
-        if (viewModel.isReader()) {
-            MessageDialog.show(
-                parentFragmentManager,
-                requireContext().getString(R.string.notification),
-                requireContext().getString(R.string.youNeedAuthorPermission),
-                R.drawable.ic_sad
-            ) {}
-            return
-        }
-
         ManagerStoryFragment.open(findNavController(), viewModel.account)
-    }
-
-    private fun openBuyStory() {
-        BuyStoryFragment.open(findNavController())
     }
 }

@@ -29,10 +29,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         viewModel.dataLiveData.observe(viewLifecycleOwner) { account ->
             binding.txtUserName.text = account.username
-            binding.txtPhoneNumber.text = account.phone
-            binding.txtPermission.text = account.permission
-            binding.txtGender.text = account.gender
-            binding.txtCost.text = account.cost.toString()
+            binding.txtGmail.text = account.email
+//            binding.txtPermission.text = if (account.permission) "Admin" else "user"
+
             bindViewImage(account.avatar)
         }
     }

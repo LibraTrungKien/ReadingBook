@@ -5,6 +5,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.reading.R
 import com.example.reading.databinding.FragmentStoryDetailBinding
 import com.example.reading.domain.model.Chapter
@@ -43,6 +45,7 @@ class StoryDetailFragment : BaseFragment<FragmentStoryDetailBinding>() {
         viewModel.dataLiveData.observe(viewLifecycleOwner) {
             bindViewTitle(it)
             bindViewContent(it)
+            bindViewImageChap(it)
             bindViewPrevious()
             bindViewNext()
         }
@@ -52,6 +55,7 @@ class StoryDetailFragment : BaseFragment<FragmentStoryDetailBinding>() {
         val chapter = viewModel.currentChap
         bindViewTitle(chapter)
         bindViewContent(chapter)
+        bindViewImageChap(chapter)
         bindViewPrevious()
         bindViewNext()
     }
@@ -62,6 +66,14 @@ class StoryDetailFragment : BaseFragment<FragmentStoryDetailBinding>() {
 
     private fun bindViewContent(chapter: Chapter) {
         binding.txtContent.text = chapter.content
+    }
+
+    private fun bindViewImageChap(chapter: Chapter) {
+        Glide.with(requireActivity())
+            .load(chapter.image.ifBlank { viewModel.story.image })
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(binding.imgChapter)
     }
 
     private fun bindViewNext() {

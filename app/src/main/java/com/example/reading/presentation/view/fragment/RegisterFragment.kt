@@ -1,5 +1,6 @@
 package com.example.reading.presentation.view.fragment
 
+import androidx.core.view.isGone
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -9,46 +10,13 @@ import com.example.reading.databinding.FragmentRegisterBinding
 import com.example.reading.presentation.view.base.BaseFragment
 import com.example.reading.presentation.view.base.apiCall
 import com.example.reading.presentation.view.base.visibleOrGone
-import com.example.reading.presentation.view.diglog.HandleOtpDialog
 import com.example.reading.presentation.view.diglog.MessageDialog
 import com.example.reading.presentation.viewmodel.RegisterViewModel
-import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     private val viewModel: RegisterViewModel by viewModels()
-    private lateinit var auth: FirebaseAuth
-    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-        }
-
-        override fun onVerificationFailed(e: FirebaseException) {
-            MessageDialog.show(
-                parentFragmentManager,
-                requireContext().getString(R.string.notification),
-                requireContext().getString(R.string.phone_number_not_like_format),
-                R.drawable.ic_sad,
-            ) {}
-        }
-
-        override fun onCodeSent(
-            verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
-        ) {
-            bindViewProgress(false)
-            HandleOtpDialog.show(
-                parentFragmentManager,
-                verificationId
-            ) { viewModel.isCheckVerifyPhoneNumber = true }
-        }
-    }
 
     override fun createViewBinding() = FragmentRegisterBinding.inflate(layoutInflater)
 
@@ -59,20 +27,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     }
 
     override fun initializeComponent() {
-        auth = FirebaseAuth.getInstance().apply {
-            this.useAppLanguage()
-        }
     }
 
     override fun initializeEvents() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.edtName.doAfterTextChanged { viewModel.copyName(it.toString().trim()) }
 
-        binding.tilPhoneNumber.setEndIconOnClickListener {
-            bindViewProgress(true)
-            verifyPhoneNumber()
-        }
-        binding.edtPhoneNumber.doAfterTextChanged {
-            viewModel.copyPhoneNumber(
+        binding.edtGmail.doAfterTextChanged {
+            viewModel.copyEmail(
                 it.toString().trim()
             )
         }
@@ -82,13 +47,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             viewModel.copyAgainPassword(
                 it.toString().trim()
             )
-        }
-        binding.rdgGender.setOnCheckedChangeListener { _, checkedId ->
-            val gender =
-                if (checkedId == R.id.rdbMale) requireContext().getString(R.string.male) else requireContext().getString(
-                    R.string.female
-                )
-            viewModel.copyGender(gender)
         }
 
         binding.btnRegister.setOnClickListener { handleClickRegister() }
@@ -101,16 +59,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     private fun bindViewProgress(isVisible: Boolean) {
         binding.prgIndicator.visibleOrGone(isVisible)
-    }
-
-    private fun verifyPhoneNumber() {
-        val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(viewModel.account.phone)       // Phone number to verify
-            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-            .setActivity(requireActivity())                 // Activity (for callback binding)
-            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
     private fun handleClickRegister() {
@@ -128,7 +76,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 bindViewProgress(false)
                 findNavController().popBackStack()
             }
-        }, { true })
+        }, {
+            bindViewProgress(false)
+            true
+        })
     }
 
     private fun validateData(): Boolean {
@@ -144,15 +95,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             showMessageDialog(
                 requireContext().getString(R.string.warning),
                 requireContext().getString(R.string.password_not_duplicate),
-                R.drawable.ic_sad
-            ) {}
-            return false
-        }
-
-        if (!viewModel.isCheckVerifyPhoneNumber) {
-            showMessageDialog(
-                requireContext().getString(R.string.warning),
-                requireContext().getString(R.string.verify_phone_number_please),
                 R.drawable.ic_sad
             ) {}
             return false

@@ -75,7 +75,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun isReader() = account.permission == "reader"
     fun isFirst() = isFirst == 0
-    fun isAdmin() = account.permission == "admin"
+    fun isAdmin() = account.permission
 }

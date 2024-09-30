@@ -25,6 +25,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
                     MainFragment.open(findNavController())
                 } else {
                     LoginFragment.open(findNavController())
+//                    MainFragment.open(findNavController())
                 }
             }
         }

@@ -8,29 +8,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
-    var account = Account(permission = "reader")
-    var againPassword = ""
+    var account = Account(permission = false)
+    private var againPassword = ""
     var code = ""
-    var isCheckVerifyPhoneNumber = false
 
     fun copyName(value: String) {
         account.username = value
-    }
-
-    fun copyPhoneNumber(value: String) {
-        account.phone = value
     }
 
     fun copyPassword(value: String) {
         account.password = value
     }
 
-    fun copyAgainPassword(value: String) {
-        againPassword = value
+    fun copyEmail(value: String){
+        account.email = value
     }
 
-    fun copyGender(value: String) {
-        account.gender = value
+    fun copyAgainPassword(value: String) {
+        againPassword = value
     }
 
     fun registerAccount() = callSafeApiWithLiveData {
@@ -38,7 +33,7 @@ class RegisterViewModel @Inject constructor(private val repository: Repository) 
     }
 
     fun validateData() =
-        account.username.isNotBlank() && account.password.isNotBlank() && account.phone.isNotBlank()
+        account.username.isNotBlank() && account.password.isNotBlank() && account.email.isNotBlank()
 
     fun checkDuplicate() = account.password == againPassword
 }

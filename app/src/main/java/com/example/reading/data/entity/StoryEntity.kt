@@ -11,11 +11,10 @@ data class StoryEntity(
     val name: String = "",
     val image: String = "",
     val category: Int = 0,
-    val author: String = "",
-    val dateCreated: String = "",
-    val dateUpdated: String = "",
-    val status: String = "",
+    val author_id: Int = 0,
+    val dateCreated: Long = 0L,
+    val dateUpdated: Long = 0L,
+    val status: Int = -1,
     val description: String = "",
-    val chapters: ArrayList<Chapter> = arrayListOf(),
-    val cost: Int = 0
+    val chapters: ArrayList<Chapter> = arrayListOf()
 )

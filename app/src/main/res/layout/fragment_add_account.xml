@@ -51,15 +51,15 @@
                 android:id="@+id/tilPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phoneNumber">
+                android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPhoneNumber"
+                    android:id="@+id/edtGmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableStart="@drawable/ic_phone_number"
+                    android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="8dp"
-                    android:inputType="phone" />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -95,30 +95,6 @@
                     android:drawablePadding="8dp"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <RadioGroup
-                android:id="@+id/btnGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/btnMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/male" />
-
-                <RadioButton
-                    android:id="@+id/btnFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/female" />
-
-            </RadioGroup>
 
             <TextView
                 android:id="@+id/btnNewAccount"

@@ -138,28 +138,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="@string/cast"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="@color/bg_text_input_layout"
-                    app:expandedHintEnabled="false"
-                    app:hintTextColor="@color/gray_text_input_layout">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtCost"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="top"
-                        android:inputType="number"
-                        android:padding="8dp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:hint="@string/description"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
@@ -305,6 +283,52 @@
                         android:padding="8dp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="16dp"
+                    app:cardCornerRadius="16dp">
+
+                    <ImageView
+                        android:id="@+id/imgChapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@null"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/btnDeleteChapter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/bg_image_circle"
+                        android:backgroundTint="#B71C1C"
+                        android:contentDescription="@null"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_delete"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        app:tint="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/btnUploadChapter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_image_circle"
+                        android:backgroundTint="#0D47A1"
+                        android:contentDescription="@null"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_upload"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        app:tint="@color/white" />
+
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilContentV2"

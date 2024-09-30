@@ -44,10 +44,18 @@ class MyToolbar @JvmOverloads constructor(
     }
 
     private fun bindViewAction() {
-        val resource = if (actionIndex == 1) {
-            R.drawable.ic_setting
-        } else {
-            R.drawable.ic_done
+        val resource = when (actionIndex) {
+            1 -> {
+                R.drawable.ic_setting
+            }
+
+            2 -> {
+                R.drawable.ic_done
+            }
+
+            else -> {
+                R.drawable.ic_edit
+            }
         }
         binding.btnAction.setImageResource(resource)
     }

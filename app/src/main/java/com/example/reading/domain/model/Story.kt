@@ -7,11 +7,10 @@ data class Story(
     var name: String = "",
     var image: String = "",
     var category: Int = -1,
-    var cost: Int = 0,
-    var author: String = "",
-    var dateCreated: String = "",
-    var dateUpdated: String = "",
-    var status: String = "Đang update",
+    var author_id: Int = 0,
+    var dateCreated: Long = 0L,
+    var dateUpdated: Long = 0L,
+    var status: Int = -1,
     var description: String = "",
     var chapters: ArrayList<Chapter> = arrayListOf()
 ) {

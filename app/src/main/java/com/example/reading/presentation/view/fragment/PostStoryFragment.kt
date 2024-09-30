@@ -2,6 +2,7 @@ package com.example.reading.presentation.view.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
@@ -52,9 +53,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
             viewModel.copyDescription(it.toString().trim())
         }
 
-        binding.edtCost.doAfterTextChanged {
-            viewModel.copyCast(it.toString().trim())
-        }
+        binding.btnUploadChapter.setOnClickListener { requestPermission() }
 
         binding.btnUpload.setOnClickListener { requestPermission() }
         binding.btnDelete.setOnClickListener { }
@@ -92,7 +91,11 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         ) {
             openGallery()
         } else {
-            requestPermissionLaunch.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                requestPermissionLaunch.launch(Manifest.permission.READ_MEDIA_IMAGES)
+            }else{
+                requestPermissionLaunch.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
             permissionCallback = {
                 if (it) {
                     openGallery()
@@ -104,14 +107,13 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
     private fun clearData() {
         viewModel.story.apply {
             id = 0
-            author = ""
             category = -1
             chapters = arrayListOf()
             description = ""
             name = ""
             image = ""
-            dateCreated = ""
-            dateUpdated = ""
+            dateCreated = System.currentTimeMillis()
+            dateUpdated = System.currentTimeMillis()
         }
 
         viewModel.chapter.apply {
@@ -153,6 +155,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
 
     private fun bindViewImage(image: String) {
         Glide.with(binding.imgStory).load(image).into(binding.imgStory)
+        Glide.with(binding.imgChapter).load(image).into(binding.imgChapter)
     }
 
     private fun showStoryPopup(anchor: View) {
@@ -184,7 +187,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>() {
         }
 
         bindViewProgress(true)
-        apiCall(viewModel.putStory(), viewLifecycleOwner, {
+        apiCall(viewModel.putStory(requireActivity()), viewLifecycleOwner, {
             bindViewProgress(false)
             MessageDialog.show(
                 parentFragmentManager,

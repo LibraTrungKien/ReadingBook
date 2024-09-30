@@ -27,7 +27,7 @@ class StoryController(private val interactor: Interactor) : TypedEpoxyController
         override fun getDefaultLayout() = R.layout.item_image_story
         override fun initializeEvents() {
             binding.root.setOnClickListener {
-                StoryFragment.open(interactor.findNavController(), story = story, false)
+                StoryFragment.open(interactor.findNavController(), story = story)
                 if (interactor.isFromSearch()) {
                     (interactor.getViewModel() as SearchStoryViewModel).addHistory(story)
                 }
@@ -37,7 +37,7 @@ class StoryController(private val interactor: Interactor) : TypedEpoxyController
         @SuppressLint("SetTextI18n")
         override fun bindView() {
             Glide.with(binding.imgStory).load(story.image).into(binding.imgStory)
-            binding.txtName.text = "${story.name}\n${story.cost} ${context.getString(R.string.cast)}"
+            binding.txtName.text = story.name
         }
     }
 }

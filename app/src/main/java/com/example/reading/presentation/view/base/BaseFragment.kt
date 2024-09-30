@@ -17,7 +17,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseView {
     protected val binding: T
         get() = _binding
 
-    val getContent =
+    private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) {
             it ?: return@registerForActivityResult
             getContentCallback(it)

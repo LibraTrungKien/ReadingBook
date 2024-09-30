@@ -26,8 +26,7 @@ class AccountController(private val onMenuClick: OnMenuClick) :
 
         override fun bindView() {
             binding.txtUserName.text = account.username
-            binding.txtPhoneNumber.text = account.phone
-            binding.txtPermission.text = account.permission
+            binding.txtPhoneNumber.text = account.email
             Glide.with(binding.imgUser).load(account.avatar).into(binding.imgUser)
         }
     }

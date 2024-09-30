@@ -18,12 +18,11 @@ fun Story.toDTO(): StoryDTO {
         name = dto.name,
         image = dto.image,
         category = dto.category,
-        author = dto.author,
+        author_id = dto.author_id,
         dateCreated = dto.dateCreated,
         dateUpdated = dto.dateUpdated,
         status = dto.status,
         description = dto.description,
-        cost = dto.cost,
         chapters = ArrayList(dto.chapters.map { it.toDTO() })
     )
 }
@@ -57,17 +56,16 @@ fun StoryDTO.toEntity(): StoryEntity {
         name = dto.name,
         image = dto.image,
         category = dto.category,
-        author = dto.author,
+        author_id = dto.author_id,
         dateCreated = dto.dateCreated,
-        dateUpdated = if (dto.dateUpdated.isBlank()) {
+        dateUpdated = if (dto.dateUpdated == 0L) {
             dateCreated
         } else {
-            dto.modifiedAt.toDateString()
+            dto.modifiedAt
         },
         status = dto.status,
         description = dto.description,
-        chapters = ArrayList(dto.chapters.map { it.toModel() }),
-        cost = dto.cost
+        chapters = ArrayList(dto.chapters.map { it.toModel() })
     )
 }
 
@@ -78,8 +76,7 @@ fun StoryEntity.toModel(): Story {
         name = entity.name,
         image = entity.image,
         category = entity.category,
-        cost = entity.cost,
-        author = entity.author,
+        author_id = entity.author_id,
         dateCreated = entity.dateCreated,
         dateUpdated = entity.dateUpdated,
         status = entity.status,
@@ -95,8 +92,7 @@ fun Story.toEntity(): HistoryEntity {
         name = model.name,
         image = model.image,
         category = model.category,
-        cost = model.cost,
-        author = model.author,
+        author_id = model.author_id,
         dateCreated = model.dateCreated,
         dateUpdated = model.dateUpdated,
         status = model.status,
@@ -112,10 +108,9 @@ fun Story.toFavouriteEntity(): FavouriteEntity {
         name = model.name,
         image = model.image,
         category = model.category,
-        author = model.author,
+        author_id = model.author_id,
         dateCreated = model.dateCreated,
         dateUpdated = model.dateUpdated,
-        cost = model.cost,
         status = model.status,
         description = model.description,
         chapters = model.chapters
@@ -129,9 +124,8 @@ fun HistoryEntity.toModel(): Story {
         name = entity.name,
         image = entity.image,
         category = entity.category,
-        author = entity.author,
+        author_id = entity.author_id,
         dateCreated = entity.dateCreated,
-        cost = entity.cost,
         dateUpdated = entity.dateUpdated,
         status = entity.status,
         description = entity.description,
@@ -145,9 +139,8 @@ fun FavouriteEntity.toModel(): Story {
         id = entity.id,
         name = entity.name,
         image = entity.image,
-        cost = entity.cost,
         category = entity.category,
-        author = entity.author,
+        author_id = entity.author_id,
         dateCreated = entity.dateCreated,
         dateUpdated = entity.dateUpdated,
         status = entity.status,
@@ -163,8 +156,7 @@ fun Story.toStoryEntity(): StoryEntity {
         name = model.name,
         image = model.image,
         category = model.category,
-        cost = model.cost,
-        author = model.author,
+        author_id = model.author_id,
         dateCreated = model.dateCreated,
         dateUpdated = model.dateUpdated,
         status = model.status,

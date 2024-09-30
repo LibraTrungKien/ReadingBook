@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace 'com.example.reading'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.reading"
         minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        targetSdk 34
+        versionCode 101
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,39 +27,29 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures {
         viewBinding true
     }
 }
 ext {
-    nav_version = "2.5.3"
+    nav_version = "2.7.7"
     epoxyVersion = "5.1.1"
-    lifecycle_version = "2.5.1"
-    roomVersion = "2.5.0"
+    lifecycle_version = "2.8.3"
+    roomVersion = "2.6.1"
 }
 
 dependencies {
-    //  zalo pay
-    implementation("commons-codec:commons-codec:1.15")
-
-    //  firebase
-    implementation platform('com.google.firebase:firebase-bom:31.2.3')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-auth-ktx'
-    
     //  swipe
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 
     //  room db
     implementation("androidx.room:room-runtime:$roomVersion")
-    implementation fileTree(dir: 'C:\\Users\\Admin\\Downloads\\zalo pay', include: ['*.aar', '*.jar'], exclude: [])
-    implementation fileTree(dir: 'C:\\Users\\Admin\\Downloads', include: ['*.aar', '*.jar'], exclude: [])
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
@@ -77,8 +67,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
 
     //  hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     //  retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -98,15 +89,11 @@ dependencies {
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-}
-
-kapt {
-    correctErrorTypes true
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }

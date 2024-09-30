@@ -81,12 +81,27 @@
         <action
             android:id="@+id/actBuyStoryFragment"
             app:destination="@id/buyStoryFragment" />
+
+        <action
+            android:id="@+id/actPostManagementFragment"
+            app:destination="@id/postManagementFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/storyFragment"
         android:name="com.example.reading.presentation.view.fragment.StoryFragment"
         tools:layout="@layout/fragment_story">
+
+        <action
+            android:id="@+id/actStoryDetailFragment"
+            app:destination="@id/storyDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/postManagementFragment"
+        android:name="com.example.reading.presentation.view.fragment.PostManagementFragment"
+        tools:layout="@layout/fragment_post_management">
 
         <action
             android:id="@+id/actStoryDetailFragment"

@@ -28,8 +28,7 @@ class StoryFavouriteController(private val interactor: Interactor) :
             binding.root.setOnClickListener {
                 StoryFragment.open(
                     interactor.findNavController(),
-                    story,
-                    false
+                    story
                 )
             }
 

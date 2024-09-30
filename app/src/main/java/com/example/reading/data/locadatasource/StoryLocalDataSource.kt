@@ -50,7 +50,7 @@ class StoryLocalDataSource @Inject constructor(
         storyDao.deleteFavourite(favouriteEntity)
     }
 
-    suspend fun getStoryByAuthor(author: String) = withContext(coroutineContext) {
+    suspend fun getStoryByAuthor(author: Int) = withContext(coroutineContext) {
         storyDao.getStoryByAuthor(author)
     }
 

@@ -6,8 +6,5 @@ data class AccountDTO(
     val email: String,
     val password: String,
     val avatar: String,
-    var permission: String,
-    val gender: String,
-    val phone: String,
-    val cost: Int
+    var permission: Boolean,
 )

@@ -29,6 +29,7 @@ class ManagerStoryController(private val interactor: Interactor) :
 
         override fun bindView() {
             binding.txtName.text = story.name
+            binding.imgStory.alpha = if (story.status == 1) 1f else 0.5f
             Glide.with(binding.imgStory).load(story.image).into(binding.imgStory)
         }
     }

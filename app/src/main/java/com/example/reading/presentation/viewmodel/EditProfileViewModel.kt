@@ -32,17 +32,14 @@ class EditProfileViewModel @Inject constructor(private val repository: Repositor
         account.username = value
     }
 
-    fun copyPhoneNumber(value: String) {
-        account.phone = value
+    fun copyGmail(value: String) {
+        account.email = value
     }
 
     fun copyPassword(value: String) {
         account.password = value
     }
 
-    fun copyGender(value: String) {
-        account.gender = value
-    }
 
     private suspend fun uploadImage(context: Context, imageUri: Uri): String {
         val path = FileUtils.getRealPath(context, imageUri)

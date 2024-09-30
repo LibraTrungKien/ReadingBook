@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StoryDetailViewModel @Inject constructor() : BaseViewModel() {
-    private lateinit var story: Story
+    lateinit var story: Story
     private var currentIndex = 1
     lateinit var currentChap: Chapter
 

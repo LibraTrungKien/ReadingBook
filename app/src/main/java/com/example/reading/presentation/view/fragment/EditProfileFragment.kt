@@ -2,6 +2,7 @@ package com.example.reading.presentation.view.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -44,18 +45,14 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
         binding.toolbar.setOnActionClick { saveAccount() }
 
         binding.edtUsername.doAfterTextChanged { viewModel.copyUsername(it.toString().trim()) }
-        binding.edtPhoneNumber.doAfterTextChanged {
-            viewModel.copyPhoneNumber(
+        binding.edtGmail.doAfterTextChanged {
+            viewModel.copyGmail(
                 it.toString().trim()
             )
         }
 
         binding.btnUploadImage.setOnClickListener { requestPermission() }
         binding.edtPassword.doAfterTextChanged { viewModel.copyPassword(it.toString().trim()) }
-        binding.rdgGender.setOnCheckedChangeListener { _, id ->
-            val gender = if (id == R.id.rdbMale) "nam" else "nữ"
-            viewModel.copyGender(gender)
-        }
 
         getContentCallback = { uri ->
             viewModel.imageUri = uri
@@ -66,14 +63,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
     override fun bindView() {
         val account = viewModel.account
         binding.edtUsername.setText(account.username)
-        binding.edtPhoneNumber.setText(account.phone)
+        binding.edtGmail.setText(account.email)
         binding.edtPassword.setText(account.password)
-
-        if (account.gender == "nam") {
-            binding.rdbMale.isChecked = true
-        } else {
-            binding.rdbFeMale.isChecked = true
-        }
 
         bindViewImage(account.avatar)
     }
@@ -84,15 +75,24 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
             .load(data).into(binding.imgProfile)
     }
 
+    private fun checkPermission() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_MEDIA_IMAGES
+        ) == PackageManager.PERMISSION_GRANTED
+    } else {
+        ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+
     private fun requestPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
+        if (checkPermission()) {
             openGallery()
         } else {
-            requestPermissionLaunch.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            requestPermissionLaunch.launch(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.READ_MEDIA_IMAGES else Manifest.permission.READ_EXTERNAL_STORAGE)
             permissionCallback = {
                 if (it) {
                     openGallery()
@@ -108,7 +108,9 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>() {
                 requireContext().getString(R.string.notification),
                 requireContext().getString(R.string.content_congratulation),
                 R.drawable.satisfied
-            ) {}
+            ) {
+                findNavController().popBackStack()
+            }
         }, { true })
 
     }

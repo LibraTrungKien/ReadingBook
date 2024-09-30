@@ -22,11 +22,11 @@ class RechargeViewModel @Inject constructor(
         }
     }
 
-    fun editAccount() = callSafeApiWithLiveData {
-        account.cost = account.cost + cost
-        repository.editAccount(account)
-        cost = 10
-    }
+//    fun editAccount() = callSafeApiWithLiveData {
+//        account.cost = account.cost + cost
+//        repository.editAccount(account)
+//        cost = 10
+//    }
 
     fun getMoney(): Int {
         return when (cost) {

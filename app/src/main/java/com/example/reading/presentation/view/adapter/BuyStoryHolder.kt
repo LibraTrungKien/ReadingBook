@@ -16,7 +16,7 @@ class BuyStoryHolder(
 
     override fun initializeEvents() {
         binding.root.setOnClickListener {
-            StoryFragment.open(interactor.findNavController(), story, true)
+            StoryFragment.open(interactor.findNavController(), story,)
         }
     }
 

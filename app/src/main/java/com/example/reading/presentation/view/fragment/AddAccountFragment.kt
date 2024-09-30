@@ -24,8 +24,8 @@ class AddAccountFragment : BaseFragment<FragmentAddAccountBinding>() {
 
     override fun initializeEvents() {
         binding.edtUserName.doAfterTextChanged { viewModel.copyDisplayName(it.toString().trim()) }
-        binding.edtPhoneNumber.doAfterTextChanged {
-            viewModel.copyPhoneNumber(
+        binding.edtGmail.doAfterTextChanged {
+            viewModel.copyGmail(
                 it.toString().trim()
             )
         }
@@ -35,10 +35,7 @@ class AddAccountFragment : BaseFragment<FragmentAddAccountBinding>() {
                 it.toString().trim()
             )
         }
-        binding.btnGroup.setOnCheckedChangeListener { _, checkedId ->
-            val isMale = checkedId == R.id.btnMale
-            viewModel.isMale(isMale)
-        }
+
         binding.btnNewAccount.setOnClickListener { registerAccount() }
     }
 

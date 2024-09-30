@@ -9,8 +9,10 @@ import com.example.reading.data.mapper.toModel
 import com.example.reading.data.mapper.toStoryEntity
 import com.example.reading.domain.Repository
 import com.example.reading.domain.model.Account
+import com.example.reading.domain.model.Comment
 import com.example.reading.domain.model.Login
 import com.example.reading.domain.model.Products
+import com.example.reading.domain.model.RateDataModel
 import com.example.reading.domain.model.Story
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -78,9 +80,9 @@ class RepositoryImpl @Inject constructor(
         localDataSource.deleteFavourite(story.toFavouriteEntity())
     }
 
-    override suspend fun getStoryByAuthor(author: String): List<Story> {
-        val data = localDataSource.getStoryByAuthor(author)
-        return data.map { it.toModel() }
+    override suspend fun getStoryByAuthor(author: Int): List<Story> {
+        val data = apiService.getStoryByUserId(author).body() ?: listOf()
+        return data
     }
 
     override suspend fun putStory(story: Story): Boolean {
@@ -90,8 +92,8 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun postStory(story: Story): Boolean {
-        val author = appStorageLocalDataSource.getInfoAccount().username
-        story.author = author
+        val author = appStorageLocalDataSource.getInfoAccount().id
+        story.author_id = author
 
         val response = apiService.postStory(story.toDTO()).body()!!
         localDataSource.save(response.toEntity())
@@ -162,6 +164,44 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getStoryById(id: Int): Story? {
         val data = localDataSource.getStoryById(id)
         return data?.toModel()
+    }
+
+    override suspend fun insertComment(comment: Comment): List<Comment> {
+        apiService.addComment(comment)
+        return getCommentsByStoryId(comment.storyId)
+    }
+
+    override suspend fun getCommentsByStoryId(storyId: Int): List<Comment> {
+        return apiService.getAllCommentByStoryId(storyId).body() ?: arrayListOf()
+    }
+
+    override suspend fun getAllStoryNotApprove(): List<Story> {
+        return apiService.getAllStoryNotApprove().body() ?: listOf()
+    }
+
+    override suspend fun getUserById(userId: Int): Account {
+        return apiService.getUserByID(userId).body()!!.first().toModel()
+    }
+
+    override suspend fun getRateByStoryId(storyId: Int): Int {
+        val data = apiService.getRateByStoryId(storyId).body() ?: listOf()
+        if (data.isEmpty()) return 0
+
+        var countRate = 0
+        data.forEach {
+            countRate += it.rate
+        }
+
+        return countRate / (data.size)
+    }
+
+    override suspend fun rateStory(rateDataModel: RateDataModel) {
+        apiService.rateStory(rateDataModel)
+    }
+
+    override suspend fun isRated(storyId: Int, authorId: Int): Boolean {
+        val data = apiService.isRateStory(storyId, authorId).body() ?: listOf()
+        return data.isNotEmpty()
     }
 
 }

@@ -13,7 +13,7 @@ class ManageAccountViewModel @Inject constructor(
     private val repository: Repository
 ) : BaseViewModel() {
 
-    var originData = listOf<Account>()
+    private var originData = listOf<Account>()
     var textSearch = ""
 
     private val _dataLiveData: MutableLiveData<List<Account>> = MutableLiveData()
@@ -21,7 +21,7 @@ class ManageAccountViewModel @Inject constructor(
         get() = _dataLiveData
 
     fun loadData() = callSafeApiWithLiveData {
-        originData = repository.fetchAllAccount().filter { it.permission != "admin" }
+        originData = repository.fetchAllAccount().filter { !it.permission }
         originData
     }
 
@@ -29,7 +29,7 @@ class ManageAccountViewModel @Inject constructor(
         val result = if (textSearch.isBlank()) {
             originData
         } else {
-            originData.filter { it.phone.contains(textSearch) || it.username.contains(textSearch) }
+            originData.filter { it.email.contains(textSearch) || it.username.contains(textSearch) }
         }
         _dataLiveData.postValue(result)
     }

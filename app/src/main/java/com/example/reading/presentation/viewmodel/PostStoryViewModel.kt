@@ -27,8 +27,6 @@ class PostStoryViewModel @Inject constructor(
     var chapter: Chapter = Chapter()
     var stories = listOf<Story>()
     var imageUri: Uri? = null
-    private val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("VINA"))
-    private val now = Calendar.getInstance().time
 
     val categories = listOf(
         "Truyện ma",
@@ -41,7 +39,7 @@ class PostStoryViewModel @Inject constructor(
 
     fun loadStoryByAuthor() {
         viewModelScope.launch {
-            val authorName = repository.getInfoAccount().username
+            val authorName = repository.getInfoAccount().id
             stories = repository.getStoryByAuthor(authorName)
         }
     }
@@ -56,7 +54,7 @@ class PostStoryViewModel @Inject constructor(
             chapters = value.chapters
             category = value.category
             image = value.image
-            author = value.author
+            author_id = value.author_id
             status = value.status
         }
     }
@@ -74,14 +72,6 @@ class PostStoryViewModel @Inject constructor(
         story.description = value
     }
 
-    fun copyCast(value: String) {
-        story.cost = try {
-            value.toInt()
-        } catch (ex: Exception) {
-            0
-        }
-    }
-
     fun copyChapName(value: String) {
         chapter.title = value
     }
@@ -90,14 +80,18 @@ class PostStoryViewModel @Inject constructor(
         chapter.content = value
     }
 
-    fun putStory() = callSafeApiWithLiveData {
+    fun putStory(context: Context) = callSafeApiWithLiveData {
         val index = getChapIndex() + 1
+        val imageUri = uploadImage(context)
         chapter.apply {
             this.id = index.toString()
             this.index = index
+            this.isCensorship = false
+            this.image = imageUri
         }
         story.apply {
-            dateUpdated = sdf.format(now)
+            status = -1
+            dateUpdated = System.currentTimeMillis()
             if (!isMatch()) {
                 chapters.add(chapter)
             }
@@ -124,8 +118,8 @@ class PostStoryViewModel @Inject constructor(
         }
         story.apply {
             image = imageUri
-            dateUpdated = sdf.format(now)
-            dateCreated = sdf.format(now)
+            dateUpdated = System.currentTimeMillis()
+            dateCreated = System.currentTimeMillis()
             if (!isMatch()) {
                 chapters.add(chapter)
             }

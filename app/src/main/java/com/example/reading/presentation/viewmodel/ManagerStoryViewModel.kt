@@ -30,7 +30,7 @@ class ManagerStoryViewModel @Inject constructor(
 
     fun getStories() {
         viewModelScope.launch {
-            val result = repository.getStoryByAuthor(account.username)
+            val result = repository.getStoryByAuthor(account.id)
             _dataLiveData.postValue(result)
         }
     }

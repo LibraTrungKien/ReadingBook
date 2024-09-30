@@ -5,6 +5,7 @@
         <attr name="actionIcon" format="enum">
             <enum name="setting" value="1" />
             <enum name="done" value="2" />
+            <enum name="edit" value="3"/>
         </attr>
     </declare-styleable>
 </resources>

@@ -5,5 +5,6 @@ data class Chapter(
     var index: Int = 0,
     var image: String = "",
     var title: String = "",
-    var content: String = ""
+    var content: String = "",
+    var isCensorship: Boolean = true
 )

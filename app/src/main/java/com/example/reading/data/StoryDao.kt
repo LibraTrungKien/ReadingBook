@@ -74,10 +74,10 @@ interface StoryDao {
         """
         SELECT *
         FROM StoryEntity
-        WHERE author = :author
+        WHERE author_id = :author
     """
     )
-    suspend fun getStoryByAuthor(author: String): List<StoryEntity>
+    suspend fun getStoryByAuthor(author: Int): List<StoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun save(storyEntity: StoryEntity)
